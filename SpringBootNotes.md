@@ -32,3 +32,20 @@ a + b -> controller -> service (convert DTO to entity) -> Repository -> Database
 
 Database (gives entity) -> service (entity to DTO) -> controller -> Jackson (DTO to json) -> DispatcherServlet -> Client
 ```
+
+```
+Without ResponseEntity<> we just control the data, with that we can control status codes, headers along with data.
+```
+
+
+### Request Processing:
+```
+Client request -> Filters (part of Java Servlet specification (jakarta.servlet.Filter) outside of spring framework,
+CORS, auth, login, request modification) ->  DispatcherServlet 
+```
+```
+Interceptors - part of spring MVC
+1. Register the interceptor (knows full about beans and controllers)
+2. Client Request -> DispatcherServlet -> Interceptor (preHandle()) -> Controller -> Service (process) -> Controller ->
+Interceptor (postHandle()) -> Interceptor (afterCompletion)) -> Dispatcherservlet -> Client
+```
