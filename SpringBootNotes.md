@@ -213,16 +213,34 @@ spring.jpa.hibernate.ddl-auto - controls whether Hibernate should create/update/
 ## Transaction
 ```
 @Transactional - Spring doesn't execute your code directly. Instead, it wraps your bean in an
-Aspect-Oriented Programming (AOP) Dynamic Proxy and creates Proxy object, then the proxy handles DB connections, DB commits, DB rollbacks.
+Aspect-Oriented Programming (AOP) Dynamic Proxy and creates Proxy object, then the proxy handles DB connections, DB commits,
+DB rollbacks.
 ⚠️ It only rollbacks for unchecked (runtime) exceptions, for checked it will still commit so
 do @Transactional(rollbackFor = {Exception.class, CustomCheckedException.class})
 
 ✅ At class level @transactional works fine but don't do it usually because it creates extra overhead
 
 ⚠️ At method level:
-If a non-transactional method tried to access transactional method then it does create proxy but doesn't go through proxy, doesn't do transaction, runs normally
+If a non-transactional method tried to access transactional method then it does create proxy but doesn't go through proxy,
+doesn't do transaction, runs normally
 so to fix it move transactional method to another service.
 
 Spring = transaction manager (BEGIN, COMMIT, ROLLBACK)
 Hibernate = ORM + change tracker (Entity tracker, Dirty Checking, Flushing changes)
+```
+## Anomalies
+```
+Concurrency Anomalies:
+Dirty Read: A updates no commit, B reads updated data, A roll back, B contains dirty data that never existed
+
+Non-repeatable Read: A reads row, B reads row, updates it and commit, A reads row again and see different data
+
+Phantom Read: A executes read range query, B inserts new row and commits, A executes same query and see new phantom row
+
+specify isolation level @Transactional(isolation = Isolation.REPEATABLE_READ):
+DEFAULT: matches with DB provider like postgres default READ_COMMITTED, MySQL default REPEATABLE_READ
+READ_UNCOMMITTED : All allowed, fastest
+READ_COMMITTED : Dirty read not allowed 
+REPEATABLE_READ : Dirty read and Non-repeatable read not allowed
+SERIALIZABLE : All not allowed, slowest
 ```
