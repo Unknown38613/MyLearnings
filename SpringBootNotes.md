@@ -314,5 +314,67 @@ handling query parameters, and returning structured JSON.
 9. @RequestParam - Extracts query parameter after ?
 10. @RequestBody - Deserialize JSON body to Java object
 11. @ResponseStatus - predefined HTTP status code returned automatically when controller method completes/exception is triggered.
+```
 
+### Validation Annotations
+Data validation should happen at the absolute entry point of your application (the Controller). 
+Spring Boot uses Jakarta Bean Validation to inspect incoming payloads before your business logic ever touches them.
+| Annotation | Target | Rule |
+|---|---|---|
+| `@NotNull` | Any | Cannot be null (`""` and `[]` allowed) |
+| `@NotEmpty` | String, Collection, Array | Cannot be null or empty |
+| `@NotBlank` | String | Cannot be null, empty, or only spaces |
+| `@Size` | String, Collection, Array | Length/size must be within min-max |
+| `@Min` | Numbers | Value must be >= given minimum |
+| `@Email` | String | Must be valid email format |
+| `@Pattern` | String | Must match given regex |
+
+### JPA / Hibernate Annotations
+JPA (Java Persistence API) annotations map plain old Java objects (POJOs) directly to relational database tables.
+| Annotation | Purpose |
+|---|---|
+| `@Entity` | Marks class as a database entity. Requires no-arg constructor and primary key |
+| `@Table` | Defines SQL table name (default = class name) |
+| `@Id` | Marks field as primary key |
+| `@GeneratedValue` | Auto-generates primary key values |
+| `@Column` | Customizes column details (name, nullable, length, etc.) |
+| `@Transient` | Excludes field from database mapping |
+| `@OneToOne` | Maps 1:1 relationship |
+| `@ManyToOne` | Many entities → one entity relationship |
+| `@OneToMany` | One entity → collection of entities |
+| `@ManyToMany` | Many-to-many relationship using join table |
+| `@JoinColumn` | Defines foreign key column for relationship |
+
+### Transaction Annotation
+```
+Control transaction boundaries and handling non-standard data modifications
+1. @Transactional - Declares that an entire method execution block must occur within a safe, isolated database transaction boundary.
+2. @Modifying - Instructs Spring Data JPA that a custom query written with @Query is a DML (Data Manipulation Language) statement
+                (an UPDATE, DELETE, or INSERT) rather than a standard SELECT lookup query.
+```
+
+### AOP Annotations
+AOP (Aspect-Oriented Programming) = a way to add common logic to multiple methods without writing the same code everywhere.
+| Annotation | Role | Timing |
+|---|---|---|
+| `@Aspect` | Defines an AOP class containing cross-cutting logic | Container |
+| `@Pointcut` | Defines methods to intercept | Target selection |
+| `@Before` | Runs before target method | Before execution |
+| `@After` | Runs after method (success/failure) | Finally block style |
+| `@AfterReturning` | Runs after successful execution, can access return value | On success |
+| `@AfterThrowing` | Runs when exception occurs, can access error | On failure |
+| `@Around` | Wraps method execution, full control over call | Before + after |
+
+### Scheduling / Async Annotations
+```
+Web requests in Spring Boot execute sequentially on a single worker thread
+this annotations allow to shift workloads to background task executor and thread pools
+
+1. @EnableScheduling - placed on main/config class to activate scheduling infrastructure without it @scheduled methods will be
+                       ignored
+2. @Scheduled - runs method automatically at designated time intervals
+                configuration - fixedRate, fixedDelay, cron
+3. @EnableAsync - placed on configuration class to enable async processing and set up internal background thread pools
+4. @Async - runs method in separate worker thread, when controller calls @Async method, it immediately returns 202 Accepted back
+            without waiting for task to be finished.
 ```
