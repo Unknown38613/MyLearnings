@@ -169,3 +169,20 @@ Open same as interface but
     String getDetails();
 but now it requires entity
 ```
+
+## Hibernate
+```
+Hibernate manages state of object inside it:
+Transient - obj exists, but hibernate doesn't know it
+Persistent (.save()) - put's that in persistence context and now it notices the changes (dirty checking) and will
+                       update that at commit.
+Detached (.close()) - object still exist but hibernate no longer watch it
+Removed (.delete()) - will delete the object at commit.
+
+Spring starts DB transaction -> Persistence context opens -> Hibernate executes SQL -> Hibernate creates entity object ->
+object becomes persistent -> modify the object -> Hibernate dirty checks detect change -> Transaction ends ->
+Hibernates flushes SQL -> DB COMMIT -> Persistence context close 
+
+@Transactional does not directly open Hibernate's persistence context. It tells Spring to create a transaction boundary.
+As part of that, Spring usually creates/binds a Persistence Context (EntityManager) that Hibernate uses.
+```
