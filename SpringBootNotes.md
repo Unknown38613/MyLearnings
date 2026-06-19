@@ -108,10 +108,20 @@ it has already a relation on other side which is "user"
 ```
 
 ```
+Usually for Associations/Joins:
 Eager loading:
 @OneToMany(fetch=FetchType.EAGER) get user along with all orders
 Lazy Loading : 
 @OneToMany(fetch=FetchType.LAZY) get user first then orders will be fetched when asked
+
+Cascading - whether the same operation should be performed on child entity
+@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+private List<Address> addresses = new ArrayList<>();
+
+cascade = CascadeType.REMOVE - if parent deleted, delete children too
+so it will delete child first, then parent
+
+orphanRemoval = true - if child is removed from parent's collection, delete that child from DB, without this the row remains in DB
 ```
 
 ```
