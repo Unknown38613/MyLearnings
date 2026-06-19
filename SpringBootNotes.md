@@ -148,3 +148,24 @@ Page<Employee> findByDepartment(
 Page = data + total count
 Slice = data + tell if there is more (it fetches 1 more if true else false)
 ```
+
+```
+Projections:
+Fetch the fields/columns you need instead of entire entity
+
+Interface based:
+Create Entity : Employee with all fields
+Create interface: EmployeeView with required field
+Now query derivative/method in repo : List<EmployeeView> findBySalary(int salary)
+
+DTO based:
+create DTO instead of interface
+then in repo : @Query("..") List<EmployeeDTO> getEmployees();
+
+Closed same as interface, select only needful
+
+Open same as interface but 
+ @Value("#{target.name + ' ' + target.department}")
+    String getDetails();
+but now it requires entity
+```
