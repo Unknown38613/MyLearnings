@@ -378,3 +378,15 @@ this annotations allow to shift workloads to background task executor and thread
 4. @Async - runs method in separate worker thread, when controller calls @Async method, it immediately returns 202 Accepted back
             without waiting for task to be finished.
 ```
+
+### Testing Annotations
+Spring Boot handles testing using Test Slices. Instead of forcing you to load your entire application context, database layers, 
+and web servers for a simple test, Spring provides targeted annotations to spin up only the exact infrastructure you need.
+
+| Annotation | Purpose |
+|---|---|
+| `@SpringBootTest` | Loads the full Spring application context (almost like running the app) |
+| `@WebMvcTest` | Loads only MVC/web layer (`DispatcherServlet`, controllers, MVC configs, filters if included) |
+| `@DataJpaTest` | Loads JPA layer (`Entity`, repositories, Hibernate, test database config) |
+| `@MockitoBean` | Registers a Mockito mock as a Spring bean inside the application context |
+| `@AutoConfigureMockMvc` | Configures `MockMvc` to test controllers without starting a real server |
