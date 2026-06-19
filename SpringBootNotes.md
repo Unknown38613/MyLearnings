@@ -49,3 +49,54 @@ Interceptors - part of spring MVC
 2. Client Request -> DispatcherServlet -> Interceptor (preHandle()) -> Controller -> Service (process) -> Controller ->
 Interceptor (postHandle()) -> Interceptor (afterCompletion)) -> Dispatcherservlet -> Client
 ```
+
+## JPA
+```
+JPA - specification
+Hibernate - Implementation
+Entity - class that represents DB table through which hibernate understands
+```
+
+```
+interface UserRepo extends JpaRep<User, Long>{}
+automatically we get findById(), findAll(), save(), deleteByID(), count(),
+hibernate convert them into SQL queries
+```
+```
+Query methods (naming should follow Spring Data JPA rules):
+User findByEmail(String email)
+List<User> findByNameAndAge(String name, int age)
+List<User> findByNameContaining(String name)
+```
+
+```
+JPQL works on objects not tables because JPA wants application to database-independent so we don't have to 
+modify queries for different DBs, hibernate deals with it internally
+@Query(
+"SELECT u FROM User u WHERE u.email=?1"
+)
+User getUser(String email);
+```
+```
+Relationship:
+1 user can have many orders so:
+
+@Entity
+class User{
+
+@OneToMany(mappedBy="user")
+List<Order> orders;
+}
+
+@Entity
+class Order{
+
+@ManyToOne
+User user;
+}
+
+**mappedBy = "I am not the owner, I am mapped by the other side."**
+
+mappedBy="user" means hibernate don't create a join table for managing relationship,
+it has already a relation on other side which is "user"
+```
