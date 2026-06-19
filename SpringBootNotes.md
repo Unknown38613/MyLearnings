@@ -63,10 +63,16 @@ automatically we get findById(), findAll(), save(), deleteByID(), count(),
 hibernate convert them into SQL queries
 ```
 ```
-Query methods (naming should follow Spring Data JPA rules):
+Query Derivation / Query methods (naming should follow Spring Data JPA rules):
 User findByEmail(String email)
 List<User> findByNameAndAge(String name, int age)
 List<User> findByNameContaining(String name)
+
+--- Common words ---
+Containing / StartingWith / EndingWith (maps to SQL LIKE)
+IgnoreCase (maps to UPPER(field) = UPPER(?))
+GreaterThan / LessThan / Between
+True / False (for boolean logic)
 ```
 
 ```
@@ -99,4 +105,46 @@ User user;
 
 mappedBy="user" means hibernate don't create a join table for managing relationship,
 it has already a relation on other side which is "user"
+```
+
+```
+Eager loading:
+@OneToMany(fetch=FetchType.EAGER) get user along with all orders
+Lazy Loading : 
+@OneToMany(fetch=FetchType.LAZY) get user first then orders will be fetched when asked
+```
+
+```
+Pagination, Sorting, Slicing:
+
+Offset Pagination:
+Page = 3 & Size = 10 means skip 30 records and give next 10 (slow for huge data)
+Cursor/ KeySet pagination:
+Cursor = 102 & Size = 10 means give 10 records after this 102 ID (DB's are optimized for finding B-Tree Index O(log n))
+
+
+Pageable pageable = PageRequest.of(offset - 0, number of records - 10);
+Page<Employee> employees =
+        employeeRepository.findAll(pageable);
+
+
+For Sorting:
+Sort sort = Sort.by("name").ascending();
+
+For both:
+ PageRequest.of(
+        0,
+        10,
+        Sort.by("salary").descending()
+    );
+
+With Query Derivatives/ Method:
+Page<Employee> findByDepartment(
+        String dept,
+        Pageable pageable
+);
+
+
+Page = data + total count
+Slice = data + tell if there is more (it fetches 1 more if true else false)
 ```
