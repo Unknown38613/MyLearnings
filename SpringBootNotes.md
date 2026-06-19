@@ -62,8 +62,10 @@ interface UserRepo extends JpaRep<User, Long>{}
 automatically we get findById(), findAll(), save(), deleteByID(), count(),
 hibernate convert them into SQL queries
 ```
+
+### Query Derivation/Method:
 ```
-Query Derivation / Query methods (naming should follow Spring Data JPA rules):
+Query methods (naming should follow Spring Data JPA rules):
 User findByEmail(String email)
 List<User> findByNameAndAge(String name, int age)
 List<User> findByNameContaining(String name)
@@ -75,6 +77,7 @@ GreaterThan / LessThan / Between
 True / False (for boolean logic)
 ```
 
+### JPQL
 ```
 JPQL works on objects not tables because JPA wants application to database-independent so we don't have to 
 modify queries for different DBs, hibernate deals with it internally
@@ -83,8 +86,9 @@ modify queries for different DBs, hibernate deals with it internally
 )
 User getUser(String email);
 ```
+
+### Relationship
 ```
-Relationship:
 1 user can have many orders so:
 
 @Entity
@@ -107,8 +111,8 @@ mappedBy="user" means hibernate don't create a join table for managing relations
 it has already a relation on other side which is "user"
 ```
 
+### For Associations/Joins
 ```
-Usually for Associations/Joins:
 Eager loading:
 @OneToMany(fetch=FetchType.EAGER) get user along with all orders
 Lazy Loading : 
@@ -125,11 +129,13 @@ orphanRemoval = true - if child is removed from parent's collection, delete that
 row remains in DB
 ```
 
+
 > Connection Pooling (Spring uses Hikari CP) - maintains cache of active DB connections that are shared and resued among incoming threads instead of doing TCP handshakes, auth, etc everytime with DB, when application starts connection pool instantiates fixed no. of connections, when spring service needs to interact with DB, it borrows idle connection from Pool, when operation is completed connection is returned back to pool instead of closing it.
 
-```
-Pagination, Sorting, Slicing:
 
+
+### Pagination, Sorting, Slicing
+```
 Offset Pagination:
 Page = 3 & Size = 10 means skip 30 records and give next 10 (slow for huge data)
 Cursor/ KeySet pagination:
@@ -162,8 +168,8 @@ Page = data + total count
 Slice = data + tell if there is more (it fetches 1 more if true else false)
 ```
 
+### Projections
 ```
-Projections:
 Fetch the fields/columns you need instead of entire entity
 
 Interface based:
@@ -183,7 +189,7 @@ Open same as interface but
 but now it requires entity
 ```
 
-## Hibernate
+### Hibernate
 ```
 Hibernate manages state of object inside it:
 Transient - obj exists, but hibernate doesn't know it
@@ -199,7 +205,8 @@ Hibernates flushes SQL -> DB COMMIT -> Persistence context close
 @Transactional does not directly open Hibernate's persistence context. It tells Spring to create a transaction boundary.
 As part of that, Spring usually creates/binds a Persistence Context (EntityManager) that Hibernate uses.
 ```
-## Database
+
+### Database
 ```
 in application.yml while configuring DB:
 spring.jpa.hibernate.ddl-auto - controls whether Hibernate should create/update/validate tables based on your @Entity classes.
@@ -210,7 +217,7 @@ spring.jpa.hibernate.ddl-auto - controls whether Hibernate should create/update/
 ⚠️ create-drop - drop tables, create new tables then while shutting drop tables
 ```
 
-## Transaction
+### Transaction
 ```
 @Transactional - Spring doesn't execute your code directly. Instead, it wraps your bean in an
 Aspect-Oriented Programming (AOP) Dynamic Proxy and creates Proxy object, then the proxy handles DB connections, DB commits,
@@ -228,7 +235,7 @@ so to fix it move transactional method to another service.
 Spring = transaction manager (BEGIN, COMMIT, ROLLBACK)
 Hibernate = ORM + change tracker (Entity tracker, Dirty Checking, Flushing changes)
 ```
-## Anomalies
+### Anomalies
 ```
 Concurrency Anomalies:
 Dirty Read: A updates no commit, B reads updated data, A roll back, B contains dirty data that never existed
@@ -243,4 +250,69 @@ READ_UNCOMMITTED : All allowed, fastest
 READ_COMMITTED : Dirty read not allowed 
 REPEATABLE_READ : Dirty read and Non-repeatable read not allowed
 SERIALIZABLE : All not allowed, slowest
+```
+
+## Annotations
+Annotations in Spring Boot act as metadata, providing instructions to the Spring container on how to discover, configure, 
+and wire Java objects
+
+
+### Stereotype Annotations
+```
+Stereotype annotations are applied to classes to designate their specific role within the application architecture.
+When Spring runs its Component Scan, it detects these annotations and automatically registers the classes as managed
+Spring Beans.
+
+1. @Component - The generic root stereotype for any Spring-managed component
+2. @Service - Business Logic Layer
+3. @Repository - Data Access Layer
+4. @Controller - Web Controller handling traditional server-side web interfaces, method typically returns string which is
+                 name of web view template to be rendered by server
+5. @RestController - specific for RESTful web services, combines @Controller and @ResponseBody, so instead of view template
+                     file, method return data directly into HTTP response body (via Jackson)
+6. @Autowired - Inject matching dependency into this
+```
+
+### Configuration Annotations
+```
+Configuration annotations instruct Spring on how to initialize the container engine, declare externalized properties,
+toggle environments, and manually manufacture third-party beans.
+
+1. @SpringBootApplication - main entry-point class of every Spring Boot app
+2. @Configuration - class contains 1 or more methods to be managed by Spring container
+3. @Bean - Register method and return value as bean inside container
+4. @EnableAutoConfiguration - Instructs spring boot to inspect pom.xml or build.gradle build configuration and initialize beans.
+5. @ComponentScan - specify base java package where spring should scan incase main class is outside structure
+6. @Value - inject properties from external environment sources directly into fields in your beans.
+7. @ConfigurationProperties - Binds entire block of properties into strongly type object, better than using many @Values
+8. @Profile - Activates/Deactivates beans based on environment profile
+```
+
+### Dependency Injection Annotations
+```
+When your application context contains many beans, Spring needs explicit instructions on how to resolve
+dependencies—especially when multiple beans implement the exact same interface.
+
+1. @Autowired - tells IoC container to find and inject matching bean into the target class 
+2. @Qualifier - Qualifies 1 between multiple beans of same data type
+3. @Primary - Sets 1 as default choice when multiple beans of same type exists
+```
+
+### Web / REST Annotations
+```
+Web annotations turn plain Java classes into powerful, HTTP-aware controllers capable of extracting raw web payloads,
+handling query parameters, and returning structured JSON.
+
+1. @RestController - Restful web controller
+2. @RequestMapping - Configures structural routing paths, HTTP methods, headers, and media types for a controller.
+3. @GetMapping - Fetches or reads a resource.
+4. @PostMapping - Creates a new resource.
+5. @PutMapping - Completely replaces an existing resource.
+6. @DeleteMapping - Removes a specific resource.
+7. @PatchMapping - Applies a partial modification to a resource.
+8. @PathVariable - Extracts data parameter from URI path
+9. @RequestParam - Extracts query parameter after ?
+10. @RequestBody - Deserialize JSON body to Java object
+11. @ResponseStatus - predefined HTTP status code returned automatically when controller method completes/exception is triggered.
+
 ```
