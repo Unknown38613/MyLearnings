@@ -199,3 +199,30 @@ Hibernates flushes SQL -> DB COMMIT -> Persistence context close
 @Transactional does not directly open Hibernate's persistence context. It tells Spring to create a transaction boundary.
 As part of that, Spring usually creates/binds a Persistence Context (EntityManager) that Hibernate uses.
 ```
+## Database
+```
+in application.yml while configuring DB:
+spring.jpa.hibernate.ddl-auto - controls whether Hibernate should create/update/validate tables based on your @Entity classes.
+✅ none - do nothing
+✅ validate - hibernate checks if entity mappings matches DB
+⚠️ Update - Hibernate modifies the database schema to match entities.
+⚠️ create - drops previous tables, create new tables
+⚠️ create-drop - drop tables, create new tables then while shutting drop tables
+```
+
+## Transaction
+```
+@Transactional - Spring doesn't execute your code directly. Instead, it wraps your bean in an
+Aspect-Oriented Programming (AOP) Dynamic Proxy and creates Proxy object, then the proxy handles DB connections, DB commits, DB rollbacks.
+⚠️ It only rollbacks for unchecked (runtime) exceptions, for checked it will still commit so
+do @Transactional(rollbackFor = {Exception.class, CustomCheckedException.class})
+
+✅ At class level @transactional works fine but don't do it usually because it creates extra overhead
+
+⚠️ At method level:
+If a non-transactional method tried to access transactional method then it does create proxy but doesn't go through proxy, doesn't do transaction, runs normally
+so to fix it move transactional method to another service.
+
+Spring = transaction manager (BEGIN, COMMIT, ROLLBACK)
+Hibernate = ORM + change tracker (Entity tracker, Dirty Checking, Flushing changes)
+```
