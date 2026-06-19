@@ -121,8 +121,11 @@ private List<Address> addresses = new ArrayList<>();
 cascade = CascadeType.REMOVE - if parent deleted, delete children too
 so it will delete child first, then parent
 
-orphanRemoval = true - if child is removed from parent's collection, delete that child from DB, without this the row remains in DB
+orphanRemoval = true - if child is removed from parent's collection, delete that child from DB, without this the
+row remains in DB
 ```
+
+> Connection Pooling (Spring uses Hikari CP) - maintains cache of active DB connections that are shared and resued among incoming threads instead of doing TCP handshakes, auth, etc everytime with DB, when application starts connection pool instantiates fixed no. of connections, when spring service needs to interact with DB, it borrows idle connection from Pool, when operation is completed connection is returned back to pool instead of closing it.
 
 ```
 Pagination, Sorting, Slicing:
