@@ -4,9 +4,9 @@
 
 | Signal | What to Return | Constraint | Brute Force Approach (T.C.) | Technique | Technique's T.C. |
 |---|---|---|---|---|---|
-| Contiguous subarray sum, negatives allowed | Max/min subarray sum (value or indices) | N up to 10^5–10^6, negatives allowed | Check all subarrays (O(N²)) | Kadane's Algorithm | O(N) |
-| Sort array of N objects into K groups in-place, O(N) | In-place partitioned/sorted array | K=3 typical, O(N) time, O(1) space | Comparison sort (O(N log N)) or counting sort with extra array (O(N) space) | Dutch National Flag | O(N) time, O(1) space |
-| Element appears more than N/2 times | The majority element | O(1) space, O(N) time, majority guaranteed | HashMap frequency count (O(N) space) | Moore's Voting Algorithm | O(N) time, O(1) space |
+| **Contiguous subarray sum**, negatives allowed (⚠️ not for other sums)| Max/min subarray sum (value or indices) | N up to 10^5–10^6, negatives allowed | Check all subarrays (O(N²)) | Kadane's Algorithm | O(N) |
+| Sort array of **N objects into K groups** in-place, O(N) (⚠️ not for generic sorting) | In-place partitioned/sorted array | K=3 typical, O(N) time, O(1) space | Comparison sort (O(N log N)) or counting sort with extra array (O(N) space) | Dutch National Flag | O(N) time, O(1) space |
+| Element appears more than **N/2 times** (⚠️ not for most frequent) | The majority element | O(1) space, O(N) time, majority guaranteed | HashMap frequency count (O(N) space) | Moore's Voting Algorithm | O(N) time, O(1) space |
 | Subarray/substring with a condition, contract/expand window | Max/min length, count, or the window itself | Contiguous segment, N up to 10^5 | Check all subarrays/substrings (O(N²)–O(N³)) | Sliding Window | O(N) |
 | Sorted array, find pair/triplet with target sum | Pair/triplet (values or indices) | Array sorted (or sortable), N up to 10^5 | Nested loops (O(N²) for pair, O(N³) for triplet) | Two Pointers | O(N) for pair (post-sort O(N log N)), O(N²) for triplet |
 | Multiple range sum queries | Sum for each query range | Q queries, static array, N,Q up to 10^5 | Recompute sum per query (O(N·Q)) | Prefix Sum | O(N) preprocess + O(1)/query |
