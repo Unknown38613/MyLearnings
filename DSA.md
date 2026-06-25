@@ -1,76 +1,65 @@
-| Main Pattern         | Sub-pattern                   | What to return                          | When to use / Clue                        | Brute Force T.C | Optimized T.C |
-| -------------------- | ----------------------------- | --------------------------------------- | ----------------------------------------- | --------------- | ------------- |
-| Sliding Window       | Fixed Size Window             | Max/min/count in window                 | "Every k elements", window size given     | O(N*K)          | O(N)          |
-| Sliding Window       | Variable Size (Shrink/Expand) | Longest/shortest valid window           | Longest substring/subarray with condition | O(N²)           | O(N)          |
-| Sliding Window       | Count of Valid Windows        | Number of subarrays/substrings          | "How many subarrays satisfy..."           | O(N²)           | O(N)          |
-| Sliding Window       | Frequency Window              | Longest substring with chars constraint | Character count, anagrams                 | O(N²)           | O(N)          |
-| Two Pointer          | Opposite Direction            | Pair sum, triplet                       | Sorted array + target                     | O(N²)           | O(N)          |
-| Two Pointer          | Same Direction (Slow/Fast)    | Modify/remove elements                  | Remove duplicates, move zeros             | O(N²)           | O(N)          |
-| Two Pointer          | Merge Intervals style         | Combined ranges                         | Overlapping ranges                        | O(N²)           | O(NlogN)      |
-| Two Pointer          | 3Sum / 4Sum                   | Triplets/quads                          | Sorted + target combinations              | O(N³/N⁴)        | O(N²/N³)      |
-| HashMap + Prefix Sum | Prefix Sum + Frequency Map    | Count subarrays                         | Sum = K, negatives allowed                | O(N²)           | O(N)          |
-| HashMap + Prefix Sum | Prefix XOR                    | Count XOR ranges                        | XOR target problems                       | O(N²)           | O(N)          |
-| HashMap + Prefix Sum | Prefix Product                | Product constraints                     | Product based subarrays                   | O(N²)           | O(N)          |
-| HashMap              | Frequency Counting            | Most frequent/duplicates                | Counting occurrences                      | O(N²)           | O(N)          |
-| Tree DFS/BFS         | DFS Traversal                 | Visit/process nodes                     | Pre/In/Post order                         | O(N)            | O(N)          |
-| Tree DFS/BFS         | Height / Depth                | Height, balance                         | Need subtree info                         | O(N)            | O(N)          |
-| Tree DFS/BFS         | Path Problems                 | Max path, root-to-leaf                  | "Path", "sum", "distance"                 | O(N²)           | O(N)          |
-| Tree DFS/BFS         | Lowest Common Ancestor        | Common ancestor                         | Two nodes relationship                    | O(N²)           | O(N)          |
-| Tree DFS/BFS         | Tree Diameter                 | Longest path                            | Distance between nodes                    | O(N²)           | O(N)          |
-| Tree DFS/BFS         | Level Order BFS               | Level-wise result                       | "Each level", minimum depth               | O(N)            | O(N)          |
-| Graph BFS/DFS        | DFS Components                | Number of islands/components            | Connectivity                              | O(V²)           | O(V+E)        |
-| Graph BFS/DFS        | BFS Shortest Path             | Minimum steps                           | Unweighted graph                          | O(V²)           | O(V+E)        |
-| Graph BFS/DFS        | Cycle Detection               | Cycle exists?                           | Directed/undirected graph                 | O(V²)           | O(V+E)        |
-| Graph BFS/DFS        | Topological Sort              | Ordering                                | Dependencies/prerequisites                | O(V²)           | O(V+E)        |
-| Graph BFS/DFS        | Flood Fill                    | Modified grid                           | Matrix traversal                          | O(N²)           | O(N²)         |
-| Binary Search        | Classic Search                | Index                                   | Sorted array                              | O(N)            | O(logN)       |
-| Binary Search        | First/Last Occurrence         | Position                                | Duplicates present                        | O(N)            | O(logN)       |
-| Binary Search        | Search Rotated Array          | Index                                   | Rotated sorted array                      | O(N)            | O(logN)       |
-| Binary Search        | Binary Search on Answer       | Minimum/maximum possible                | "Minimize maximum", monotonic             | O(N*answer)     | O(NlogAnswer) |
-| Binary Search        | Peak Finding                  | Peak index                              | Local maximum                             | O(N)            | O(logN)       |
-| Linked List          | Reverse Linked List           | Modified list                           | Reverse nodes                             | O(N)            | O(N)          |
-| Linked List          | Fast/Slow Pointer             | Middle/cycle                            | Two speed pointers                        | O(N)            | O(N)          |
-| Linked List          | Merge Lists                   | Combined list                           | Sorted lists                              | O(N)            | O(N)          |
-| Linked List          | Reverse in K Group            | Modified chunks                         | Reverse every k nodes                     | O(N)            | O(N)          |
-| Linked List          | Intersection                  | Common node                             | Two linked lists merge                    | O(N²)           | O(N)          |
-| Stack                | Parenthesis Matching          | Valid/invalid                           | Brackets                                  | O(N)            | O(N)          |
-| Stack                | Monotonic Increasing          | Next smaller                            | Histogram, stock span                     | O(N²)           | O(N)          |
-| Stack                | Monotonic Decreasing          | Next greater                            | NGE, daily temperatures                   | O(N²)           | O(N)          |
-| Stack                | Expression Evaluation         | Value                                   | Calculator problems                       | O(N)            | O(N)          |
-| Heap                 | Top K Elements                | K largest/smallest                      | Ranking problems                          | O(NlogN)        | O(NlogK)      |
-| Heap                 | Kth Element                   | kth value                               | Median/order statistics                   | O(NlogN)        | O(NlogK)      |
-| Heap                 | Two Heap Median               | Median                                  | Streaming numbers                         | O(NlogN)        | O(logN)       |
-| Backtracking         | Subsets                       | All subsets                             | Pick/not pick                             | O(2^N)          | O(2^N)        |
-| Backtracking         | Permutations                  | All arrangements                        | Ordering matters                          | O(N!)           | O(N!)         |
-| Backtracking         | Combination Sum               | Valid combinations                      | Target sum                                | O(2^N)          | O(2^N)        |
-| Backtracking         | Grid Backtracking             | Paths                                   | Maze/word search                          | O(4^N)          | O(4^N)        |
-| DP                   | 1D DP                         | Best answer till i                      | Fibonacci, house robber                   | O(2^N)          | O(N)          |
-| DP                   | 2D DP                         | Grid/state answer                       | Matrix, strings                           | O(2^(N+M))      | O(NM)         |
-| DP                   | Knapsack DP                   | Max value                               | Pick/not pick items                       | O(2^N)          | O(NW)         |
-| DP                   | LIS Pattern                   | Longest sequence                        | Increasing subsequence                    | O(N²)           | O(NlogN)      |
-| DP                   | String DP                     | Matching/editing                        | LCS, edit distance                        | O(3^N)          | O(NM)         |
-| Greedy               | Sorting + Pick                | Minimum/maximum                         | Interval scheduling                       | O(N²)           | O(NlogN)      |
-| Greedy               | Local Choice                  | Best next move                          | Activity/job problems                     | O(N²)           | O(NlogN)      |
-| Greedy               | Two Pointer Greedy            | Optimize pairing                        | Boats, containers                         | O(NlogN)        | O(N)          |
-| Trie                 | Prefix Trie                   | Search/prefix                           | Dictionary problems                       | O(N*M)          | O(M)          |
-| Trie                 | Bit Trie                      | XOR maximum                             | Max XOR pair                              | O(N²)           | O(N*bits)     |
-| Bit Manipulation     | XOR Pattern                   | Unique element                          | Appears odd times                         | O(N)            | O(1)          |
-| Bit Manipulation     | Bit Counting                  | Count set bits                          | Binary properties                         | O(N*bits)       | O(N)          |
-| Bit Manipulation     | Masking                       | Subsets/state                           | Small N combinations                      | O(2^N)          | O(2^N)        |
-| Strings              | Frequency Count               | Count/compare characters         | Anagram, ransom note, character frequency | O(N²)           | O(N)          |
-| Strings              | HashMap + String              | Longest/count substring          | Repeated chars, unique chars              | O(N²)           | O(N)          |
-| Strings              | Sliding Window String         | Longest/shortest substring       | "Substring + condition"                   | O(N²)           | O(N)          |
-| Strings              | Two Pointer String           | Modified string/check palindrome | Left-right comparison                     | O(N)            | O(N)          |
-| Strings              | Palindrome Check             | Boolean/result string            | Palindrome, almost palindrome             | O(N)            | O(N)          |
-| Strings      | Palindrome Expansion         | Longest palindrome               | Center expansion clue                     | O(N²)           | O(N²)         |
-| Strings      | String Matching              | Index/occurrence                 | Find pattern in text                      | O(N*M)          | O(N+M) (KMP)  |
-| Strings      | Subsequence Pattern          | Boolean/count                    | "Can form", order matters                 | O(N*M)          | O(N)          |
-| Strings      | Longest Common Subsequence   | Length/string                    | Two strings comparison                    | O(2^(N+M))      | O(NM)         |
-| Strings      | Edit Distance                | Minimum operations               | Insert/delete/replace                     | O(3^(N+M))      | O(NM)         |
-| Strings      | String DP                    | Count/optimal answer             | Repeated states in strings                | Exponential     | O(NM)         |
-| Strings      | Stack Based                  | Remove/construct string          | Remove duplicates, decode string          | O(N²)           | O(N)          |
-| Strings      | Parsing String               | Extract values                   | Numbers, expressions                      | O(N²)           | O(N)          |
-| Strings      | Character Replacement Window | Longest valid string             | Replace ≤ K chars                         | O(N²)           | O(N)          |
-| Strings      | Grouping Strings             | Bucketing                        | Group anagrams, patterns                  | O(N²)           | O(N*K)        |
-| Strings      | Trie String Search           | Prefix/search                    | Dictionary words                          | O(N*M)          | O(M)          |
-| Strings      | Rolling Hash                 | Substring search                 | Duplicate substring                       | O(N*M)          | O(N) avg      |
+| Main Pattern         | Sub-pattern               | What to return          | When to use / Clue             | Brute Force T.C | Optimized T.C |
+| -------------------- | ------------------------- | ----------------------- | ------------------------------ | --------------- | ------------- |
+| Sliding Window       | Fixed Size Window         | Max/min/count in window | "Size K", fixed window         | O(N*K)          | O(N)          |
+| Sliding Window       | Variable Size Window      | Longest/shortest window | Subarray/substring + condition | O(N²)           | O(N)          |
+| Sliding Window       | Count Valid Windows       | Number of valid ranges  | Count substrings/subarrays     | O(N²)           | O(N)          |
+| Sliding Window       | Frequency Window (String) | Longest substring/count | Character constraints          | O(N²)           | O(N)          |
+| Sliding Window       | Character Replacement     | Longest valid substring | Replace ≤ K chars              | O(N²)           | O(N)          |
+| Sliding Window       | Anagram Window            | Starting indices/count  | Pattern matching in string     | O(N*M)          | O(N)          |
+| Two Pointer          | Opposite Direction        | Pair/triplet/index      | Sorted array + target          | O(N²)           | O(N)          |
+| Two Pointer          | Same Direction            | Modify array/string     | Remove duplicates, move zeros  | O(N²)           | O(N)          |
+| Two Pointer          | 3Sum                      | Triplets                | Sorted + target                | O(N³)           | O(N²)         |
+| Two Pointer          | 4Sum                      | Quadruplets             | Sorted + target                | O(N⁴)           | O(N³)         |
+| Two Pointer          | Palindrome Check (String) | True/False              | Compare ends                   | O(N)            | O(N)          |
+| Two Pointer          | Merge Intervals           | Combined ranges         | Overlapping intervals          | O(N²)           | O(NlogN)      |
+| Prefix Sum + HashMap | Subarray Sum              | Count/length            | Sum K, negatives allowed       | O(N²)           | O(N)          |
+| Prefix Sum + HashMap | Prefix XOR                | Count ranges            | XOR target                     | O(N²)           | O(N)          |
+| Prefix Sum + HashMap | Frequency Prefix          | Balance/count           | Equal zeros/ones etc           | O(N²)           | O(N)          |
+| HashMap              | Frequency Count           | Count occurrences       | Anagram, duplicates            | O(N²)           | O(N)          |
+| HashMap              | Grouping Pattern          | Groups                  | Group anagrams                 | O(N²)           | O(N*K)        |
+| Tree DFS/BFS         | DFS Traversal             | Nodes/result            | Tree processing                | O(N)            | O(N)          |
+| Tree DFS/BFS         | Height/Depth              | Height                  | Subtree info                   | O(N)            | O(N)          |
+| Tree DFS/BFS         | Diameter                  | Longest path            | Max distance                   | O(N²)           | O(N)          |
+| Tree DFS/BFS         | Path Sum                  | Path/value              | Root-leaf or any path          | O(N²)           | O(N)          |
+| Tree DFS/BFS         | Lowest Common Ancestor    | Common node             | Relationship between nodes     | O(N²)           | O(N)          |
+| Tree DFS/BFS         | Level Order BFS           | Level result            | Each level/min depth           | O(N)            | O(N)          |
+| Graph DFS/BFS        | Components                | Number of groups        | Islands/connectivity           | O(V²)           | O(V+E)        |
+| Graph DFS/BFS        | BFS Shortest Path         | Minimum distance        | Unweighted graph               | O(V²)           | O(V+E)        |
+| Graph DFS/BFS        | Cycle Detection           | Cycle exists            | Directed/undirected            | O(V²)           | O(V+E)        |
+| Graph DFS/BFS        | Topological Sort          | Ordering                | Dependencies                   | O(V+E)          | O(V+E)        |
+| Binary Search        | Normal Search             | Index                   | Sorted array                   | O(N)            | O(logN)       |
+| Binary Search        | First/Last Position       | Boundary                | Duplicates                     | O(N)            | O(logN)       |
+| Binary Search        | Rotated Array             | Index                   | Rotated sorted array           | O(N)            | O(logN)       |
+| Binary Search        | Search Answer             | Min/max value           | Monotonic answer               | O(N*Ans)        | O(NlogAns)    |
+| Linked List          | Reverse List              | Modified list           | Reverse nodes                  | O(N)            | O(N)          |
+| Linked List          | Fast Slow Pointer         | Middle/cycle            | Pointer speed                  | O(N)            | O(N)          |
+| Linked List          | Intersection              | Common node             | Merge point                    | O(N²)           | O(N)          |
+| Linked List          | Merge Lists               | Sorted list             | Combine lists                  | O(N)            | O(N)          |
+| Linked List          | Reverse K Group           | Modified chunks         | Reverse batches                | O(N)            | O(N)          |
+| Stack                | Parentheses Validation    | Valid/invalid           | Brackets                       | O(N)            | O(N)          |
+| Stack                | Monotonic Increasing      | Next smaller            | Histogram, stock span          | O(N²)           | O(N)          |
+| Stack                | Monotonic Decreasing      | Next greater            | NGE, temperatures              | O(N²)           | O(N)          |
+| Stack                | String Stack              | Construct string        | Remove chars, decode           | O(N²)           | O(N)          |
+| Heap                 | Top K                     | K elements              | Ranking                        | O(NlogN)        | O(NlogK)      |
+| Heap                 | Kth Element               | kth value               | Order statistics               | O(NlogN)        | O(NlogK)      |
+| Heap                 | Two Heap Median           | Median                  | Streaming values               | O(NlogN)        | O(logN)       |
+| Backtracking         | Subsets                   | All subsets             | Pick/not pick                  | O(2^N)          | O(2^N)        |
+| Backtracking         | Permutations              | All orders              | Arrangement                    | O(N!)           | O(N!)         |
+| Backtracking         | Combination Sum           | Valid combos            | Target based                   | O(2^N)          | O(2^N)        |
+| Backtracking         | Grid Search               | Paths                   | Maze/word search               | O(4^N)          | O(4^N)        |
+| Dynamic Programming  | 1D DP                     | Best till i             | Fibonacci, robber              | O(2^N)          | O(N)          |
+| Dynamic Programming  | 2D DP                     | Matrix states           | Grid/string                    | Exponential     | O(NM)         |
+| Dynamic Programming  | Knapsack                  | Max value               | Pick/not pick                  | O(2^N)          | O(NW)         |
+| Dynamic Programming  | LIS                       | Longest sequence        | Increasing order               | O(N²)           | O(NlogN)      |
+| Dynamic Programming  | LCS                       | Common sequence         | Two strings                    | O(2^N)          | O(NM)         |
+| Dynamic Programming  | Edit Distance             | Operations              | Convert string                 | O(3^N)          | O(NM)         |
+| Greedy               | Sorting + Selection       | Best choice             | Local optimum                  | O(N²)           | O(NlogN)      |
+| Greedy               | Interval Greedy           | Maximum activities      | Scheduling                     | O(N²)           | O(NlogN)      |
+| Trie                 | Prefix Search             | Word/prefix             | Dictionary                     | O(N*M)          | O(M)          |
+| Trie                 | Bit Trie                  | Max XOR                 | Binary representation          | O(N²)           | O(N*bits)     |
+| String               | Pattern Matching (KMP)    | Match index             | Find substring                 | O(NM)           | O(N+M)        |
+| String               | Rolling Hash              | Duplicate substring     | Hash comparison                | O(NM)           | O(N) avg      |
+| String               | Parsing                   | Extract/compute         | Numbers/operators              | O(N)            | O(N)          |
+| Bit Manipulation     | XOR Pattern               | Unique element          | Odd occurrence                 | O(N)            | O(1)          |
+| Bit Manipulation     | Bit Counting              | Set bits                | Binary properties              | O(N*bits)       | O(N)          |
+| Bit Manipulation     | Bit Masking               | States/subsets          | Small N                        | O(2^N)          | O(2^N)        |
