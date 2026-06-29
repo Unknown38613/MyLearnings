@@ -41,8 +41,9 @@ for length : {0,-1} currentrunningprefixsum, index
 For XOR:
 X ^ X = 0
 X ^ 0 = X
-CurrentRunningPrefixXOR - OlderPrefixXOR = TargetXOR
-so OlderPrefixXOR = CurrentRunningPrefixXOR - target
+X ^ Y = Z, Y ^ Z = X, Z ^ X = Y
+CurrentRunningPrefixXOR ^ OlderPrefixXOR = TargetXOR
+so OlderPrefixXOR = CurrentRunningPrefixXOR ^ target
 ```
 ```
 Count equal 0s and 1s
