@@ -21,7 +21,36 @@ For at least k (complement trick) = total subarrays - at most k - 1
 same like numbers >= 10 ---> total numbers - number <= 9
 ```
 
+```
+### Shrinking Rule
+- while → when invalid can happen multiple times
+- if → when window size is fixed / single removal
+```
+
 ## Two Pointers
+```
+Use when:
+- array is sorted
+- need pair/triplet
+- need shrinking from both ends
+
+
+### Sorted Array Pair
+sum < target → left++
+sum > target → right--
+
+
+### Remove Duplicates Pattern
+Move fast pointer always.
+Move slow pointer only when valid new value found.
+
+
+### Opposite Direction
+left = 0
+right = n-1
+
+Move pointer that helps reach target.
+```
 
 
 ## Prefix Sum
