@@ -112,3 +112,17 @@ diameter of node = height(L) + height(R)
 uses those height for edge
 if we used -1 then leaf will have 0 height
 ```
+Path Sum: 
+Root to leaf path sum - just pass the sum target - root.val
+> Any path exists - || (will immediately terminate operation if 1 path is found)
+
+> All paths valid - &&
+
+Any Path sum - Naive approach to start from every node O(N^2) for skewed tree
+Optimized approach - Prefix Sum + DFS + Backtracking
+1. Start like normal prefix sum
+2. Map {0, 1} runningsum, frequency
+3. Now in DFS, check if runningsum - target exists then count it
+4. map the runningsum, frequency
+5. now do dfs in both side with that runningsum
+6. after doing it backtrack by decrementing the freqency 
