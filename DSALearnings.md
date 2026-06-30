@@ -86,3 +86,29 @@ Group Anagram
 Hashmap + Sorted Key - N.KlogK
 HashMap + Frequency Patterned Key - N.K
 ```
+## Tree
+```
+Height = node to deepest leaf, edges 
+so if root == null return -1 because leaf has no edge
+
+But for node count return 0 because root == null means no node
+
+Why Postorder for height? Because parent's height depend on child
+```
+
+```
+BFS - level by level, decrease depth only when level is visited
+```
+
+```
+Diameter(longest path btw 2 nodes) - edges on longest path between any 2 nodes
+(not necessary it passes through root)
+        node
+       /    \
+      L      R
+height(L) + height(R)
+
+⚠️ here root == null return 0 because we are using nodes for height and then diameter
+uses those height for edge
+if we used -1 then leaf will have 0 height
+```
