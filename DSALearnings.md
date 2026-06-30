@@ -118,7 +118,9 @@ Root to leaf path sum - just pass the sum target - root.val
 
 > All paths valid - &&
 
+```
 Any Path sum - Naive approach to start from every node O(N^2) for skewed tree
+
 Optimized approach - Prefix Sum + DFS + Backtracking
 1. Start like normal prefix sum
 2. Map {0, 1} runningsum, frequency
@@ -126,3 +128,9 @@ Optimized approach - Prefix Sum + DFS + Backtracking
 4. map the runningsum, frequency
 5. now do dfs in both side with that runningsum
 6. after doing it backtrack by decrementing the freqency 
+```
+
+```
+LCA of p and q - first node that has both descendant p and q
+(a node can be descendant of itself)
+```
