@@ -106,7 +106,7 @@ Diameter(longest path btw 2 nodes) - edges on longest path between any 2 nodes
         node
        /    \
       L      R
-height(L) + height(R)
+diameter of node = height(L) + height(R)
 
 ⚠️ here root == null return 0 because we are using nodes for height and then diameter
 uses those height for edge
