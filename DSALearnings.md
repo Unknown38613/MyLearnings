@@ -133,4 +133,12 @@ Optimized approach - Prefix Sum + DFS + Backtracking
 ```
 LCA of p and q - first node that has both descendant p and q
 (a node can be descendant of itself)
+
+⚠️ P and Q are guarnteed present
+⚠️ We are not doing value comparison because it relies on Node object, value can repeat
+1. If root is null, p, q return root
+2. Search left and right for it
+3. If both returns non-null then that node is LCA return root
+4. Return non-null side (incase of both null return any)
+return (left != null) ? left : right;
 ```
