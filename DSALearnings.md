@@ -163,4 +163,12 @@ Inend - Inend
 ```
 
 ## Graph
+```
+Adjacency list(sparse, few edge) - visit each edge twice and vertex once = O(V + 2E)
+(not VxE because we don't loop all edges for each Vertex, we know neighbor of each V)
 
+Adjacency Matrix(many, dense) - we don't know each V neighbor so we scan whole row = O(V^2)
+(even if no edges still it check V^2)
+But useful in checking if there is edge between 2 vertices
+(Adjacency list will go through list, matrix is just mat[A][B])
+```
