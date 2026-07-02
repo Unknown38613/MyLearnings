@@ -172,3 +172,31 @@ Adjacency Matrix(many, dense) - we don't know each V neighbor so we scan whole r
 But useful in checking if there is edge between 2 vertices
 (Adjacency list will go through list, matrix is just mat[A][B])
 ```
+
+```
+DFS on graph
+BFS on graph
+min dist in unweighted graph - BFS
+distance[neighbor] = distance[currentnode] + 1;
+positive weight - Dijkstra
+Relax distance - (distance[node] + adjweight < distance[adjNode]) 
+(minimizing distance from the source)
+
+MST - all vertices, V - 1 edges, no cycle, min total weight
+Prim's MST - PQ
+Just keep adding all outgoing edges to unvisited neighbours
+(minimizing the next connecting edge)
+
+DSU (Union Find) data structure:
+Find() - which group element belong
+Union() - merge 2 groups
+
+1. maintain parent index array where everyone is their own parent
+2. for int find() use path compression
+3. void Union() by rank/size
+
+Kruskal's MST - DSU
+Topological Sort - Kahn's algo
+Undirected cycle detection - DSU
+Directed cycle detection - Kahn's algo
+```
