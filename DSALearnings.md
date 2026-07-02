@@ -142,3 +142,25 @@ LCA of p and q - first node that has both descendant p and q
 4. Return non-null side (incase of both null return any)
 return (left != null) ? left : right;
 ```
+```
+Binary Tree from Preorder and Inorder
+1. Preorder - root left right, Inorder - left root right
+2. First element in preorder is always root
+3. Now in inorder, find that preorder element index
+left side from that will be left subtree, and right side another
+4. Then just continue that with left and right subtree recursively
+For Left - 
+Prestart - Prestart + 1
+Preend - Prestart + (Inorderroot - Instart)
+Instart - Instart 
+Inend - Inorderroot - 1
+
+For Right -
+Prestart - Prestart + (Inorderroot - Instart) + 1
+Preend - Preend
+Instart - Inorderroot + 1
+Inend - Inend
+```
+
+## Graph
+
