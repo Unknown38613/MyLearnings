@@ -221,3 +221,51 @@ target in rotated sorted array -
 7) else high = mid - 1
 8) return -1 if not found
 ```
+## Linked List
+
+```
+Reverse LL:
+Pointer dance
+prev = null
+curr = head;
+while curr!=null
+1) temp = curr.next
+2) curr.next = prev;
+3) prev = curr;
+4) curr = temp;
+5) return prev
+```
+```
+Fast and Slow:
+odd - middle node
+even - 2nd middle
+```
+```
+Detecting Cycle:
+slow and fast meet true
+```
+```
+Linked List intersection
+start both from head
+when reached end, switch heads
+p1 = a + c + b
+p2 = b + c + a
+same dist
+even if no intersection, will hit null 
+```
+
+```
+Linked List Cycle start
+x = dist from head to start cycle
+y = dist from start cycle to meet
+L = length of cycle
+
+for slow = x + y
+for fast = 2(x + y) 
+
+2 (x + y) = x + y + kL (it will have to travel some k loop to reach same dist)
+x + y = kL
+x = kL - y
+pointer from head = pointer from meeting point needs same step
+regardless of K 
+```
