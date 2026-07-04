@@ -269,3 +269,35 @@ x = kL - y
 pointer from head = pointer from meeting point needs same step
 regardless of K 
 ```
+```
+Merge 2 sorted lists:
+dummy -1
+current = dummy
+
+now walk both lists
+compare if list1.value <= list2.value
+current.next = list1
+list1 = list1.next
+current = current.next
+
+any leftovers list1 != null
+current.next = list1
+
+return dummy.next;
+```
+
+```
+Reverse K Groups:
+
+PGT = -1
+dummy = -1
+curr = 1
+-1->1->2->3->4->5
+CGH = 1
+prev = null
+---------
+-1->3->2->1->4->5
+PGT.next = prev = 3
+CGH.next = curr = 4
+PGT = 1
+```
