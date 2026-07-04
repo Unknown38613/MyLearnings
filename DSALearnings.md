@@ -200,3 +200,24 @@ Topological Sort - Kahn's algo
 Undirected cycle detection - DSU
 Directed cycle detection - Kahn's algo
 ```
+## Binary Search
+```
+Target - Return middle element immediately (log N)
+```
+```
+firstPosition in duplicate array - when found the middle, tighten  
+boundary on left (high = mid - 1) don't stop
+lastPosition in duplicate array - when found the middle, tighten
+boundary in right (left = mid + 1) don't stop
+```
+```
+target in rotated sorted array -
+1) Find mid, if target return 
+2) compare low with mid, if low <= mid left half is sorted
+3) Now check if target is between left and mid high = mid - 1
+4) else low = mid + 1
+5) Else right half is sorted
+6) Check if target is between mid and right low = mid + 1
+7) else high = mid - 1
+8) return -1 if not found
+```
