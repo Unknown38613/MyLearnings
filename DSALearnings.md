@@ -301,3 +301,43 @@ PGT.next = prev = 3
 CGH.next = curr = 4
 PGT = 1
 ```
+## Stack
+
+```
+Parentheses
+Open push
+Close
+1.If empty false
+2.If mismatch with pop false
+
+If stack empty true
+```
+
+```
+Next Smaller Element (NSE)
+Use index to make calculation easy
+if stack is not empty && curr < stack peek
+poppedIndex = pop()
+res[poppedIndex] = curr
+
+stack.push(i)
+```
+
+```
+Next Greater Element (NGE)
+Use index to make calculation easy
+if stack is not empty && curr > stack peek
+poppedIndex = pop()
+res[poppedIndex] = curr
+
+stack.push(i)
+```
+
+```
+(NGE) Daily Temperatures - how many days to get warmer temp
+if stack is not empty && currTemp > stack peek
+poppedIndex = pop()
+res[poppedIndex] = i - poppedIndex
+
+stack.push(i)
+```
