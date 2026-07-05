@@ -390,3 +390,46 @@ repeat = countstack pop = 3
 currentstring = accaccacc
 -------------------
 ```
+
+## Heap
+
+```
+Find K largest element
+PQ - min heap
+insert
+Evict when size() > k 
+
+3 10 2 8 15 7
+k = 3
+2 3 10 -> 3 8 10 ->
+8 10 15 -> 8 10 15
+```
+
+```
+Find K smallest element
+PQ - max heap
+priorityQueue(Collections.reverseOrder())
+insert
+Evict when size() > k
+```
+
+```
+Median
+smallhalf = max heap
+can contain 1 extra element
+for odd number
+largehalf = min heap
+
+add:
+add in smallhalf always
+add the max of small half to largehalf
+if smallfhalf size < largehalf 
+then smallhalf add largehalf min element
+
+findMedian:
+for odd:
+if smallhalf > largehalf 
+return smallhalf max element
+for even:
+return small + large peek / 2.0
+```
