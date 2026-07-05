@@ -341,3 +341,52 @@ res[poppedIndex] = i - poppedIndex
 
 stack.push(i)
 ```
+```
+removeAdjacentDuplicates
+if len > 0 && stack top == curr
+then stack pop
+else stack push
+```
+
+```
+Deep String Decoding
+
+3[a2[c]]
+
+3
+k = 3
+-------------------
+[
+countstack = 3
+stringstack = currentstring = ""
+currentstring = ""
+k = 0
+-------------------
+a
+currentstring = a
+-------------------
+2
+k = 2
+-------------------
+[
+countstack = 3 2
+stringstack = currentstring = "" a
+currentstring = ""
+k = 0
+-------------------
+c
+currentstring = c
+-------------------
+]
+decodedsegment = c
+currentstring = stringstack pop = a
+repeat = countstack pop = 2
+currentstring = acc
+-------------------
+]
+decodedsegment = acc
+currentstring = stringstack pop = ""
+repeat = countstack pop = 3
+currentstring = accaccacc
+-------------------
+```
