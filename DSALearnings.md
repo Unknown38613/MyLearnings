@@ -433,3 +433,28 @@ return smallhalf max element
 for even:
 return small + large peek / 2.0
 ```
+
+## Backtracking
+
+```
+1. Subset
+list.add(list2) - point just to reference of list 2 
+list.add(new ArrayList<>(list2)) - create copy of list 2
+
+2. Combination
+pick/skip manually skip - useless branching if looping forwards
+for loop - skips naturally avoids useless branches
+
+3. Combination Sum
+Objects like list - manually restore them in backtracking
+primitives/pass by value - don't restore them
+
+4. Combination Sum II
+Always check for success before failure in base condition
+In case of sorted array,
+detect duplicate early
+prune early (if curr > target) then next will also be > targets so break
+
+5. Permutations
+loop starts from 0 every time, visited array will keep track whether to continue or not
+```
