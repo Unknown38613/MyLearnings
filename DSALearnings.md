@@ -452,13 +452,29 @@ primitives/pass by value - don't restore them
 4. Combination Sum II
 Always check for success before failure in base condition
 In case of sorted array,
-detect duplicate early
+detect duplicate early if(j > 0 && nums[j] == nums[j - 1])
 prune early (if curr > target) then next will also be > targets so break
 
 5. Permutations
 loop starts from 0 every time, visited array will keep track whether to continue or not
-```
 
+6. Permutations II
+if(j > 0 && nums[j] == nums[j - 1] && !visited[j - 1]) continue;
+
+7. Trick:
+Permutations 
+j = 0
+currentslot + 1
+
+Combintaion/subset
+j = i 
+j + 1
+
+Independent pools 1 = "abc" 2 = "def"
+j = 0
+currentPool + 1
+```
+```
 78  -> Subsets
 77  -> Combinations
 39  -> Combination Sum
@@ -474,3 +490,4 @@ loop starts from 0 every time, visited array will keep track whether to continue
 37  -> Sudoku Solver
 1593 -> Max Unique Split
 282 -> Expression Add Operators
+```
