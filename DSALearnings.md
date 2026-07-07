@@ -460,19 +460,21 @@ loop starts from 0 every time, visited array will keep track whether to continue
 
 6. Permutations II
 if(j > 0 && nums[j] == nums[j - 1] && !visited[j - 1]) continue;
+This number is a duplicate, and the identical number just before it hasn't been used yet,
+so don't start a new branch with this duplicate.
 
 7. Trick:
 Permutations 
 j = 0
-currentslot + 1
+recurse(currentslot + 1)
 
 Combintaion/subset
 j = i 
-j + 1
+recurse(j + 1)
 
 Independent pools 1 = "abc" 2 = "def"
 j = 0
-currentPool + 1
+recurse(currentPool + 1)
 ```
 ```
 78  -> Subsets
