@@ -458,3 +458,19 @@ prune early (if curr > target) then next will also be > targets so break
 5. Permutations
 loop starts from 0 every time, visited array will keep track whether to continue or not
 ```
+
+78  -> Subsets
+77  -> Combinations
+39  -> Combination Sum
+40  -> Combination Sum II
+46  -> Permutations
+47  -> Permutations II
+17  -> Letter Combinations
+22  -> Generate Parentheses
+131 -> Palindrome Partitioning
+79  -> Word Search
+1219 -> Path with Maximum Gold
+51  -> N-Queens
+37  -> Sudoku Solver
+1593 -> Max Unique Split
+282 -> Expression Add Operators
