@@ -475,6 +475,22 @@ recurse(j + 1)
 Independent pools 1 = "abc" 2 = "def"
 j = 0
 recurse(currentPool + 1)
+
+8. Golden rule for duplicates
+For sorted array combinations:
+if(j > i && nums[j] == nums[j - 1]) continue;
+
+For permutations:
+if(j > 0 && nums[j] == nums[j - 1] && !visited[j - 1]) continue;
+if(visited[j]) continue;
+
+9. For static limited choices without input array
+Directly use that item to append
+recurse
+backtrack
+Now use another item to append
+recurse
+backtrack
 ```
 ```
 78  -> Subsets
