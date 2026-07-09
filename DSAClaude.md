@@ -2,216 +2,434 @@
 
 **1. Subsets / Combinations (include-exclude choice)**
 - Subsets — LC 78
+```
+```
 - Subsets II (with duplicates) — LC 90
+```
+```
 - Combinations — LC 77
+```
+```
 
 **2. Permutations (order matters, swap/visited-based)**
 - Permutations — LC 46
+```
+```
 - Permutations II (with duplicates) — LC 47
+```
+```
 
 **3. Target sum / combination search (choose repeatedly until target)**
 - Combination Sum — LC 39
+```
+```
 - Combination Sum II — LC 40
+```
+```
 - Combination Sum III — LC 216
+```
+```
 
 **4. Partitioning (split input into valid pieces)**
 - Palindrome Partitioning — LC 131
+```
+```
 - Restore IP Addresses — LC 93
+```
+```
 
 **5. Constraint satisfaction on a grid/board (place, check, undo)**
 - N-Queens — LC 51
+```
+```
 - Sudoku Solver — LC 37
+```
+```
 
 **6. Word search on grid (DFS + backtrack with visited marking)**
 - Word Search — LC 79
+```
+```
 - Word Search II (Trie + backtracking) — LC 212
+```
+```
 
 **7. String construction / matching with backtracking**
 - Letter Combinations of a Phone Number — LC 17
+```
+```
 - Generate Parentheses — LC 22
+```
+```
 
 
 ## Dynamic Programming
 
 **1. 1D DP — linear sequence decisions**
 - Climbing Stairs — LC 70
+```
+```
 - House Robber — LC 198
+```
+```
 - House Robber II (circular) — LC 213
+```
+```
 
 **2. Kadane's / subarray DP**
 - Maximum Subarray — LC 53
+```
+```
 - Maximum Product Subarray — LC 152
+```
+```
 
 **3. 0/1 Knapsack pattern**
 - Partition Equal Subset Sum — LC 416
+```
+```
 - Target Sum — LC 494
+```
+```
 - Coin Change (min coins, unbounded knapsack variant) — LC 322
+```
+```
 - Coin Change II (count ways, unbounded) — LC 518
+```
+```
 
 **4. Longest Common Subsequence family (2D grid DP over two strings)**
 - Longest Common Subsequence — LC 1143
+```
+```
 - Edit Distance — LC 72
+```
+```
 - Distinct Subsequences — LC 115
+```
+```
 
 **5. Longest Increasing Subsequence pattern**
 - Longest Increasing Subsequence (O(n log n) variant important) — LC 300
+```
+```
 - Russian Doll Envelopes (LIS in 2D) — LC 354
+```
+```
 
 **6. Palindromic DP**
 - Longest Palindromic Substring — LC 5
+```
+```
 - Longest Palindromic Subsequence — LC 516
+```
+```
 - Palindrome Partitioning II (min cuts) — LC 132
+```
+```
 
 **7. Grid/path DP**
 - Unique Paths — LC 62
+```
+```
 - Minimum Path Sum — LC 64
+```
+```
 - Dungeon Game (reverse DP) — LC 174
+```
+```
 
 **8. Interval DP (decisions over subranges, merge point)**
 - Burst Balloons — LC 312
+```
+```
 - Matrix Chain Multiplication style — Minimum Cost to Merge Stones — LC 1000
+```
+```
 
 **9. DP on stocks (state machine DP)**
 - Best Time to Buy and Sell Stock II — LC 122
+```
+```
 - Best Time to Buy and Sell Stock with Cooldown — LC 309
+```
+```
 - Best Time to Buy and Sell Stock III (k=2 transactions) — LC 123
+```
+```
 
 **10. Bitmask DP**
 - Partition to K Equal Sum Subsets — LC 698
+```
+```
 - Shortest Path Visiting All Nodes — LC 847
+```
+```
 
 **11. DP on trees**
 - House Robber III — LC 337
+```
+```
 - Binary Tree Maximum Path Sum (DP-flavored, not classic but good practice) — LC 124
+```
+```
 
 **12. Digit DP / counting DP (less common in Indian product interviews but shows up occasionally)**
 - Count Numbers with Unique Digits — LC 357
-
+```
+```
 
 ## Graphs
 
 **1. Basic Traversal (BFS/DFS foundations)**
 - Number of Islands — LC 200
+```
+```
 - Flood Fill — LC 733
+```
+```
 - Max Area of Island — LC 695
+```
+```
 
 **2. Connected Components / Union-Find**
 - Number of Provinces — LC 547
+```
+```
 - Graph Valid Tree — LC 261 (premium, but pattern is common — Redundant Connection LC 684 is the free equivalent)
+```
+```
 - Accounts Merge — LC 721
+```
+```
 
 **3. Topological Sort (dependency ordering — very common in interviews)**
 - Course Schedule — LC 207
+```
+```
 - Course Schedule II — LC 210
+```
+```
 - Alien Dictionary — LC 269 (premium equivalent pattern very popular at product companies — practice via "Foreign Dictionary" on GfG/Coding Ninjas if LC is locked)
+```
+```
 
 **4. Shortest Path — Unweighted (BFS)**
 - Rotting Oranges — LC 994
+```
+```
 - 01 Matrix — LC 542
+```
+```
 - Word Ladder — LC 127
+```
+```
 
 **5. Shortest Path — Weighted (Dijkstra)**
 - Network Delay Time — LC 743
+```
+```
 - Path with Minimum Effort — LC 1631
+```
+```
 - Cheapest Flights Within K Stops (Bellman-Ford variant) — LC 787
+```
+```
 
 **6. Minimum Spanning Tree**
 - Min Cost to Connect All Points — LC 1584
+```
+```
 
 **7. Bipartite / Graph Coloring**
 - Is Graph Bipartite — LC 785
+```
+```
 - Possible Bipartition — LC 886
+```
+```
 
 **8. Cycle Detection**
 - Course Schedule (directed cycle via DFS) — LC 207
+```
+```
 - Detect Cycle in Undirected Graph (via Union-Find, same idea as LC 684)
+```
+```
 
 **9. Multi-source BFS**
 - Rotting Oranges — LC 994 (also fits here)
+```
+```
 - Walls and Gates — LC 286 (premium equivalent: "01 Matrix" LC 542)
+```
+```
 
 **10. Grid-as-graph DFS/backtracking hybrid**
 - Number of Distinct Islands — LC 694 (premium; good pattern to at least read)
+```
+```
 - Surrounded Regions — LC 130
+```
+```
 
 **11. Union-Find advanced (used a lot at Flipkart/Amazon LLD-adjacent rounds)**
 - Number of Islands II — LC 305 (premium; dynamic connectivity)
+```
+```
 - Satisfiability of Equality Equations — LC 990
+```
+```
 
 **12. Eulerian Path / Hard graph construction (rare but occasionally asked at strong product companies)**
 - Reconstruct Itinerary — LC 332
+```
+```
 
 
 ## Arrays
 
-Since arrays span too many surface problems, the goal is one canonical problem per underlying technique.
 
 **1. Two Pointers (opposite ends)**
 - Two Sum II (sorted) — LC 167
+```
+```
 - Container With Most Water — LC 11
+```
+```
 - Trapping Rain Water — LC 42
+```
+```
 
 **2. Two Pointers (same direction / fast-slow)**
 - Remove Duplicates from Sorted Array — LC 26
+```
+```
 - Move Zeroes — LC 283
+```
+```
 
 **3. Sliding Window (fixed size)**
 - Maximum Sum Subarray of Size K (GfG classic; LC equivalent: Maximum Average Subarray I — LC 643)
+```
+```
 
 **4. Sliding Window (variable size)**
 - Longest Substring Without Repeating Characters — LC 3
+```
+```
 - Minimum Size Subarray Sum — LC 209
+```
+```
 - Longest Substring with At Most K Distinct Characters — LC 340 (premium; free equivalent: Fruit Into Baskets — LC 904)
+```
+```
 
 **5. Prefix Sum**
 - Subarray Sum Equals K — LC 560
+```
+```
 - Product of Array Except Self — LC 238
+```
+```
 - Range Sum Query — Immutable — LC 303
+```
+```
 
 **6. Kadane's Algorithm (subarray optimization)**
 - Maximum Subarray — LC 53
+```
+```
 - Maximum Circular Subarray Sum — LC 918
+```
+```
 
 **7. Sorting-based greedy**
 - Merge Intervals — LC 56
+```
+```
 - Non-overlapping Intervals — LC 435
+```
+```
 - Meeting Rooms II — LC 253 (premium; free equivalent: Insert Interval — LC 57 for practice)
+```
+```
 
 **8. Binary Search on Answer (very common at Razorpay/PhonePe SDE rounds)**
 - Koko Eating Bananas — LC 875
+```
+```
 - Capacity to Ship Packages Within D Days — LC 1011
+```
+```
 - Split Array Largest Sum — LC 410
+```
+```
 
 **9. Binary Search on Rotated/Modified Arrays**
 - Search in Rotated Sorted Array — LC 33
+```
+```
 - Find Minimum in Rotated Sorted Array — LC 153
+```
+```
 
 **10. Cyclic Sort (missing/duplicate number patterns)**
 - Find the Duplicate Number — LC 287
+```
+```
 - First Missing Positive — LC 41
+```
+```
 
 **11. In-place array manipulation**
 - Rotate Array — LC 189
+```
+```
 - Next Permutation — LC 31
+```
+```
 
 **12. Matrix as array (common warm-up round question)**
 - Rotate Image — LC 48
+```
+```
 - Spiral Matrix — LC 54
+```
+```
 - Set Matrix Zeroes — LC 73
+```
+```
 
 **13. Merge/Multi-array**
 - Merge Sorted Array — LC 88
+```
+```
 - Merge k Sorted Lists (arrays variant with heap) — LC 23
+```
+```
 
 **14. Monotonic Stack (often bucketed under arrays, comes up a lot)**
 - Next Greater Element I — LC 496
+```
+```
 - Daily Temperatures — LC 739
+```
+```
 - Largest Rectangle in Histogram — LC 84
+```
+```
 
 **15. Greedy on Arrays**
 - Jump Game — LC 55
+```
+```
 - Jump Game II — LC 45
+```
+```
 - Gas Station — LC 134
+```
+```
 
 
 ## Tree / BST — Non-negotiable
