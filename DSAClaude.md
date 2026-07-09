@@ -3,12 +3,70 @@
 **1. Subsets / Combinations (include-exclude choice)**
 - Subsets — LC 78
 ```
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        recurse(0, new ArrayList<>(), res, nums);
+        return res;
+    }
+    private void recurse(int i, List<Integer> curr, List<List<Integer>> res, int[] nums){
+        if(i == nums.length){
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        curr.add(nums[i]);
+        recurse(i + 1, curr, res, nums);
+        curr.remove(curr.size() - 1);
+        recurse(i + 1, curr, res, nums);
+    }
+}
 ```
 - Subsets II (with duplicates) — LC 90
 ```
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        recurse(0, new ArrayList<>(), nums, res);
+        return res;
+    }
+    private void recurse(int start, List<Integer> curr, int[] nums, List<List<Integer>> res){
+        res.add(new ArrayList<>(curr));
+        for(int j = start; j < nums.length; j++){
+            //⚠️not duplicate number but duplicate choice at same level
+            //is the second choice also on same start level?
+            if(j > start && nums[j] == nums[j - 1]) continue;
+            curr.add(nums[j]);
+            recurse(j + 1, curr, nums, res);
+            curr.remove(curr.size() - 1);
+        }
+    }
+}
 ```
 - Combinations — LC 77
 ```
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        int[] nums = new int[n];
+        List<List<Integer>> res = new ArrayList<>();
+        for(int i = 0 ; i < n ; i++){
+            nums[i] = i + 1;
+        }
+        recurse(0, k, nums, new ArrayList<>(), res);
+        return res;
+    }
+    private void recurse(int start, int k, int[] nums, List<Integer> curr,List<List<Integer>> res){
+        if(curr.size() == k){
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        for(int j = start ; j < nums.length ; j++){
+            curr.add(nums[j]);
+            recurse(j + 1, k, nums, curr, res);
+            curr.remove(curr.size() - 1);
+        }
+    }
+}
 ```
 
 **2. Permutations (order matters, swap/visited-based)**
