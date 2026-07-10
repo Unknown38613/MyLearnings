@@ -107,8 +107,8 @@ class Solution {
         recurse(0, nums, new ArrayList<>(), res, visited);
         return res;
     }
-    private void recurse(int i, int[] nums, List<Integer> curr, List<List<Integer>> res, boolean[] visited){
-        if(i == nums.length){
+    private void recurse(int start, int[] nums, List<Integer> curr, List<List<Integer>> res, boolean[] visited){
+        if(start == nums.length){
             res.add(new ArrayList<>(curr));
             return;
         }
@@ -118,7 +118,7 @@ class Solution {
             if(visited[j] == true) continue;
             visited[j] = true;
             curr.add(nums[j]);
-            recurse(i + 1, nums, curr, res, visited);
+            recurse(start + 1, nums, curr, res, visited);
             visited[j] = false;
             curr.remove(curr.size() - 1);
         }
