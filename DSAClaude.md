@@ -72,9 +72,58 @@ class Solution {
 **2. Permutations (order matters, swap/visited-based)**
 - Permutations — LC 46
 ```
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        int n = nums.length;
+        boolean[] visited = new boolean[n];
+        Arrays.fill(visited, false);
+        List<List<Integer>> res = new ArrayList<>();
+        recurse(0, nums, new ArrayList<>(), visited, res);
+        return res;
+    }
+    private void recurse(int start, int[] nums, List<Integer> curr, boolean[] visited, List<List<Integer>> res){
+        if(start == nums.length){
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        for(int j = 0 ; j < nums.length ; j++){
+            if(visited[j] == true) continue;
+            visited[j] = true;
+            curr.add(nums[j]);
+            recurse(start + 1, nums, curr, visited, res);
+            visited[j] = false;
+            curr.remove(curr.size() - 1);
+        }
+    }
+}
 ```
 - Permutations II (with duplicates) — LC 47
 ```
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        boolean[] visited = new boolean[nums.length];
+        recurse(0, nums, new ArrayList<>(), res, visited);
+        return res;
+    }
+    private void recurse(int i, int[] nums, List<Integer> curr, List<List<Integer>> res, boolean[] visited){
+        if(i == nums.length){
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        for(int j = 0 ; j < nums.length ; j++){
+            //only pick second copy when first copy is picked at same level
+            if(j > 0 && nums[j] == nums[j - 1] && !visited[j - 1]) continue;
+            if(visited[j] == true) continue;
+            visited[j] = true;
+            curr.add(nums[j]);
+            recurse(i + 1, nums, curr, res, visited);
+            visited[j] = false;
+            curr.remove(curr.size() - 1);
+        }
+    }
+}
 ```
 
 **3. Target sum / combination search (choose repeatedly until target)**
