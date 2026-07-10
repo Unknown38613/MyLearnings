@@ -129,9 +129,52 @@ class Solution {
 **3. Target sum / combination search (choose repeatedly until target)**
 - Combination Sum — LC 39
 ```
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        recurse(0, new ArrayList<>(), res, candidates, target);
+        return res;
+    }
+    private void recurse(int start, List<Integer> curr, List<List<Integer>> res, int[] candidates, int target){
+        if(target == 0){
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        if(target < 0 || start == candidates.length) return;
+        for(int j = start; j < candidates.length ; j++){
+            curr.add(candidates[j]);
+            recurse(j, curr, res, candidates, target - candidates[j]);
+            curr.remove(curr.size() - 1);
+        }
+    }
+}
 ```
 - Combination Sum II — LC 40
 ```
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> res = new ArrayList<>();
+        recurse(0, new ArrayList<>(), res, candidates, target);
+        return res;
+    }
+    private void recurse(int start, List<Integer> curr, List<List<Integer>> res, int[] candidates, int target){
+        if(target == 0){
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        if(target < 0 || start == candidates.length) return;
+        for(int j = start ; j < candidates.length ; j++){
+            if(j > start && candidates[j] == candidates[j - 1]) continue;
+            //prune - in sorted array, next all will be greater so break
+            if(candidates[j] > target) break;
+            curr.add(candidates[j]);
+            //no reuse of same element
+            recurse(j + 1 , curr, res, candidates, target - candidates[j]);
+            curr.remove(curr.size() - 1);
+        }
+    }
+}
 ```
 - Combination Sum III — LC 216
 ```
