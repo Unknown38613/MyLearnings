@@ -279,6 +279,53 @@ class Solution {
 **5. Constraint satisfaction on a grid/board (place, check, undo)**
 - N-Queens — LC 51
 ```
+class Solution {
+    private List<List<String>> games;
+    private int n;
+    public List<List<String>> solveNQueens(int n) {
+        this.n = n;
+        this.games = new ArrayList<>();
+        char[][] board = new char[n][n];
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < n ; j++){
+                board[i][j] = '.';
+            }
+        }
+
+        boolean[] column = new boolean[n];
+        //possible values of (row + col) is 0 to 2n - 2
+        boolean[] diagonalLeft = new boolean[2*n];
+        boolean[] diagonalRight = new boolean[2*n];
+        backtrack(0, n, board, column, diagonalLeft, diagonalRight);
+        return games;
+    }
+
+    private void backtrack(int r, int n, char[][] board, boolean[] column, boolean[] diagonalLeft, boolean[] diagonalRight){
+        if(r == n){
+            List<String> temp = new ArrayList<>();
+            for(char[] boardrow : board){
+                temp.add(new String(boardrow));
+            }
+            games.add(temp);
+            return;
+        }
+        for(int col = 0 ; col < n ; col++){
+        //0,0;1,1 can go negative so add n
+            int d1 = r - col + n;
+            int d2 = r + col;
+            if(column[col] || diagonalLeft[d1] || diagonalRight[d2]) continue;
+            board[r][col] = 'Q';
+            column[col] = true;
+            diagonalLeft[d1] = true;
+            diagonalRight[d2] = true;
+            backtrack(r + 1, n, board, column, diagonalLeft, diagonalRight);
+            board[r][col] = '.';
+            column[col] = false;
+            diagonalLeft[d1] = false;
+            diagonalRight[d2] = false;
+        }
+    }
+}
 ```
 - Sudoku Solver — LC 37
 ```
