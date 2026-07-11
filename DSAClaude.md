@@ -203,6 +203,31 @@ class Solution {
 **4. Partitioning (split input into valid pieces)**
 - Palindrome Partitioning — LC 131
 ```
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> res = new ArrayList<>();
+        recurse(0, s, new ArrayList<>(), res);
+        return res; 
+    }
+    private void recurse(int start, String s, List<String> curr, List<List<String>> res){
+        if(start == s.length()){
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        for(int j = start ; j < s.length() ; j++){
+            String temp = s.substring(start, j + 1);
+            if(!isPalindrome(temp)) continue;
+            curr.add(temp);
+            recurse(j + 1, s, curr, res);
+            curr.remove(curr.size() - 1);
+        }
+    }
+    private boolean isPalindrome(String s){
+        int l = 0, r = s.length() - 1;
+        while(l <= r) if(s.charAt(l++) != s.charAt(r--)) return false;
+        return true;
+    }
+}
 ```
 - Restore IP Addresses — LC 93
 ```
