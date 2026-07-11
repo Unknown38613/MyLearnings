@@ -231,6 +231,49 @@ class Solution {
 ```
 - Restore IP Addresses — LC 93
 ```
+class Solution {
+    public List<String> restoreIpAddresses(String s) {
+        List<String> res = new ArrayList<>();
+        //will never be possible 4-12 is only valid range for IP segmentation
+        if (s.length() < 4 || s.length() > 12) return res;
+        recurse(0, s, new StringBuilder(), res, 4);
+        return res;
+    }
+    private void recurse(int start, String s, StringBuilder sb, List<String> res, int segments){
+        //only when all segments are utilized
+        if(start == s.length() && segments == 0){
+            res.add(sb.toString());
+            return;
+        }
+        //if base not success then return
+        if(start == s.length() || segments == 0) return;
+        //prune: remainingdigits are more or less than segment
+        int remainingdigits = s.length() - start;
+        if(remainingdigits > 3 * segments || remainingdigits < segments) return;
+
+        for(int j = start ; j < s.length() ; j++){
+
+            String sub = s.substring(start, j + 1);
+            // >3 not possible
+            if(sub.length() > 3) break;
+            // start with 0 not possible
+            if(sub.length() > 1 && sub.startsWith("0")) continue;
+            int num = Integer.parseInt(sub);
+            if(num >= 0 && num <= 255){
+                if(j == s.length() - 1) sb.append(sub);
+                else sb.append(sub).append(".");
+                recurse(j + 1, s, sb, res, segments - 1);
+                if(j == s.length() - 1){
+                    sb.delete(sb.length() - sub.length(), sb.length());
+                }
+                else{
+                    // +1 due to .
+                    sb.delete(sb.length() - (sub.length() + 1), sb.length());
+                }
+            }
+        }
+    }
+}
 ```
 
 **5. Constraint satisfaction on a grid/board (place, check, undo)**
