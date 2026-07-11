@@ -178,6 +178,26 @@ class Solution {
 ```
 - Combination Sum III — LC 216
 ```
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> res = new ArrayList<>();
+        recurse(1, k, n, new ArrayList<>(), res);
+        return res;
+    }
+    private void recurse(int start, int k, int target, List<Integer> curr, List<List<Integer>> res){
+        if(target == 0 && curr.size() == k){
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        if(target < 0 || curr.size() > k) return;
+        for(int j = start ; j < 10 ; j++){
+            if(j > target) break; //prune
+            curr.add(j);
+            recurse(j + 1, k, target - j, curr, res);
+            curr.remove(curr.size() - 1);
+        }
+    }
+}
 ```
 
 **4. Partitioning (split input into valid pieces)**
