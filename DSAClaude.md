@@ -330,6 +330,69 @@ class Solution {
 ```
 - Sudoku Solver — LC 37
 ```
+class Solution {
+    private boolean[][] visitedrow;
+    private boolean[][] visitedcol;
+    private boolean[][] visitedbox;
+    public void solveSudoku(char[][] board) {
+        int row = board.length;
+        int col = board[0].length;
+        this.visitedrow = new boolean[9][10];
+        this.visitedcol = new boolean[9][10];
+        this.visitedbox = new boolean[9][10];
+        for(int i = 0 ; i < row ; i++){
+            for(int j = 0 ; j < col ; j++){
+                if(board[i][j] != '.'){
+                    int digit = board[i][j] - '0';
+                    visitedrow[i][digit] = true;
+                    visitedcol[j][digit] = true;
+                    int boxrow = i / 3;
+                    int boxcol = j / 3;
+                    int box = boxrow * 3 + boxcol;
+                    visitedbox[box][digit] = true;
+                }
+            }
+        }
+        boolean done = backtrack(board);
+    }
+
+    private boolean backtrack(char[][] board){
+
+        for(int r = 0 ; r < 9 ; r++){
+
+            for(int c = 0 ; c < 9 ; c++){
+
+                if(board[r][c] == '.'){
+
+                    int boxrow = r / 3;
+                    int boxcol = c / 3;
+                    int box = boxrow * 3 + boxcol;
+
+                    for(int digit = 1 ; digit <= 9 ; digit++){
+                        if(visitedrow[r][digit] || visitedcol[c][digit] || visitedbox[box][digit]) continue;
+                        visitedrow[r][digit] = true;
+                        visitedcol[c][digit] = true;
+                        visitedbox[box][digit] = true;
+                        board[r][c] = (char)(digit + '0');
+                        // Continue solving the remaining board
+                        //return true to all previous recursive calls
+                        //if false then digit was wrong choice
+                        if(backtrack(board)) return true;
+                        board[r][c] = '.';
+                        visitedrow[r][digit] = false;
+                        visitedcol[c][digit] = false;
+                        visitedbox[box][digit] = false;
+                    }
+                    // No valid digit could be placed here
+                    //previous recursive call undo its last move and try another digit
+                    return false;
+                }
+            }
+        }
+        // No empty cells remain, Sudoku is solved
+        return true;
+    }
+}
 ```
 
 **6. Word search on grid (DFS + backtrack with visited marking)**
