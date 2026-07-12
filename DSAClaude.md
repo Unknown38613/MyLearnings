@@ -294,13 +294,13 @@ class Solution {
 
         boolean[] column = new boolean[n];
         //possible values of (row + col) is 0 to 2n - 2
-        boolean[] diagonalLeft = new boolean[2*n];
-        boolean[] diagonalRight = new boolean[2*n];
-        backtrack(0, n, board, column, diagonalLeft, diagonalRight);
+        boolean[] diagonalLeft = new boolean[2*n-1];
+        boolean[] diagonalRight = new boolean[2*n-1];
+        backtrack(0, board, column, diagonalLeft, diagonalRight);
         return games;
     }
-
-    private void backtrack(int r, int n, char[][] board, boolean[] column, boolean[] diagonalLeft, boolean[] diagonalRight){
+   //placing on different row so no need to check for row
+    private void backtrack(int r, char[][] board, boolean[] column, boolean[] diagonalLeft, boolean[] diagonalRight){
         if(r == n){
             List<String> temp = new ArrayList<>();
             for(char[] boardrow : board){
@@ -310,15 +310,16 @@ class Solution {
             return;
         }
         for(int col = 0 ; col < n ; col++){
-        //0,0;1,1 can go negative so add n
-            int d1 = r - col + n;
+        //0,0;1,1 can go negative so add n-1
+        //range - (n - 1) to (n - 1)
+            int d1 = r - col + (n - 1);
             int d2 = r + col;
             if(column[col] || diagonalLeft[d1] || diagonalRight[d2]) continue;
             board[r][col] = 'Q';
             column[col] = true;
             diagonalLeft[d1] = true;
             diagonalRight[d2] = true;
-            backtrack(r + 1, n, board, column, diagonalLeft, diagonalRight);
+            backtrack(r + 1, board, column, diagonalLeft, diagonalRight);
             board[r][col] = '.';
             column[col] = false;
             diagonalLeft[d1] = false;
