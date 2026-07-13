@@ -441,6 +441,69 @@ class Solution {
 ```
 - Word Search II (Trie + backtracking) — LC 212
 ```
+class Solution {
+    public static class TrieNode{
+        TrieNode[] children = new TrieNode[26];
+        String word = null;
+    }
+
+    public List<String> findWords(char[][] board, String[] words) {
+        List<String> res = new ArrayList<>();
+        TrieNode root = buildTree(words);
+
+        int r = board.length;
+        int c = board[0].length;
+
+        for(int i = 0 ; i < r ; i++){
+            for(int j = 0 ; j < c ; j++){
+                dfs(i, j, board, root, res);
+            }
+        }
+
+        return res;
+    }
+
+    private void dfs(int r, int c, char[][] board, TrieNode root, List<String> res){
+        char temp = board[r][c];
+        if(temp == '#') return;
+        
+        int idx = temp - 'a';
+        TrieNode child = root.children[idx];
+        if(child == null) return;
+
+        if(child.word != null) {
+            res.add(child.word);
+            child.word = null;
+        }
+
+        board[r][c] = '#';
+
+        if(r > 0) dfs(r - 1, c, board, child, res);
+        if(r < board.length - 1) dfs(r + 1, c, board, child, res);
+        if(c > 0) dfs(r, c - 1, board, child, res);
+        if(c < board[0].length - 1) dfs(r, c + 1, board, child, res);
+
+        board[r][c] = temp;
+    }
+
+    private TrieNode buildTree(String[] words){
+        TrieNode root = new TrieNode();
+
+        for(String word : words){
+            TrieNode curr = root;
+            for(int i = 0 ; i < word.length() ; i++){
+                int idx = word.charAt(i) - 'a';
+                if(curr.children[idx] == null){
+                    curr.children[idx] = new TrieNode();
+                }
+                curr = curr.children[idx];
+            }
+            curr.word = word;
+        }
+
+        return root;
+    }
+}
 ```
 
 **7. String construction / matching with backtracking**
