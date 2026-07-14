@@ -509,9 +509,65 @@ class Solution {
 **7. String construction / matching with backtracking**
 - Letter Combinations of a Phone Number — LC 17
 ```
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String> list = new ArrayList<>();
+        Map<Character, String> map = new HashMap<>();
+        map.put('2', "abc");
+        map.put('3', "def");
+        map.put('4', "ghi");
+        map.put('5', "jkl");
+        map.put('6', "mno");
+        map.put('7', "pqrs");
+        map.put('8', "tuv");
+        map.put('9', "wxyz");
+        recurse(0, new StringBuilder(), list, digits, map);
+        return list;
+    }
+    private void recurse(int i, StringBuilder sb, List<String> list, String digits, Map<Character, String> map){
+        if(i == digits.length()){
+            list.add(sb.toString());
+            return;
+        }
+        //i - current pool
+        char curr = digits.charAt(i);
+        String phoneletter = map.get(curr);
+
+        for(int j = 0 ; j < phoneletter.length(); j++){
+            char c = phoneletter.charAt(j);
+            sb.append(c);
+            //move to next pool
+            recurse(i + 1, sb, list, digits, map);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+}
 ```
 - Generate Parentheses — LC 22
 ```
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> list = new ArrayList<>();
+        recurse(0, 0, n, new StringBuilder(), list);
+        return list;
+    }
+    private void recurse(int open, int close, int n, StringBuilder sb, List<String> list){
+        if(sb.length() == 2*n){
+            list.add(sb.toString());
+            return;
+        }
+        if(open < n){
+            sb.append('(');
+            recurse(open + 1, close, n, sb, list);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        if(close < open){
+            sb.append(')');
+            recurse(open, close + 1, n, sb, list);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+}
 ```
 
 
