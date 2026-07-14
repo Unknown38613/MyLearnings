@@ -1,7 +1,7 @@
 ## Backtracking
 
 **1. Subsets / Combinations (include-exclude choice)**
-- Subsets — LC 78
+- [Subsets (LC 78)](https://leetcode.com/problems/subsets/)
 ```
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
@@ -21,7 +21,7 @@ class Solution {
     }
 }
 ```
-- Subsets II (with duplicates) — LC 90
+- [Subsets II (LC 90)](https://leetcode.com/problems/subsets-ii/)
 ```
 class Solution {
     public List<List<Integer>> subsetsWithDup(int[] nums) {
@@ -43,7 +43,7 @@ class Solution {
     }
 }
 ```
-- Combinations — LC 77
+- [Combinations (LC 77)](https://leetcode.com/problems/combinations/)
 ```
 class Solution {
     public List<List<Integer>> combine(int n, int k) {
@@ -70,7 +70,7 @@ class Solution {
 ```
 
 **2. Permutations (order matters, swap/visited-based)**
-- Permutations — LC 46
+- [Permutations (LC 46)](https://leetcode.com/problems/permutations/)
 ```
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
@@ -97,7 +97,7 @@ class Solution {
     }
 }
 ```
-- Permutations II (with duplicates) — LC 47
+- [Permutations II (LC 47)](https://leetcode.com/problems/permutations-ii/)
 ```
 class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
@@ -127,7 +127,7 @@ class Solution {
 ```
 
 **3. Target sum / combination search (choose repeatedly until target)**
-- Combination Sum — LC 39
+- [Combination Sum (LC 39)](https://leetcode.com/problems/combination-sum/)
 ```
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
@@ -149,7 +149,7 @@ class Solution {
     }
 }
 ```
-- Combination Sum II — LC 40
+- [Combination Sum II (LC 40)](https://leetcode.com/problems/combination-sum-ii/)
 ```
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
@@ -176,7 +176,7 @@ class Solution {
     }
 }
 ```
-- Combination Sum III — LC 216
+- [Combination Sum III (LC 216)](https://leetcode.com/problems/combination-sum-iii/)
 ```
 class Solution {
     public List<List<Integer>> combinationSum3(int k, int n) {
@@ -201,7 +201,7 @@ class Solution {
 ```
 
 **4. Partitioning (split input into valid pieces)**
-- Palindrome Partitioning — LC 131
+- [Palindrome Partitioning (LC 131)](https://leetcode.com/problems/palindrome-partitioning/)
 ```
 class Solution {
     public List<List<String>> partition(String s) {
@@ -229,7 +229,7 @@ class Solution {
     }
 }
 ```
-- Restore IP Addresses — LC 93
+- [Restore IP Addresses (LC 93)](https://leetcode.com/problems/restore-ip-addresses/)
 ```
 class Solution {
     public List<String> restoreIpAddresses(String s) {
@@ -277,7 +277,7 @@ class Solution {
 ```
 
 **5. Constraint satisfaction on a grid/board (place, check, undo)**
-- N-Queens — LC 51
+- [N-Queens (LC 51)](https://leetcode.com/problems/n-queens/)
 ```
 class Solution {
     private List<List<String>> games;
@@ -328,7 +328,7 @@ class Solution {
     }
 }
 ```
-- Sudoku Solver — LC 37
+- [Sudoku Solver (LC 37)](https://leetcode.com/problems/sudoku-solver/)
 ```
 class Solution {
     private boolean[][] visitedrow;
@@ -396,7 +396,7 @@ class Solution {
 ```
 
 **6. Word search on grid (DFS + backtrack with visited marking)**
-- Word Search — LC 79
+- [Word Search (LC 79)](https://leetcode.com/problems/word-search/)
 ```
 class Solution {
     public boolean exist(char[][] board, String word) {
@@ -439,7 +439,7 @@ class Solution {
     }
 }
 ```
-- Word Search II (Trie + backtracking) — LC 212
+- [Word Search II (LC 212)](https://leetcode.com/problems/word-search-ii/)
 ```
 class Solution {
     public static class TrieNode{
@@ -507,7 +507,7 @@ class Solution {
 ```
 
 **7. String construction / matching with backtracking**
-- Letter Combinations of a Phone Number — LC 17
+- [Letter Combinations of a Phone Number (LC 17)](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
 ```
 class Solution {
     public List<String> letterCombinations(String digits) {
@@ -543,7 +543,7 @@ class Solution {
     }
 }
 ```
-- Generate Parentheses — LC 22
+- [Generate Parentheses (LC 22)](https://leetcode.com/problems/generate-parentheses/)
 ```
 class Solution {
     public List<String> generateParenthesis(int n) {
