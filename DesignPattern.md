@@ -1,15 +1,171 @@
-Single Responsibility Principle (SRP):
-A class should have only one reason to change, doesn't mean only one method
+# SOLID Principles in Java
 
-Open/Close Principle (OCP):
-Open for extension, close for modification
-Example common interface for different types of payment
+## 1. Single Responsibility Principle (SRP)
+*A class should have only one reason to change — not "only one method".*
 
-Liskov's Substitution Principle (LSP):
-If child class extends parent class then we can replace the parent object with child object without breaking application
-Obvious but the problem is when a child class doesn't want to implement all methods of parent class, so create interface for that particular case
+```java
+// BAD: Invoice handles both business logic AND printing/persistence
+class Invoice {
+    double calculateTotal() { /* ... */ return 100.0; }
+    void printInvoice() { /* printing logic */ }
+    void saveToDB() { /* DB logic */ }
+}
 
-Interface Segregation Principle (ISP):
+// GOOD: each class has one reason to change
+class Invoice {
+    double calculateTotal() { /* ... */ return 100.0; }
+}
+class InvoicePrinter {
+    void print(Invoice invoice) { /* printing logic */ }
+}
+class InvoiceRepository {
+    void save(Invoice invoice) { /* DB logic */ }
+}
+```
+`Invoice` can still have multiple methods (`calculateTotal`, `applyDiscount`, `getItems`) — that's fine, they all change for the *same reason* (billing logic changes).
+
+
+## 2. Open/Closed Principle (OCP)
+*Open for extension, closed for modification.*
+
+```java
+interface PaymentMethod {
+    void pay(double amount);
+}
+
+class CreditCardPayment implements PaymentMethod {
+    public void pay(double amount) { System.out.println("Paid via Credit Card: " + amount); }
+}
+
+class UpiPayment implements PaymentMethod {
+    public void pay(double amount) { System.out.println("Paid via UPI: " + amount); }
+}
+
+// Adding PayPal later requires NO change to existing classes
+class PayPalPayment implements PaymentMethod {
+    public void pay(double amount) { System.out.println("Paid via PayPal: " + amount); }
+}
+
+class PaymentProcessor {
+    void process(PaymentMethod method, double amount) {
+        method.pay(amount); // works with any implementation
+    }
+}
+```
+
+
+## 3. Liskov Substitution Principle (LSP)
+*A subclass object should be substitutable for its parent without breaking correctness.*
+
+```java
+// BAD: violates LSP — Ostrich can't fly, but is forced to implement fly()
+class Bird {
+    void fly() { System.out.println("Flying"); }
+}
+class Ostrich extends Bird {
+    void fly() { throw new UnsupportedOperationException(); } // breaks substitution!
+}
+```
+
+Fix: don't force behavior onto subclasses that can't honor it — split the abstraction.
+
+```java
+interface Bird {
+    void eat();
+}
+interface FlyingBird extends Bird {
+    void fly();
+}
+
+class Sparrow implements FlyingBird {
+    public void eat() { System.out.println("Eating"); }
+    public void fly() { System.out.println("Flying"); }
+}
+
+class Ostrich implements Bird {
+    public void eat() { System.out.println("Eating"); }
+    // no fly() forced on it — LSP preserved
+}
+```
+Now any `Bird` reference works safely with any subtype, and only `FlyingBird`s are expected to fly.
+
+
+## 4. Interface Segregation Principle (ISP)
+*Clients shouldn't be forced to depend on methods they don't use — prefer many small interfaces over one fat interface.*
+
+```java
+// BAD: fat interface
+interface Machine {
+    void print();
+    void scan();
+    void fax();
+}
+class OldPrinter implements Machine {
+    public void print() { System.out.println("Printing"); }
+    public void scan() { throw new UnsupportedOperationException(); } // forced, unused
+    public void fax()  { throw new UnsupportedOperationException(); } // forced, unused
+}
+
+// GOOD: segregated interfaces
+interface Printer { void print(); }
+interface Scanner { void scan(); }
+interface Fax     { void fax(); }
+
+class OldPrinter implements Printer {
+    public void print() { System.out.println("Printing"); }
+}
+class AllInOnePrinter implements Printer, Scanner, Fax {
+    public void print() { System.out.println("Printing"); }
+    public void scan()  { System.out.println("Scanning"); }
+    public void fax()   { System.out.println("Faxing"); }
+}
+```
+This is exactly the fix you mentioned under LSP too — a child not wanting all parent methods is a *symptom* that the interface needs to be segregated in the first place.
+
+
+## 5. Dependency Inversion Principle (DIP)
+*High-level modules shouldn't depend on low-level modules — both should depend on abstractions. (Not "Dependency Injection", though DI is the common technique used to achieve it.)*
+
+```java
+// BAD: high-level class directly depends on low-level concrete class
+class MySqlDatabase {
+    void save(String data) { System.out.println("Saved to MySQL: " + data); }
+}
+class UserService {
+    private MySqlDatabase db = new MySqlDatabase(); // tightly coupled
+    void saveUser(String user) { db.save(user); }
+}
+
+// GOOD: both depend on an abstraction
+interface Database {
+    void save(String data);
+}
+class MySqlDatabase implements Database {
+    public void save(String data) { System.out.println("Saved to MySQL: " + data); }
+}
+class MongoDatabase implements Database {
+    public void save(String data) { System.out.println("Saved to MongoDB: " + data); }
+}
+
+class UserService {
+    private final Database db; // depends on abstraction, not concrete class
+    UserService(Database db) { this.db = db; } // injected (constructor injection)
+    void saveUser(String user) { db.save(user); }
+}
+
+// usage
+UserService service = new UserService(new MongoDatabase()); // swap freely, no code change in UserService
+```
+
+### Quick mental map
+| Principle | One-liner |
+|---|---|
+| SRP | One reason to change |
+| OCP | Extend without modifying |
+| LSP | Subtypes must honor supertype's contract |
+| ISP | Small, focused interfaces |
+| DIP | Depend on abstractions, not concretions |
+
 ---------------------------------------------------------------------------
 Factory:
 All notification logic should be present in the factory and client should talk only to that class, object creating logic should not be present in client class
