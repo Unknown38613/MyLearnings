@@ -68,6 +68,61 @@ class Solution {
 ```
 - [House Robber II (circular) — LC 213](https://leetcode.com/problems/house-robber-ii/)
 ```
+class Solution {
+    private int[] memo;
+    private int robber(int i, int j, int[] nums, int offset){
+        if(i > j) return 0;
+        if(memo[offset + i] != -1) return memo[offset + i];
+        int pick = nums[i] + robber(i + 2, j, nums, offset);
+        int skip = robber(i + 1, j, nums, offset);
+        return memo[offset + i] = Math.max(pick, skip);
+    }
+    public int rob(int[] nums) {
+        int n = nums.length;
+        if(n == 1) return nums[0];
+        //⚠️ offset trick because same memo is used twice
+        // or else redeclare memo
+        memo = new int[2*n + 1];
+        Arrays.fill(memo, -1);
+        int rob1 = robber(0, n - 2, nums, 0);
+        int rob2 = robber(1, n - 1, nums, n);
+        return Math.max(rob1, rob2);
+    }
+}
+```
+```
+class Solution {
+    public int rob(int[] nums) {
+        int n = nums.length;
+
+        if (n == 1) return nums[0];
+
+        int rob1 = robRange(nums, 0, n - 2);
+
+        int rob2 = robRange(nums, 1, n - 1);
+
+        return Math.max(rob1, rob2);
+    }
+
+    private int robRange(int[] nums, int start, int end) {
+        int len = end - start + 1;
+
+        if (len == 1) return nums[start];
+
+        int[] dp = new int[len];
+
+        dp[0] = nums[start];
+        dp[1] = Math.max(nums[start], nums[start + 1]);
+
+        for (int i = start + 2; i <= end; i++) {
+            //⚠️ array always index from 0
+            int dpIdx = i - start;
+            dp[dpIdx] = Math.max(dp[dpIdx - 1], nums[i] + dp[dpIdx - 2]);
+        }
+
+        return dp[len - 1];
+    }
+}
 ```
 
 **2. Kadane's / subarray DP**
