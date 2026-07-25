@@ -34,6 +34,37 @@ class Solution {
 ```
 - [House Robber — LC 198](https://leetcode.com/problems/house-robber/)
 ```
+class Solution {
+    private int[] memo;
+    private int robber(int i, int[] nums){
+        if(i >= nums.length) return 0;
+        if(memo[i] != -1) return memo[i];
+        int pick = nums[i] + robber(i + 2, nums);
+        int skip = robber(i + 1, nums);
+        return memo[i] = Math.max(pick, skip);
+    }
+    public int rob(int[] nums) {
+        memo = new int[nums.length + 1];
+        Arrays.fill(memo, -1);
+        return robber(0, nums);
+    }
+}
+```
+```
+class Solution {
+    public int rob(int[] nums) {
+        int n = nums.length;
+        int[] dp = new int[n + 1];
+        dp[0] = nums[0];
+        //⚠️ if only one house
+        if(n == 1) return dp[0];
+        dp[1] = Math.max(nums[0], nums[1]);
+        for(int i = 2 ; i < n ; i++){
+            dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1]);
+        }
+        return dp[n - 1];
+    }
+}
 ```
 - [House Robber II (circular) — LC 213](https://leetcode.com/problems/house-robber-ii/)
 ```
