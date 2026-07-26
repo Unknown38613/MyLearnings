@@ -128,6 +128,41 @@ class Solution {
 **2. Kadane's / subarray DP**
 - [Maximum Subarray — LC 53](https://leetcode.com/problems/maximum-subarray/)
 ```
+class Solution {
+    //⚠️ Negative number so Integer
+    private Integer[] memo;
+    public int maxSubArray(int[] nums) {
+        int n = nums.length;
+        int maxSum = nums[0];
+        memo = new Integer[n + 1];
+
+        for(int i = 1 ; i < n ; i++){
+            maxSum = Math.max(maxSum, solve(nums, i));
+        }
+
+        return maxSum;
+    }
+    private int solve(int[] nums, int i){
+        if(i == 0) return nums[i];
+        if(memo[i] != null) return memo[i];
+        int currSum = Math.max(nums[i] + solve(nums, i - 1), nums[i]);
+        return memo[i] = currSum;
+    }
+}
+```
+```
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int n = nums.length;
+        int maxSum = nums[0];
+        int currSum = nums[0];
+        for(int i = 1 ; i < n ; i++){
+            currSum = Math.max(currSum + nums[i], nums[i]);
+            maxSum = Math.max(maxSum, currSum);
+        }
+        return maxSum;
+    }
+}
 ```
 - [Maximum Product Subarray — LC 152](https://leetcode.com/problems/maximum-product-subarray/)
 ```
