@@ -142,6 +142,7 @@ class Solution {
 
         return maxSum;
     }
+    // Maximum subarray sum ending at i
     private int solve(int[] nums, int i){
         if(i == 0) return nums[i];
         if(memo[i] != null) return memo[i];
@@ -165,7 +166,35 @@ class Solution {
 }
 ```
 - [Maximum Product Subarray — LC 152](https://leetcode.com/problems/maximum-product-subarray/)
+
 ```
+class Solution {
+    public int maxProduct(int[] nums) {
+        int n = nums.length;
+        int maxSoFar = nums[0];
+       //in sum we can avoid negative number
+       //but in product 2 negative number gives large positive number
+        int minSoFar = nums[0];
+        int maxProd = nums[0];
+
+        for(int i = 1 ; i < n ; i++){
+            //⚠️ multiply by negative flips max to min 
+            //and min to max number
+            if(nums[i] < 0){
+                int temp = maxSoFar;
+                maxSoFar = minSoFar;
+                minSoFar = temp;
+            }
+
+            maxSoFar = Math.max(maxSoFar*nums[i], nums[i]);
+            minSoFar = Math.min(minSoFar*nums[i], nums[i]);
+
+            maxProd = Math.max(maxProd, maxSoFar);
+        }
+
+        return maxProd;
+    }
+}
 ```
 
 **3. 0/1 Knapsack pattern**
