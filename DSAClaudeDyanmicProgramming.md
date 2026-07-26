@@ -261,6 +261,60 @@ class Solution {
 ```
 - [Target Sum — LC 494](https://leetcode.com/problems/target-sum/)
 ```
+class Solution {
+    private Integer[][] memo;
+    public int findTargetSumWays(int[] nums, int target) {
+        int n = nums.length;
+        int sum = nums[0];
+        for(int i = 1 ; i < n ; i++) sum += nums[i];
+        if(Math.abs(target) > sum) return 0;
+        //target range = -sum to +sum, so use offset
+        memo = new Integer[n][2*sum + 1];
+        return recurse(0, nums, target, sum);
+    }
+    private int recurse(int i, int[] nums, int target, int sum){
+        //⚠️ we don't stop at target because we assign operator to each number
+        if(i == nums.length) return target == 0 ? 1 : 0;
+        if(Math.abs(target) > sum) return 0;
+        if(memo[i][target + sum] != null) return memo[i][target + sum];
+        int add = recurse(i + 1, nums, target - nums[i], sum);
+        int sub = recurse(i + 1, nums, target + nums[i], sum);
+        return memo[i][target + sum] = add + sub;
+    }
+}
+```
+```
+class Solution {
+    public int findTargetSumWays(int[] nums, int target) {
+        int n = nums.length;
+        int sum = nums[0];
+        for(int i = 1 ; i < n ; i++) sum += nums[i];
+        if(Math.abs(target) > sum) return 0;
+        //target range = -sum to +sum, so use offset
+        int[][] dp = new int[n + 1][2*sum + 1];
+        int offset = sum;
+        
+        //base case: if (i == n) return target == 0 ? 1 : 0;
+        dp[n][0 + offset] = 1;
+
+        for(int i = n - 1 ; i >= 0 ; i--){
+            for(int t = -sum ; t <= sum ; t++){
+
+                int add = 0;
+                if(t - nums[i] >= -sum){
+                    add = dp[i + 1][t - nums[i] + offset];
+                }
+                int sub = 0;
+                if(t + nums[i] <= sum){
+                    sub = dp[i + 1][t + nums[i] + offset];
+                }
+                dp[i][t + offset] = add + sub;
+            }
+        }
+
+        return dp[0][target + offset];
+    }
+}
 ```
 - [Coin Change (min coins, unbounded knapsack variant) — LC 322](https://leetcode.com/problems/coin-change/)
 ```
