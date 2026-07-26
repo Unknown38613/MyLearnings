@@ -200,6 +200,64 @@ class Solution {
 **3. 0/1 Knapsack pattern**
 - [Partition Equal Subset Sum — LC 416](https://leetcode.com/problems/partition-equal-subset-sum/)
 ```
+class Solution {
+    //⚠️ avoid confusion between computed false and pre-filled false
+    private Boolean[][] memo;
+    public boolean canPartition(int[] nums) {
+        int n = nums.length;
+        int sum = nums[0];
+        for(int i = 1 ; i < n ; i++) sum += nums[i];
+        //if sum is odd then cannot be divided in 2 halves
+        if(sum % 2 != 0) return false;
+        int target = sum / 2;
+        memo = new Boolean[n][target + 1];
+        return recurse(0, target, nums);
+    }
+    private boolean recurse(int i, int target, int[] nums){
+        if(target == 0) return true;
+        if(target < 0 || i >= nums.length) return false;
+        if(memo[i][target] != null) return memo[i][target];
+
+        boolean pick = recurse(i + 1, target - nums[i], nums);
+        boolean skip = recurse(i + 1, target, nums);
+
+        return memo[i][target] = pick || skip;
+    }
+}
+```
+```
+class Solution {
+    
+    public boolean canPartition(int[] nums) {
+        int n = nums.length;
+        int sum = nums[0];
+        for(int i = 1 ; i < n ; i++) sum += nums[i];
+        //if sum is odd then cannot be divided in 2 halves
+        if(sum % 2 != 0) return false;
+        int target = sum / 2;
+
+        //memo handles base case but table needs it so n + 1
+        boolean[][] dp = new boolean[n + 1][target + 1];
+        //Can I make sum 0 using elements from i onward?
+        for(int i = 0 ; i <= n ; i++){
+            dp[i][0] = true;
+        }
+
+        for(int i = n - 1 ; i >= 0 ; i--){
+            for(int t = 1 ; t <= target ; t++){
+                boolean skip = dp[i + 1][t];
+                boolean pick = false;
+                //⚠️ avoid negative indexing
+                if(t >= nums[i]){
+                    pick = dp[i + 1][t - nums[i]];
+                }
+                dp[i][t] = pick || skip;
+            }
+        }
+
+        return dp[0][target];
+    }
+}
 ```
 - [Target Sum — LC 494](https://leetcode.com/problems/target-sum/)
 ```
