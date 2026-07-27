@@ -318,6 +318,59 @@ class Solution {
 ```
 - [Coin Change (min coins, unbounded knapsack variant) — LC 322](https://leetcode.com/problems/coin-change/)
 ```
+class Solution {
+    private static final int INF = (int) 1e9;
+    private Integer[][] memo;
+    public int coinChange(int[] coins, int amount) {
+        int n = coins.length;
+        memo = new Integer[n][amount + 1];
+        int ans = recurse(0, coins, amount);
+        return ans == INF ? -1 : ans;
+    }
+    private int recurse(int i, int[] coins, int amount){
+        //⚠️ dealing with no. of coins not ways so 0 coins needed
+        if(amount == 0) return 0;
+        //⚠️ invalid case : return max value so it never becomes answer
+        if(amount < 0 || i >= coins.length) return INF;
+        if(memo[i][amount] != null) return memo[i][amount];
+        //⚠️ pick a coin
+        int pick = 1 + recurse(i, coins, amount - coins[i]);
+        int skip = recurse(i + 1, coins, amount);
+
+        return memo[i][amount] = Math.min(pick, skip);
+    }
+}
+```
+```
+class Solution {
+    private static final int INF = (int) 1e9;
+    public int coinChange(int[] coins, int amount) {
+        int n = coins.length;
+        int[][] dp = new int[n + 1][amount + 1];
+        //⚠️ in min problems initialize with max
+        for(int[] row : dp){
+            Arrays.fill(row, INF);
+        }
+        //Amount 0 needs 0 coins of any type
+        for(int i = 0 ; i < n ; i++){
+            dp[i][0] = 0;
+        }
+        
+        for(int i = n - 1 ; i >= 0 ; i--){
+            for(int a = 1 ; a <= amount ; a++){
+                //⚠️choose the value based on evaluation condition
+                int pick = INF;
+                if(a >= coins[i]){
+                    pick = 1 + dp[i][a - coins[i]];
+                }
+                int skip = dp[i + 1][a];
+                dp[i][a] = Math.min(pick, skip);
+            }
+        }
+
+        return dp[0][amount] == INF ? -1 : dp[0][amount];
+    }
+}
 ```
 - [Coin Change II (count ways, unbounded) — LC 518](https://leetcode.com/problems/coin-change-ii/)
 ```
