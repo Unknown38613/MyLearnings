@@ -374,6 +374,26 @@ class Solution {
 ```
 - [Coin Change II (count ways, unbounded) — LC 518](https://leetcode.com/problems/coin-change-ii/)
 ```
+class Solution {
+    private Integer[][] memo;
+    public int change(int amount, int[] coins) {
+        int n = coins.length;
+        memo = new Integer[n][amount + 1];
+        int ans = recurse(0, coins, amount);
+        return ans;
+    }
+    private int recurse(int i, int[] coins, int amount){
+        //⚠️ number of ways/combinations that make up amount
+        if(amount == 0) return 1;
+        if(amount < 0 || i >= coins.length) return 0;
+        if(memo[i][amount] != null) return memo[i][amount];
+        int pick = recurse(i, coins, amount - coins[i]);
+        int skip = recurse(i + 1, coins, amount);
+        return memo[i][amount] = pick + skip;
+    }
+}
+```
+```
 ```
 
 **4. Longest Common Subsequence family (2D grid DP over two strings)**
