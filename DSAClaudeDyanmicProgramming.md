@@ -421,6 +421,37 @@ class Solution {
 **4. Longest Common Subsequence family (2D grid DP over two strings)**
 - [Longest Common Subsequence — LC 1143](https://leetcode.com/problems/longest-common-subsequence/)
 ```
+class Solution {
+    private Integer[][] memo;
+    public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length();
+        int n = text2.length();
+        memo = new Integer[m][n];
+        int ans = LCS(0, 0, text1, text2);
+        return ans;
+    }
+    private int LCS(int t1, int t2, String text1, String text2){
+        if(t1 == text1.length() || t2 == text2.length()){
+            return 0;
+        }
+        if(memo[t1][t2] != null) return memo[t1][t2];
+        int ans = -1;
+        if(text1.charAt(t1) == text2.charAt(t2)){
+            ans = 1 + LCS(t1 + 1, t2 + 1, text1, text2);
+        }
+        else{
+            //⚠️ while skipping we can skip either, not both
+            // else we will miss valid combination
+            ans = Math.max(
+                LCS(t1 + 1, t2, text1, text2),
+                LCS(t1, t2 + 1, text1, text2)
+            );
+        }
+        return memo[t1][t2] = ans;
+    }
+}
+```
+```
 ```
 - [Edit Distance — LC 72](https://leetcode.com/problems/edit-distance/)
 ```
