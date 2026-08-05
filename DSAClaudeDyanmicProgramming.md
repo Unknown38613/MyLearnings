@@ -476,6 +476,41 @@ class Solution {
 ```
 - [Edit Distance — LC 72](https://leetcode.com/problems/edit-distance/)
 ```
+class Solution {
+    private Integer[][] memo;
+    public int minDistance(String word1, String word2) {
+        int m = word1.length();
+        int n = word2.length();
+        memo = new Integer[m][n];
+        int ans = recurse(0, 0, word1, word2);
+        return ans;
+    }
+    private int recurse(int i, int j, String word1, String word2){
+        //⚠️ this problem does not have dead end so we don't return INF here
+        //remaining insertions
+        if(i == word1.length()){
+            return word2.length() - j;
+        }
+        //remaining deletions
+        if(j == word2.length()){ 
+            return word1.length() - i;
+        }
+        if(memo[i][j] != null) return memo[i][j];
+        int ans;
+        if(word1.charAt(i) == word2.charAt(j)){
+            ans = recurse(i + 1, j + 1, word1, word2);
+        }
+        else{
+            int insert = 1 + recurse(i, j + 1, word1, word2);
+            int delete = 1 + recurse(i + 1, j, word1, word2);
+            int replace = 1 + recurse(i + 1, j + 1, word1, word2);
+            ans = Math.min(insert, Math.min(delete, replace));
+        }
+        return memo[i][j] = ans;
+    }
+}
+```
+```
 ```
 - [Distinct Subsequences — LC 115](https://leetcode.com/problems/distinct-subsequences/)
 ```
