@@ -511,6 +511,41 @@ class Solution {
 }
 ```
 ```
+class Solution {
+    
+    public int minDistance(String word1, String word2) {
+        int m = word1.length();
+        int n = word2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        //word1 finished, insert remaining of word2
+        for(int j = 0 ; j <= n ; j++){
+            dp[m][j] = n - j;
+        }
+        //word2 finished, delete remaining of word1
+        for(int i = 0 ; i <= m ; i++){
+            dp[i][n] = m - i;
+        }
+
+        for(int i = m - 1 ; i >= 0 ; i--){
+            for(int j = n - 1 ; j >= 0 ; j--){
+                if(word1.charAt(i) == word2.charAt(j)){
+                    dp[i][j] = dp[i + 1][j + 1];
+                }
+                else{
+                    //insert in word1 from word2, word2 matched but word1 not
+                    int insert = 1 + dp[i][j + 1];
+                    //delete in word1, word1 matched but word2 not
+                    int delete = 1 + dp[i + 1][j];
+                    //both matched
+                    int replace = 1 + dp[i + 1][j + 1];
+                    dp[i][j] = Math.min(insert, Math.min(delete, replace));
+                } 
+            }
+        }
+
+        return dp[0][0];
+    }
+}
 ```
 - [Distinct Subsequences — LC 115](https://leetcode.com/problems/distinct-subsequences/)
 ```
