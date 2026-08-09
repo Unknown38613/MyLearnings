@@ -549,6 +549,35 @@ class Solution {
 ```
 - [Distinct Subsequences — LC 115](https://leetcode.com/problems/distinct-subsequences/)
 ```
+class Solution {
+    private Integer[][] memo;
+    public int numDistinct(String s, String t) {
+        int n = s.length();
+        int m = t.length();
+        memo = new Integer[n][m];
+        int ans = recurse(0, 0, s, t);
+        return ans;
+    }
+    private int recurse(int i, int j, String s, String t){
+        //succesful t
+        if(j == t.length()){
+            return 1;
+        }
+        //s exhausted before t
+        if(i == s.length()) return 0;
+        if(memo[i][j] != null) return memo[i][j];
+        int ans = 0;
+        if(s.charAt(i) == t.charAt(j)){
+            ans = recurse(i + 1, j + 1, s, t) + recurse(i + 1, j, s, t);
+        }
+        else{
+            ans = recurse(i + 1, j, s, t);
+        }
+        return memo[i][j] = ans;
+    }
+}
+```
+```
 ```
 
 **5. Longest Increasing Subsequence pattern**
