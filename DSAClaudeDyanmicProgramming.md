@@ -567,6 +567,12 @@ class Solution {
         if(i == s.length()) return 0;
         if(memo[i][j] != null) return memo[i][j];
         int ans = 0;
+        //⚠️ LCS - max overlaps, so if match +1 & pick it, there is no point of
+        // skipping match but no match then skip either and take max of it
+        // here give no. of ways, so even if we pick it, skip may also have way so we
+        //do + of both, if no match then we just skip it
+        //⚠️ in LCS we find common between 2 strings so we can skip from either
+        // but in this one is source and other is target so we can't skip target
         if(s.charAt(i) == t.charAt(j)){
             ans = recurse(i + 1, j + 1, s, t) + recurse(i + 1, j, s, t);
         }
@@ -578,6 +584,30 @@ class Solution {
 }
 ```
 ```
+class Solution {
+    public int numDistinct(String s, String t) {
+        int n = s.length();
+        int m = t.length();
+        int[][] dp = new int[n + 1][m + 1];
+
+        for(int i = 0 ; i <= n ; i++){
+            dp[i][m] = 1;
+        }
+
+        for(int i = n - 1 ; i >= 0 ; i--){
+            for(int j = m - 1 ; j >=0 ; j--){
+                if(s.charAt(i) == t.charAt(j)){
+                    dp[i][j] = dp[i + 1][j + 1] + dp[i + 1][j];
+                }
+                else{
+                    dp[i][j] = dp[i + 1][j];
+                }
+            }
+        }
+
+        return dp[0][0];
+    }
+}
 ```
 
 **5. Longest Increasing Subsequence pattern**
