@@ -613,6 +613,53 @@ class Solution {
 **5. Longest Increasing Subsequence pattern**
 - [Longest Increasing Subsequence (O(n log n) variant important) — LC 300](https://leetcode.com/problems/longest-increasing-subsequence/)
 ```
+class Solution {
+    private Integer[][] memo;
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        //i, prev (contains -1 so offset with +1)
+        memo = new Integer[n][n + 1];
+        return LIS(0, -1, nums);
+    }
+    private int LIS(int i, int prev, int[] nums){
+        //⚠️ we are dealing with length so even if nums[] are negative
+        //we still return 0 on dead end
+        if(i == nums.length) return 0;
+        if(memo[i][prev + 1] != null) return memo[i][prev + 1];
+
+        int pick = 0;
+
+        if(prev == -1 || nums[i] > nums[prev]){
+           pick = 1 + LIS(i + 1, i, nums);
+        }
+
+        int skip = LIS(i + 1, prev, nums);
+
+        return memo[i][prev + 1] = Math.max(pick, skip);
+    }
+}
+```
+```
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        int[][] dp = new int[n + 1][n + 2];
+
+        for(int i = n - 1 ; i >= 0 ; i--){
+            for(int prev = n - 1 ; prev >= -1 ; prev--){
+                int pick = 0;
+                //⚠️ nums[] = 0 to n - 1
+                // dp[] = -1 to n - 1 so add 1
+                if(prev == - 1 || nums[i] > nums[prev]){
+                    pick = 1 + dp[i + 1][i + 1];
+                }
+                int skip = dp[i + 1][prev + 1];
+                dp[i][prev + 1] = Math.max(pick, skip);
+            }
+        }
+        return dp[0][0];
+    }
+}
 ```
 - [Russian Doll Envelopes (LIS in 2D) — LC 354](https://leetcode.com/problems/russian-doll-envelopes/)
 ```
