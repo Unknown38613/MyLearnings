@@ -434,16 +434,61 @@ class Solution {
 1. [Search in a Binary Search Tree](https://leetcode.com/problems/search-in-a-binary-search-tree/)
 
 ```java
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        if(root == null) return null;
+
+        if(root.val == val) return root;
+
+        if(val < root.val) return searchBST(root.left, val);
+
+        return searchBST(root.right, val);
+    }
+}
 ```
 
 2. [Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/)
 
 ```java
+class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if(root == null) return new TreeNode(val);
+        //⚠️ traverse left till we find null position to attach node
+        if(val < root.val){
+            root.left = insertIntoBST(root.left, val);
+        }
+        //⚠️ traverse right till we find null position to attach node
+        if(val > root.val){
+            root.right = insertIntoBST(root.right, val);
+        }
+        return root;
+    }
+}
 ```
 
 3. [Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 
 ```java
+class Solution {
+    // ⚠️❗checking immediate children will not work for whole BST
+    // inorder traversal visits every node in ascending order
+    // check if inorder property is violated
+    private Integer prev = null;
+    public boolean isValidBST(TreeNode root) {
+        return inorder(root);
+    }
+    private boolean inorder(TreeNode node){
+        if(node == null) return true;
+        //early termination
+        if(!inorder(node.left)) return false;
+        
+        if(prev != null && prev >= node.val) return false;
+
+        prev = node.val;
+
+        return inorder(node.right);
+    }
+}
 ```
 
 4. [Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
