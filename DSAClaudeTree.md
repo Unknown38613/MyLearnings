@@ -297,26 +297,136 @@ class Solution {
 1. [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
 
 ```java
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ansList = new ArrayList<>();
+        if(root == null) return ansList;
+
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);          
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            List<Integer> path = new ArrayList<>();
+            for(int i = 0 ; i < size ; i++){
+                TreeNode curr = queue.poll();
+                path.add(curr.val);
+                if(curr.left != null) queue.offer(curr.left);
+                if(curr.right != null) queue.offer(curr.right);
+            }
+            ansList.add(new ArrayList<>(path)); 
+        }
+        return ansList;
+    }
+}
 ```
 
 2. [Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
 
 ```java
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> ansList = new ArrayList<>();
+        if(root == null) return ansList;
+        //❗
+        boolean toggle = true;
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            
+            List<Integer> path = new LinkedList<>();
+            for(int i = 0 ; i < size ; i++){
+                TreeNode curr = queue.poll();
+                if(toggle) path.add(curr.val);
+                else path.addFirst(curr.val);
+                if(curr.left != null) queue.offer(curr.left);
+                if(curr.right != null) queue.offer(curr.right);
+            }
+            
+            toggle = !toggle;
+            ansList.add(new ArrayList<>(path));
+        }
+        return ansList;
+    }
+}
 ```
 
 3. [Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
 
 ```java
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> path = new ArrayList<>();
+        if(root == null) return path;
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i = 0 ; i < size ; i++){
+                TreeNode curr = queue.poll();
+                //❗
+                if(i == size - 1) path.add(curr.val);
+                if(curr.left != null) queue.offer(curr.left);
+                if(curr.right != null) queue.offer(curr.right);
+            }
+        }
+        return path;
+    }
+}
 ```
 
 4. [Binary Tree Left Side View](https://leetcode.com/problems/binary-tree-left-side-view/)
 
 ```java
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> path = new ArrayList<>();
+        if(root == null) return path;
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i = 0 ; i < size ; i++){
+                TreeNode curr = queue.poll();
+                //❗
+                if(i == 0) path.add(curr.val);
+                if(curr.left != null) queue.offer(curr.left);
+                if(curr.right != null) queue.offer(curr.right);
+            }
+        }
+        return path;
+    }
+}
 ```
 
 5. [Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/)
 
 ```java
+//average of each level
+class Solution {
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> path = new ArrayList<>();
+        if(root == null) return path;
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            //⚠️ constraints -2^31 <= Node.val <= 2^31 - 1
+            long sum = 0;
+            int size = queue.size();
+            for(int i = 0 ; i < size ; i++){
+                TreeNode curr = queue.poll();
+                sum += curr.val;
+                if(i == size - 1){
+                    double avg = (double) sum / size;
+                    path.add(avg);
+                }
+                if(curr.left != null) queue.offer(curr.left);
+                if(curr.right != null) queue.offer(curr.right);
+            }
+        }
+        return path;
+    }
+}
 ```
 
 ## Level 4 — BST
