@@ -5,31 +5,125 @@
 1. [Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
 
 ```java
+//root to farthest leaf
+int maxDepth(TreeNode root) {
+
+    if (root == null) {
+        return 0;
+    }
+
+    int leftHeight = maxDepth(root.left);
+    int rightHeight = maxDepth(root.right);
+
+    return 1 + Math.max(leftHeight, rightHeight);
+}
 ```
 
 2. [Same Tree](https://leetcode.com/problems/same-tree/)
 
 ```java
+boolean isSameTree(TreeNode p, TreeNode q) {
+
+    if (p == null && q == null) {
+        return true;
+    }
+
+    if (p == null || q == null) {
+        return false;
+    }
+
+    if (p.val != q.val) {
+        return false;
+    }
+
+    return isSameTree(p.left, q.left)
+        && isSameTree(p.right, q.right);
+}
 ```
 
 3. [Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
 
 ```java
+//mirror the tree, swap left and right
+TreeNode invertTree(TreeNode root) {
+
+    if (root == null) {
+        return null;
+    }
+
+    TreeNode temp = root.left;
+    root.left = root.right;
+    root.right = temp;
+
+    invertTree(root.left);
+    invertTree(root.right);
+
+    return root;
+}
 ```
 
 4. [Symmetric Tree](https://leetcode.com/problems/symmetric-tree/)
 
 ```java
+//is the tree mirror in itself, pass both left and right node and compare its left and right
+boolean isSymmetric(TreeNode root) {
+
+    if (root == null) {
+        return true;
+    }
+
+    return isMirror(root.left, root.right);
+}
+
+boolean isMirror(TreeNode left, TreeNode right) {
+
+    if (left == null && right == null) {
+        return true;
+    }
+
+    if (left == null || right == null) {
+        return false;
+    }
+
+    if (left.val != right.val) {
+        return false;
+    }
+
+    return isMirror(left.left, right.right)
+        && isMirror(left.right, right.left);
+}
 ```
 
 5. [Count Complete Tree Nodes](https://leetcode.com/problems/count-complete-tree-nodes/)
 
 ```java
+int countNodes(TreeNode root) {
+
+    if (root == null) {
+        return 0;
+    }
+
+    int leftCount = countNodes(root.left);
+    int rightCount = countNodes(root.right);
+
+    return 1 + leftCount + rightCount;
+}
 ```
 
 6. [Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/)
 
 ```java
+int sumNodes(TreeNode root) {
+
+    if (root == null) {
+        return 0;
+    }
+
+    int leftSum = sumNodes(root.left);
+    int rightSum = sumNodes(root.right);
+
+    return root.val + leftSum + rightSum;
+}
 ```
 
 ## Level 2 — Recursion Patterns
