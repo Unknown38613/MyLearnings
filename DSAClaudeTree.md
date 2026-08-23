@@ -544,6 +544,33 @@ class Solution {
 6. [Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/)
 
 ```java
+class Solution {
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if(root == null) return null;
+
+        if(key < root.val) root.left = deleteNode(root.left, key);
+
+        else if(key > root.val) root.right = deleteNode(root.right, key);
+
+        else{
+            if(root.left == null) return root.right;
+            if(root.right == null) return root.left;
+
+            TreeNode minNode = findMin(root.right);
+
+            root.val = minNode.val;
+
+            root.right = deleteNode(root.right, root.val);
+        }
+
+        return root;
+    }
+
+    private TreeNode findMin(TreeNode root){
+        while(root.left != null) root = root.left;
+        return root;
+    }
+}
 ```
 
 ## Level 5 — Advanced
