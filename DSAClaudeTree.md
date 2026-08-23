@@ -150,11 +150,45 @@ class Solution {
 1. [Path Sum](https://leetcode.com/problems/path-sum/)
 
 ```java
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root == null) return false;
+        if(root.left == null && root.right == null){
+            //remaining = leaf.val
+            return targetSum == root.val;
+        }
+        return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
+    }
+}
 ```
 
 2. [Path Sum II](https://leetcode.com/problems/path-sum-ii/)
 
 ```java
+class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> ansList = new ArrayList<>();
+        dfs(root, targetSum, new ArrayList<>(), ansList);
+        return ansList;
+    }
+    private void dfs(TreeNode root, int targetSum, List<Integer> path, List<List<Integer>> ansList){
+        if(root == null) return;
+
+        path.add(root.val);
+
+        if(root.left == null && root.right == null){
+            if(targetSum == root.val){
+                //⚠️❗path is modified in backtracking so add a copy
+                ansList.add(new ArrayList<>(path));
+            }
+        }
+        dfs(root.left, targetSum - root.val, path, ansList);
+        dfs(root.right, targetSum - root.val, path, ansList);
+
+        //backtrack
+        path.remove(path.size() - 1);
+    }
+}
 ```
 
 3. [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
