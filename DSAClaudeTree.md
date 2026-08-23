@@ -97,32 +97,51 @@ boolean isMirror(TreeNode left, TreeNode right) {
 5. [Count Complete Tree Nodes](https://leetcode.com/problems/count-complete-tree-nodes/)
 
 ```java
-int countNodes(TreeNode root) {
+class Solution {
+    //count nodes in complete binary tree (Every level except possibly the last is completely full)
+    //⚠️ Avoid O(n) T.C given in question
+    public int countNodes(TreeNode root) {
+        if(root == null) return 0;
+        
+        int leftTreeHeight = getLeftHeight(root);
+        int rightTreeHeight = getRightHeight(root);
 
-    if (root == null) {
-        return 0;
+        //⚠️ Optimization: if perfect binary tree then nodes = 2^height - 1
+        if(leftTreeHeight == rightTreeHeight) return (1 << leftTreeHeight) - 1;
+        //else count as it is
+        return 1 + countNodes(root.left) + countNodes(root.right);
     }
 
-    int leftCount = countNodes(root.left);
-    int rightCount = countNodes(root.right);
+    private int getLeftHeight(TreeNode root){
+        if(root == null) return 0;
+        return 1 + getLeftHeight(root.left);
+    }
 
-    return 1 + leftCount + rightCount;
+    private int getRightHeight(TreeNode root){
+        if(root == null) return 0;
+        return 1 + getRightHeight(root.right);
+    }
 }
 ```
 
 6. [Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/)
 
 ```java
-int sumNodes(TreeNode root) {
+class Solution {
+    private int sum = 0;
 
-    if (root == null) {
-        return 0;
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root == null) return 0;
+        calculate(root, false);
+        return sum;
     }
 
-    int leftSum = sumNodes(root.left);
-    int rightSum = sumNodes(root.right);
-
-    return root.val + leftSum + rightSum;
+    private void calculate(TreeNode node, boolean isLeft){
+        if(node == null) return;
+        if(node.left == null && node.right == null && isLeft == true) sum += node.val;
+        calculate(node.left, true);
+        calculate(node.right, false);
+    }
 }
 ```
 
