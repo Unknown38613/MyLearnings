@@ -281,11 +281,13 @@ class Solution {
         //if root is p or q return that root
         if(root == null || root == p || root == q) return root;
 
+        //2 sides trying to find p and q
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
         
         //found both p & q, root is LCA
         if(left != null && right != null) return root;
+
         //found either p or q, pass up, or found neither return null
         return left != null ? left : right;
     }
@@ -494,11 +496,49 @@ class Solution {
 4. [Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
 
 ```java
+class Solution {
+    //inorder gives sorted order
+    private int count = 0;
+    private int answer = 0;
+    public int kthSmallest(TreeNode root, int k) {
+        inorder(root, k);
+        return answer;
+    }
+    private void inorder(TreeNode root, int k){
+        if(root == null) return;
+
+        inorder(root.left, k);
+
+        count++;
+        if(count == k){
+            answer = root.val;
+            return;
+        }
+
+        inorder(root.right, k);
+    }
+}
 ```
 
 5. [Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 
 ```java
+class Solution {
+    //⚠️ differs from BT implementation because we know BST ordering so we know which
+    //side will have p and q
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        //both on left side
+        if(p.val < root.val && q.val < root.val){
+            return lowestCommonAncestor(root.left, p, q);
+        }
+        //both on right side
+        if(p.val > root.val && q.val > root.val){
+            return lowestCommonAncestor(root.right, p, q);
+        }
+        //splitting point
+        return root;
+    }
+}
 ```
 
 6. [Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/)
