@@ -276,6 +276,20 @@ class Solution {
 6. [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 
 ```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        //if root is p or q return that root
+        if(root == null || root == p || root == q) return root;
+
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        
+        //found both p & q, root is LCA
+        if(left != null && right != null) return root;
+        //found either p or q, pass up, or found neither return null
+        return left != null ? left : right;
+    }
+}
 ```
 
 ## Level 3 — BFS
