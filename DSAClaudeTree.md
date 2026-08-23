@@ -154,7 +154,7 @@ class Solution {
     public boolean hasPathSum(TreeNode root, int targetSum) {
         if(root == null) return false;
         if(root.left == null && root.right == null){
-            //remaining = leaf.val
+            //remaining == leaf.val
             return targetSum == root.val;
         }
         return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
@@ -194,16 +194,83 @@ class Solution {
 3. [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
 
 ```java
+class Solution {
+    //diameter - longest path between any 2 nodes not necessarily root
+    //⚠️ maintain diameter outside because we calculate height in function
+    private int diameter = 0;
+    public int diameterOfBinaryTree(TreeNode root) {
+        height(root);
+        return diameter;
+    }
+    private int height(TreeNode root){
+        if(root == null) return 0;
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        //⚠️ diameter of node n = sum of height of both sides of node n
+        diameter = Math.max(diameter, leftHeight + rightHeight);
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+}
 ```
 
 4. [Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
 
 ```java
+class Solution {
+    //Balanced tree means |height(left) - height(right)| <= 1
+    public boolean isBalanced(TreeNode root) {
+        return height(root) != -1;
+    }
+    private int height(TreeNode root){
+        if(root == null) return 0;
+
+        int left = height(root.left);
+        //⚠️ early return if -1 tree is unbalanced
+        if(left == -1) return -1;
+
+        int right = height(root.right);
+        if(right == -1) return -1;
+
+        if(Math.abs(left - right) > 1) return -1;
+
+        return 1 + Math.max(left, right);
+    }
+}
 ```
 
 5. [Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
 
 ```java
+class Solution {
+    //⚠️ catch: path goes like left + root + right but we cannot return both sides 
+    // to its parent node it's invalid calculation
+    /*
+                    Current node
+                         |
+             +-----------+-----------+
+             |                       |
+        final answer             return to parent
+             |                       |
+       left + root + right     root + max(left,right)
+    */
+    private int maxSum = (int) -1e9;
+    public int maxPathSum(TreeNode root) {
+        height(root);
+        return maxSum;
+    }
+    private int height(TreeNode root){
+        if(root == null) return 0;
+        //avoid picking negative nodes
+        int leftGain = Math.max(0, height(root.left));
+        int rightGain = Math.max(0, height(root.right));
+
+        int path = leftGain + root.val + rightGain;
+
+        maxSum = Math.max(maxSum, path);
+
+        return root.val + Math.max(leftGain, rightGain);
+    }
+}
 ```
 
 6. [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
