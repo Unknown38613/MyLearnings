@@ -577,6 +577,31 @@ class Solution {
 }
 ```
 
+### Structural Mutation Operations
+
+Structural mutation operations like **insert, delete, invert, flip** tree require parent pointer updates.
+
+Directly re-assigning a node to a value or null will not work in Java.
+
+Example: Delete Leaf
+```
+if (node.left == null && node.right == null) {
+    node = null; // ❌ DOES NOT WORK!
+                 // Only sets local variable 'node' to null.
+                 // Parent still points to the old node in memory!
+}
+```
+Correct Approach
+
+The parent must update its pointer:
+```
+parent.left = null;
+```
+
+Or:
+```
+node.left = deleteNode(node.left, key);
+```
 ## Level 5 — Advanced
 
 1. [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
