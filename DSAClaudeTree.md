@@ -612,7 +612,7 @@ Preorder → Who is the root?
 Inorder → What is on the left and right of that root?
 Repeat the same process recursively for left and right.
 */
-//❗❗ Since we are building the tree in preorder format, root -> left -> right, so preIndex++ will always give next root element
+//❗❗ Since we are building the tree in preorder format, root -> left -> right, so preIndex++ will always give next root
 // ⚠️ it will not work if we build right tree first or run in parallel threads
 class Solution {
     //For quick search of inorder element position so we know the left and right side
@@ -649,6 +649,37 @@ class Solution {
 2. [Construct Binary Tree from Inorder and Postorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
 
 ```java
+// postorder is left -> right -> root so construct from backwards
+// because root will be last element
+class Solution {
+    private Map<Integer, Integer> map;
+    private int postIndex;
+    
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        map = new HashMap<>();
+        postIndex = postorder.length - 1;
+        for(int i = 0 ; i < inorder.length ; i++){
+            map.put(inorder[i], i);
+        }
+        return build(postorder, 0, inorder.length - 1);
+    }
+
+    private TreeNode build(int[] postorder, int start, int end){
+        if(start > end) return null;
+
+        int rootVal = postorder[postIndex--];
+
+        TreeNode root = new TreeNode(rootVal);
+
+        int inPos = map.get(rootVal);
+        //⚠️ root -> right -> left
+        root.right = build(postorder, inPos + 1, end);
+
+        root.left = build(postorder, start, inPos - 1);
+
+        return root;
+    }
+}
 ```
 
 3. [Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
