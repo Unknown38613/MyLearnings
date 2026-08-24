@@ -612,6 +612,8 @@ Preorder → Who is the root?
 Inorder → What is on the left and right of that root?
 Repeat the same process recursively for left and right.
 */
+//❗❗ Since we are building the tree in preorder format, root -> left -> right, so preIndex++ will always give next root element
+// ⚠️ it will not work if we build right tree first or run in parallel threads
 class Solution {
     //For quick search of inorder element position so we know the left and right side
     private Map<Integer,Integer> map;
