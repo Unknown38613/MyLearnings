@@ -553,13 +553,17 @@ class Solution {
         else if(key > root.val) root.right = deleteNode(root.right, key);
 
         else{
+            //For 0 or 1 children
+            //⚠️❗ if left is null return right, if right is null return left, if both are null then also it will work
+
             if(root.left == null) return root.right;
             if(root.right == null) return root.left;
-
+         
+            //For 2 children, Find Inorder Successor (smallest node in the right subtree)
             TreeNode minNode = findMin(root.right);
-
+            //replace the value
             root.val = minNode.val;
-
+            //delete the original successor node
             root.right = deleteNode(root.right, root.val);
         }
 
