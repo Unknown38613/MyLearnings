@@ -607,6 +607,41 @@ node.left = deleteNode(node.left, key);
 1. [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
 
 ```java
+/*
+Preorder → Who is the root?
+Inorder → What is on the left and right of that root?
+Repeat the same process recursively for left and right.
+*/
+class Solution {
+    //For quick search of inorder element position so we know the left and right side
+    private Map<Integer,Integer> map;
+    //Preorder always gives root element
+    private int preIndex = 0;
+
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        map = new HashMap<>();
+        for(int i = 0 ; i < inorder.length ; i++){
+            map.put(inorder[i], i);
+        }
+        return build(preorder, 0, inorder.length - 1);
+    }
+
+    private TreeNode build(int[] preorder, int start, int end){
+        if(start > end) return null;
+        //Gives root
+        int rootVal = preorder[preIndex++];
+        //Makes root
+        TreeNode root = new TreeNode(rootVal);
+        //Finds root in inorder
+        int inPos = map.get(rootVal);
+        //Builds tree
+        root.left = build(preorder, start, inPos - 1);
+
+        root.right = build(preorder, inPos + 1, end);
+
+        return root;
+    }
+}
 ```
 
 2. [Construct Binary Tree from Inorder and Postorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
