@@ -685,6 +685,59 @@ class Solution {
 3. [Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
 
 ```java
+public class Codec {
+ 
+    // Doing using preorder dfs traversal
+    public String serialize(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        serializeHelper(root, sb);
+        return sb.toString();
+    }
+
+    private void serializeHelper(TreeNode root, StringBuilder sb){
+        if(root == null){
+            sb.append("null,");
+            return;
+        }
+        sb.append(root.val).append(",");
+        serializeHelper(root.left, sb);
+        serializeHelper(root.right, sb);
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        String[] values = data.split(",");
+        // ⚠️❗Java passes by value, so changes made in recursive call
+        // won't persist after call return for primitives
+        // In normal recursion child branches are independent but 
+        // here right subtree needs to know how many indexes are utilized by 
+        // left subtree
+        // 1) Pass a object: array is object, java passes reference by value
+        // each recursive call points to same heap memory location
+        // 2) Instance variable : private int index = 0; Shared state across
+        // the class instance
+        /* Primitive : pass copy of data, Object: pass copy of address*/
+        int[] index = {0};
+        return deserializeHelper(values, index);
+    }
+
+    private TreeNode deserializeHelper(String[] values, int[] index){
+        if(values[index[0]].equals("null")){
+            index[0]++;
+            return null;
+        }
+        
+        TreeNode root = new TreeNode(Integer.parseInt(values[index[0]]));
+
+        index[0]++;
+
+        root.left = deserializeHelper(values, index);
+
+        root.right = deserializeHelper(values, index);
+
+        return root;
+    }
+}
 ```
 
 4. [All Nodes Distance K in Binary Tree](https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/)
