@@ -747,6 +747,7 @@ public class Codec {
 class Solution {
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
         List<Integer> ansList = new ArrayList<>();
+        //❗Helps in preventing duplicate node values
         Map<TreeNode, TreeNode> parentMap = new HashMap<>();
         dfs(root, parentMap, null);
         distanceHelper(target, null, 0, k, parentMap, ansList);
@@ -760,7 +761,8 @@ class Solution {
         dfs(node.right, parentMap, node);
     }
 
-    private void distanceHelper(TreeNode target, TreeNode previous, int dist, int k, Map<TreeNode, TreeNode> parentMap, List<Integer> ansList){
+    private void distanceHelper(TreeNode target, TreeNode previous, int dist, int k, Map<TreeNode, TreeNode> parentMap,
+ List<Integer> ansList){
         if(target == null) return;
         if(dist == k){
            ansList.add(target.val);
