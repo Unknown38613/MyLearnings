@@ -778,9 +778,77 @@ class Solution {
 }
 ```
 
-5. [Burn Binary Tree](https://leetcode.com/problems/burning-tree/)
+5. [Burn Binary Tree / Amount of Time for Binary Tree to Be Infected](https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/description/)
 
 ```java
+//DFS Solution/ Graph like Tree problem
+class Solution {
+    //⚠️ to avoid passing by value, direct heap reference
+    private TreeNode startNode = null;
+    public int amountOfTime(TreeNode root, int start) {
+        Map<TreeNode, TreeNode> parentMap = new HashMap<>();
+        dfsToFindParent(root, null, parentMap, start);
+        return timeTakenByInfection(startNode, null, parentMap);
+    }
+
+    private void dfsToFindParent(TreeNode node, TreeNode parentNode, Map<TreeNode, TreeNode> parentMap, int start){
+        if(node == null) return;
+        dfsToFindParent(node.left, node, parentMap, start);
+        parentMap.put(node, parentNode);
+        if(startNode == null && node.val == start) startNode = node;
+        dfsToFindParent(node.right, node, parentMap, start);
+    }
+
+    private int timeTakenByInfection(TreeNode startNode, TreeNode previous, Map<TreeNode, TreeNode> parentMap){
+        if(startNode == null) return 0;
+        int left = 0;
+        int right = 0;
+        int parent = 0;
+        //⚠️❗ Avoid counting time for null nodes and already visited nodes
+        if(startNode.left != null && startNode.left != previous){
+            left = 1 + timeTakenByInfection(startNode.left, startNode, parentMap);
+        }
+        if(startNode.right != null && startNode.right != previous){
+            right = 1 + timeTakenByInfection(startNode.right, startNode, parentMap);
+        }
+        if(parentMap.get(startNode) != null && parentMap.get(startNode) != previous){
+            parent = 1 + timeTakenByInfection(parentMap.get(startNode), startNode, parentMap);
+        }
+        return Math.max(left, Math.max(right, parent));
+    }
+}
+
+//BFS Solution
+//⚠️ normal bfs traverse level by level but in this we also including parent so 
+    //it can traverse to it's parent again so avoid it by visited set
+    private int timeTakenByInfection(TreeNode startNode, TreeNode previous, Map<TreeNode, TreeNode> parentMap){
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        Set<TreeNode> visited = new HashSet<>();
+        queue.offer(startNode);
+        visited.add(startNode);
+        int time = -1;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            time = time + 1;
+            for(int i = 0 ; i < size ; i++){
+                TreeNode curr = queue.poll();
+                if(curr.left != null && !visited.contains(curr.left)) {
+                    visited.add(curr.left);
+                    queue.offer(curr.left);
+                }
+                if(curr.right != null && !visited.contains(curr.right)) {
+                    visited.add(curr.right);
+                    queue.offer(curr.right);
+                } 
+                TreeNode parent = parentMap.get(curr);
+                if(parent != null && !visited.contains(parent)) {
+                    visited.add(parent);
+                    queue.offer(parent);
+                } 
+            }
+        }
+        return time;
+    }
 ```
 
 6. [Morris Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
