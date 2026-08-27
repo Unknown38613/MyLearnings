@@ -3,6 +3,55 @@
 * [Implement Trie (Prefix Tree) — LC 208](https://leetcode.com/problems/implement-trie-prefix-tree/)
 
 ```java
+class Trie {
+    //creates 26 null references 
+    Trie[] children = new Trie[26];
+    boolean isWord = false;
+
+    public Trie() {}
+    
+    public void insert(String word) {
+        //Trie object itself is root
+        Trie curr = this;
+        for(char c : word.toCharArray()){
+            int i = c - 'a';
+            if(curr.children[i] == null){
+                //Create a new Trie node and store its reference in the ith child
+                curr.children[i] = new Trie();
+            }
+            curr = curr.children[i];
+        }
+        curr.isWord = true;
+    }
+    
+    public boolean search(String word) {
+        Trie curr = this;
+        for(char c : word.toCharArray()){
+            int i = c - 'a';
+            if(curr.children[i] == null) return false;
+            curr = curr.children[i];
+        }
+        return curr.isWord;
+    }
+    
+    public boolean startsWith(String prefix) {
+        Trie curr = this;
+        for(char c : prefix.toCharArray()){
+            int i = c - 'a';
+            if(curr.children[i] == null) return false;
+            curr = curr.children[i];
+        }
+        return true;
+    }
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * boolean param_2 = obj.search(word);
+ * boolean param_3 = obj.startsWith(prefix);
+ */
 ```
 
 * [Design Add and Search Words Data Structure — LC 211](https://leetcode.com/problems/design-add-and-search-words-data-structure/)
