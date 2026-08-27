@@ -854,4 +854,46 @@ class Solution {
 6. [Morris Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
 
 ```java
+//Morris 
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ansList = new ArrayList<>();
+        if(root == null) return ansList;
+        if(root.left == null && root.right == null) return new ArrayList<>(Arrays.asList(root.val));
+        //❗ while loop
+        while(root != null){
+            //if left has child
+            if(root.left != null){
+                //find predecessor
+                //⚠️ since algo creates temp links infinite loop possible
+                // so pass both left portion and root
+                TreeNode pred = inorderPredecessor(root.left, root);
+                //if no link present btw pred and root then create and move left
+                if(pred.right == null){
+                    pred.right = root;
+                    root = root.left;
+                }
+                //if link already exist, means we have visited that
+                //remove that link, add it, move to right
+                else if(pred.right == root){
+                    pred.right = null;
+                    ansList.add(root.val);
+                    root = root.right;
+                }
+            }
+            //if left is null, simply add it and move to right
+            else if(root.left == null){
+                ansList.add(root.val);
+                root = root.right; //temp link
+            }
+        }
+        return ansList;
+    }
+    private TreeNode inorderPredecessor(TreeNode node, TreeNode root){
+        if(node == null) return null;
+        //❗ while loop
+        while(node.right != null && node.right != root) node = node.right;
+        return node;
+    }
+}
 ```
