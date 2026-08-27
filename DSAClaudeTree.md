@@ -743,6 +743,37 @@ public class Codec {
 4. [All Nodes Distance K in Binary Tree](https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/)
 
 ```java
+//Graph like traversal problem inside a tree, along with left, right, we need root also
+class Solution {
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        List<Integer> ansList = new ArrayList<>();
+        Map<TreeNode, TreeNode> parentMap = new HashMap<>();
+        dfs(root, parentMap, null);
+        distanceHelper(target, null, 0, k, parentMap, ansList);
+        return ansList;
+    }
+    //get all parents of each node
+    private void dfs(TreeNode node, Map<TreeNode, TreeNode> parentMap, TreeNode parentNode){
+        if(node == null) return;
+        dfs(node.left, parentMap, node);
+        parentMap.put(node, parentNode);
+        dfs(node.right, parentMap, node);
+    }
+
+    private void distanceHelper(TreeNode target, TreeNode previous, int dist, int k, Map<TreeNode, TreeNode> parentMap, List<Integer> ansList){
+        if(target == null) return;
+        if(dist == k){
+           ansList.add(target.val);
+           return;
+        }
+        dist = dist + 1;
+        //⚠️ don't visit the previous parent node again, 
+        // 5 -> 3 (root), 3(left) -> 5
+        if(target.left != previous) distanceHelper(target.left, target, dist, k, parentMap, ansList);
+        if(target.right != previous) distanceHelper(target.right, target, dist, k, parentMap, ansList);
+        if(parentMap.get(target) != previous) distanceHelper(parentMap.get(target), target, dist, k, parentMap, ansList);
+    }
+}
 ```
 
 5. [Burn Binary Tree](https://leetcode.com/problems/burning-tree/)
