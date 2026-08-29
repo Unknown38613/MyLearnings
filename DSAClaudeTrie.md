@@ -57,6 +57,64 @@ class Trie {
 * [Design Add and Search Words Data Structure — LC 211](https://leetcode.com/problems/design-add-and-search-words-data-structure/)
 
 ```java
+class WordDictionary {
+
+    static class TrieNode{
+        TrieNode[] children = new TrieNode[26];
+        boolean isWord = false;
+    }
+
+    TrieNode root;
+
+    public WordDictionary() {
+        root = new TrieNode();
+    }
+    
+    public void addWord(String word) {
+        TrieNode curr = root;
+        for(char c : word.toCharArray()){
+            int i = c - 'a';
+            if(curr.children[i] == null){
+                curr.children[i] = new TrieNode();
+            }
+            curr = curr.children[i];
+        }
+        curr.isWord = true;
+    }
+    
+    //wildcard dfs search with backtracking
+    public boolean search(String word) {
+        return dfs(root, word, 0);
+    }
+
+    public boolean dfs(TrieNode curr, String word, int idx){
+        if(idx == word.length()) return curr.isWord;
+
+        char c = word.charAt(idx);
+
+        if(c != '.'){
+            int i = c - 'a';
+            if(curr.children[i] == null) return false;
+            curr = curr.children[i];
+            return dfs(curr, word, idx + 1);
+        }
+        else{
+            for(TrieNode child : curr.children){
+                if(child != null){
+                    if(dfs(child, word, idx + 1)) return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary obj = new WordDictionary();
+ * obj.addWord(word);
+ * boolean param_2 = obj.search(word);
+ */
 ```
 
 * [Word Search II — LC 212](https://leetcode.com/problems/word-search-ii/)
