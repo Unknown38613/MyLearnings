@@ -190,6 +190,67 @@ class Solution {
 * [Replace Words — LC 648](https://leetcode.com/problems/replace-words/)
 
 ```java
+class Solution {
+
+    static class TrieNode{
+        TrieNode[] children = new TrieNode[26];
+        String word = null;
+    }
+
+    TrieNode root = new TrieNode();
+
+    public String replaceWords(List<String> dictionary, String sentence) {
+        buildTrie(dictionary);
+        String[] words = sentence.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for(String word : words){
+            TrieNode curr = root;
+            //⚠️❗ if cannot be replaced then let the original word be
+            String replace = null;
+
+            for(char c : word.toCharArray()){
+                int i = c - 'a';
+                //if no children means no root found, break and put original word
+                if(curr.children[i] == null){
+                    break;
+                }
+                
+                curr = curr.children[i];
+                
+                //root found in children pick and break
+                if(curr.word != null) {
+                    replace = curr.word;
+                    break;
+                }
+            }
+
+            if(replace != null){
+               sb.append(replace);
+            }
+            else{
+               sb.append(word);
+            }
+
+            sb.append(" ");
+        }
+
+        return sb.toString().trim();
+    }
+
+    private void buildTrie(List<String> dictionary){
+        for(String word : dictionary){
+            TrieNode curr = root;
+            for(char c : word.toCharArray()){
+                int i = c - 'a';
+                if(curr.children[i] == null) {
+                    curr.children[i] = new TrieNode();
+                }
+                curr = curr.children[i];
+            }
+            curr.word = word;
+        }
+    }
+}
 ```
 
 * [Map Sum Pairs — LC 677](https://leetcode.com/problems/map-sum-pairs/)
