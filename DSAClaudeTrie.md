@@ -120,6 +120,71 @@ class WordDictionary {
 * [Word Search II — LC 212](https://leetcode.com/problems/word-search-ii/)
 
 ```java
+class Solution {
+
+    static class TrieNode{
+        TrieNode[] children = new TrieNode[26];
+        String word = null; //⚠️ store entire word 
+    }
+
+    TrieNode root = new TrieNode();
+
+    public List<String> findWords(char[][] board, String[] words) {
+        constructTrie(words);
+        List<String> res = new ArrayList<>();
+        int r = board.length;
+        int c = board[0].length;
+
+        for(int i = 0 ; i < r ; i++){
+            for(int j = 0 ; j < c ; j++){
+                dfs(i, j, board, root, res);
+            }
+        }
+        return res;
+    }
+
+    private void constructTrie(String[] words){
+        for(String word : words){
+            TrieNode curr = root;
+            for(char c : word.toCharArray()){
+                int i = c - 'a';
+                if(curr.children[i] == null){
+                    curr.children[i] = new TrieNode();
+                }
+                curr = curr.children[i];
+            }
+            curr.word = word;
+        }
+    }
+
+    private void dfs(int i, int j, char[][] board, TrieNode parent, List<String> res){
+
+        char temp = board[i][j];
+        //Don't use this board cell again in the current path.
+        if(temp == '#') return;
+
+        int idx = temp - 'a';
+        // is ther any word starting with current char?
+        TrieNode curr = parent.children[idx];
+        //pruning: if no such thing exists in trie return
+        if(curr == null) return;
+
+        //is word? 
+        if(curr.word != null){
+            res.add(curr.word);
+            //avoid two different paths that can form same word
+            curr.word = null;
+        }
+
+        board[i][j] = '#';
+        if(i < board.length - 1) dfs(i + 1, j, board, curr, res);
+        if(i > 0) dfs(i - 1, j, board, curr, res);
+        if(j < board[0].length - 1) dfs(i, j + 1, board, curr, res);
+        if(j > 0) dfs(i, j - 1, board, curr, res);
+        board[i][j] = temp;
+
+    }
+}
 ```
 
 * [Replace Words — LC 648](https://leetcode.com/problems/replace-words/)
