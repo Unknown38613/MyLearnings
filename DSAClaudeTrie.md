@@ -256,6 +256,50 @@ class Solution {
 * [Map Sum Pairs — LC 677](https://leetcode.com/problems/map-sum-pairs/)
 
 ```java
+class MapSum {
+
+    static class TrieNode{
+        TrieNode[] children = new TrieNode[26];
+        int sum = 0;
+    }
+
+    TrieNode root;
+    Map<String, Integer> map;
+
+    public MapSum() {
+        root = new TrieNode();
+        map = new HashMap<>();
+    }
+    
+    public void insert(String key, int val) {
+        //⚠️ if key already exists then replace it with this one 
+        // so newval = val - old value
+        int newval = val - map.getOrDefault(key, 0);
+        map.put(key, val);
+        TrieNode curr = root;
+        for(char c : key.toCharArray()){
+            int i = c - 'a';
+            if(curr.children[i] == null) {
+                curr.children[i] = new TrieNode();
+            }
+            curr = curr.children[i];
+            curr.sum += newval;
+        }
+    }
+    
+    public int sum(String prefix) {
+        TrieNode curr = root;
+        int sum = 0;
+        char[] carr = prefix.toCharArray();
+        for(int i = 0 ; i < carr.length ; i++){
+            int idx = carr[i] - 'a';
+            if(curr.children[idx] == null) return 0;
+            curr = curr.children[idx];
+        }
+        return curr.sum;
+    }
+}
+
 ```
 
 * [Maximum XOR of Two Numbers in an Array — LC 421](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/)
