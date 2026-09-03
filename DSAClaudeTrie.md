@@ -362,6 +362,70 @@ class Solution {
 * [Search Suggestions System — LC 1268](https://leetcode.com/problems/search-suggestions-system/)
 
 ```java
+class Solution {
+    static class TrieNode{
+        TrieNode[] children = new TrieNode[26];
+        String word = null;
+    }
+
+    TrieNode root = new TrieNode();
+
+    public List<List<String>> suggestedProducts(String[] products, String searchWord) {
+        buildTrie(products);
+        List<List<String>> suggestedProductsList = new ArrayList<>();
+        String search = "";
+        for(char c : searchWord.toCharArray()){
+            search += c;
+            List<String> foundProductsList = findProducts(search);
+            suggestedProductsList.add(foundProductsList);
+        }
+        return suggestedProductsList;
+    }
+
+    private void buildTrie(String[] products){
+        for(String product : products){
+            TrieNode curr = root;
+            for(char c : product.toCharArray()){
+                int i = c - 'a';
+                if(curr.children[i] == null){
+                    curr.children[i] = new TrieNode();
+                }
+                curr = curr.children[i];
+            }
+            curr.word = product;
+        }
+    }
+
+    private List<String> findProducts(String searchWord){
+        List<String> productList = new ArrayList<>();
+        TrieNode curr = root;
+        for(char c : searchWord.toCharArray()){
+            int i = c - 'a';
+            if(curr.children[i] == null) return new ArrayList<>();
+            curr = curr.children[i];
+        }
+
+        boolean value = dfs(curr, productList);
+
+        return productList;
+    }
+
+    private boolean dfs(TrieNode curr, List<String> productList){
+        if(curr.word != null){
+            productList.add(curr.word);
+        }
+
+        if(productList.size() >= 3) return false;
+
+        for(TrieNode child : curr.children){
+            if(child != null){
+                if(!dfs(child, productList)) return false;
+            }
+        }
+
+        return true;
+    }
+}
 ```
 
 * [Concatenated Words — LC 472](https://leetcode.com/problems/concatenated-words/)
