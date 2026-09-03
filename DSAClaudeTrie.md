@@ -305,6 +305,7 @@ class MapSum {
 * [Maximum XOR of Two Numbers in an Array — LC 421](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/)
 
 ```java
+//Greedy HSB Pick algorithm
 //For XOR opposite HSB decides whether xor of 2 numbers will be maximum
 // << left shift: x << n = x * 2^n
 // >> right shift: x >> n = x / 2^n
@@ -331,6 +332,8 @@ class Solution {
                    currxor |= (1 << j);
                    curr = curr.children[complement];
                 }
+           //⚠️ Even when we don't found complement, we still have to move down
+           //on current path
                 else{
                     curr = curr.children[bit];
                 }
