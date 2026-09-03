@@ -305,6 +305,55 @@ class MapSum {
 * [Maximum XOR of Two Numbers in an Array — LC 421](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/)
 
 ```java
+//For XOR opposite HSB decides whether xor of 2 numbers will be maximum
+// << left shift: x << n = x * 2^n
+// >> right shift: x >> n = x / 2^n
+class Solution {
+    //Binary Trie
+    static class TrieNode{
+        TrieNode[] children = new TrieNode[2];
+        int number = 0;
+    }
+
+    TrieNode root = new TrieNode();
+
+    public int findMaximumXOR(int[] nums) {
+        buildTrie(nums);
+        int xorAns = 0;
+        for(int i = 0 ; i < nums.length ; i++){
+            TrieNode curr = root;
+            int currxor = 0;
+            for (int j = 31; j >= 0; j--){
+                int bit = (nums[i] >> j) & 1;
+                int complement = 1 - bit;
+                if(curr.children[complement] != null){
+            //⚠️ I found the opposite bit in the Trie, so XOR bit j will be 1
+                   currxor |= (1 << j);
+                   curr = curr.children[complement];
+                }
+                else{
+                    curr = curr.children[bit];
+                }
+            }
+            xorAns = Math.max(xorAns, currxor);
+        }
+        return xorAns;
+    }
+
+    private void buildTrie(int[] nums){
+        for(int i = 0 ; i < nums.length ; i++){
+            TrieNode curr = root;
+            for (int j = 31; j >= 0; j--){  //32 bit representation
+                int bit = (nums[i] >> j) & 1;  //Gets value (0 or 1) at index j
+                if(curr.children[bit] == null){
+                    curr.children[bit] = new TrieNode();
+                }
+                curr = curr.children[bit];
+            }
+            curr.number = nums[i];
+        }
+    }
+}
 ```
 
 * [Search Suggestions System — LC 1268](https://leetcode.com/problems/search-suggestions-system/)
