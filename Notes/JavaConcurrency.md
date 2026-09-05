@@ -1,6 +1,6 @@
 # Java Concurrency — Interview Prep Guide
 
----
+
 
 ## 1. Process vs Thread
 
@@ -36,7 +36,7 @@ public class Demo {
 4. *"Trick question: is multithreading always faster than multiprocessing?"*
    → No — for CPU-bound work with heavy contention, thread synchronization overhead can outweigh gains; multiprocessing avoids shared-memory contention but pays IPC cost instead.
 
----
+
 
 ## 2. Creating a Thread in Java
 
@@ -82,7 +82,7 @@ public class Demo {
 4. *"If you implement both `Runnable` and pass it to `Thread`, and also override `run()` in a `Thread` subclass — which wins?"* (rare but asked)
    → If you extend `Thread` AND pass a `Runnable` to its constructor, the overridden `run()` in the subclass wins unless it explicitly calls `super.run()`.
 
----
+
 
 ## 3. start() vs run()
 
@@ -114,7 +114,7 @@ public class Demo {
 4. *"Why does JVM disallow re-starting a finished thread instead of just resetting its state?"*
    → Because thread state (stack, sync locks acquired, etc.) isn't cleanly resettable; the JVM models a `Thread` as a one-shot lifecycle object by design.
 
----
+
 
 ## 4. Thread Lifecycle
 
@@ -155,7 +155,7 @@ public class LifecycleDemo {
 4. *"A thread calls `wait()` inside a `synchronized` block — what state, and does it hold the lock?"*
    → `WAITING` (or `TIMED_WAITING` if `wait(ms)`), and critically it **releases the monitor lock** while waiting — this is what makes `wait/notify` usable at all (otherwise deadlock).
 
----
+
 
 ## 5. sleep(), join(), interrupt()
 
@@ -200,7 +200,7 @@ public class Demo {
 5. *"Difference between `isInterrupted()` and `Thread.interrupted()`?"*
    → `isInterrupted()` is an instance method, doesn't clear the flag. `Thread.interrupted()` is static, checks the *current* thread, and **clears** the flag as a side effect. Mixing these up is a very common bug.
 
----
+
 
 ## 6. What Can Go Wrong With Shared Data?
 
@@ -233,7 +233,7 @@ class Counter {
 4. *"Two threads increment two DIFFERENT variables, no shared state — any concurrency issue?"*
    → Generally no data race, but watch for **false sharing** (both variables on the same CPU cache line) — a performance issue, not a correctness one.
 
----
+
 
 ## 7. Race Condition
 
@@ -266,7 +266,7 @@ class Singleton {
 4. *"What's the fix for the double-checked-locking singleton bug shown above?"*
    → Either synchronize the whole method (simple but slower), use the double-checked-locking pattern correctly *with* a `volatile` instance field (to prevent reordering), or use the initialization-on-demand holder idiom (a static inner class), which is lazy and thread-safe for free via JVM class-loading guarantees.
 
----
+
 
 ## 8. synchronized
 
@@ -309,7 +309,7 @@ class Counter {
 5. *"What happens if an exception is thrown inside a `synchronized` block?"*
    → The lock is still released — `synchronized` releases the lock automatically on both normal exit and exceptional exit (like an implicit finally).
 
----
+
 
 ## 9. Locks (java.util.concurrent.locks)
 
@@ -361,7 +361,7 @@ class Counter {
 5. *"Can `tryLock()` cause starvation?"*
    → Yes — since it's typically non-fair by default, a thread repeatedly calling `tryLock()` and backing off can theoretically be starved by threads that keep winning the race.
 
----
+
 
 ## 10. volatile
 
@@ -398,7 +398,7 @@ class FlagExample {
 4. *"What's the difference between `volatile` and `synchronized` in terms of what they guarantee?"*
    → `volatile` = visibility + ordering only, no mutual exclusion. `synchronized` = visibility + ordering + mutual exclusion (atomicity of the whole block).
 
----
+
 
 ## 11. AtomicInteger / Atomic Classes
 
@@ -434,7 +434,7 @@ class Counter {
 4. *"Is `AtomicInteger` faster than `synchronized` under heavy contention?"*
    → Not necessarily — under very high contention, CAS retry loops can spin and waste CPU (livelock-ish behavior), sometimes making locks (which park waiting threads) more efficient. Atomics shine most under low-moderate contention.
 
----
+
 
 ## 12. ExecutorService
 
@@ -470,7 +470,7 @@ public class Demo {
 4. *"What happens if a task submitted via `execute()` throws an uncaught exception?"*
    → The thread dies silently (pool replaces it with a new worker thread), and the exception is swallowed unless you set an `UncaughtExceptionHandler` or use `submit()` and inspect the returned `Future` (whose `get()` will re-throw it wrapped in `ExecutionException`).
 
----
+
 
 ## 13. Thread Pools
 
@@ -512,7 +512,7 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
 4. *"Does increasing thread pool size always increase throughput?"*
    → No — for CPU-bound tasks, exceeding the number of CPU cores just adds context-switching overhead. Thread pool sizing should roughly match core count for CPU-bound work, and can be much higher for I/O-bound work (threads spend time blocked, not computing).
 
----
+
 
 ## 14. Callable + Future
 
@@ -555,7 +555,7 @@ executor.shutdown();
 4. *"What's the core limitation of `Future` that `CompletableFuture` was designed to fix?"*
    → No way to attach a callback / chain dependent async computations — you're forced to block on `get()` to know when it's done. No composability (combine two futures), no manual completion, no built-in exception-handling pipeline.
 
----
+
 
 ## 15. CompletableFuture
 
@@ -599,7 +599,7 @@ future.thenAccept(score -> System.out.println("Final score: " + score));
 5. *"`join()` vs `get()`?"*
    → `join()` throws an unchecked `CompletionException` (no `throws` needed), `get()` throws checked `ExecutionException`/`InterruptedException`. `join()` is more common in stream/lambda chains where checked exceptions are awkward.
 
----
+
 
 ## 16. Deadlock / Starvation / Livelock
 
@@ -642,7 +642,7 @@ t1.start(); t2.start(); // classic deadlock: t1 holds A wants B, t2 holds B want
 5. *"Is starvation possible even without any deadlock or bug in locking logic?"*
    → Yes — e.g., a non-fair `synchronized`/`ReentrantLock` under heavy contention can theoretically starve a particular thread indefinitely even though the system as a whole keeps making progress.
 
----
+
 
 ## 17. Java Memory Model (JMM)
 
@@ -690,7 +690,7 @@ class SharedState {
 4. *"Is final field visibility guaranteed without synchronization?"*
    → Yes, specially — the JMM guarantees that once a constructor finishes, any thread that gets a reference to the fully-constructed object sees the correctly initialized values of its `final` fields (assuming no reference "leaks" out of the constructor before it completes — the classic *unsafe publication* trap).
 
----
+
 
 ## 18. Concurrent Collections
 
@@ -747,7 +747,7 @@ map.computeIfPresent("count", (k, v) -> v + 1); // atomic read-modify-write
 5. *"When is `CopyOnWriteArrayList` a bad choice?"*
    → Write-heavy workloads — every single write (`add`, `remove`, `set`) copies the *entire* backing array, which is O(n) per write and can be catastrophic for large, frequently-mutated lists.
 
----
+
 
 ## Quick Reference — Cross-Cutting Trap Themes
 
