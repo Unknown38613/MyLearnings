@@ -1,33 +1,33 @@
-Topics for Backend:
+# Backend Engineering Topics
 
-A high-level understanding
-HTTP protocol
-Routing
-Serialisation and deserialisation
-Authentication and authorisation
-Validation and transformation
-Middlewares
-Request context
-Handlers, controllers and services
-CRUD deepdive
-RESTful architecture and best practices
-Databases
-Business logic layer (BLL)
-Caching
-Transactional emails
-Task queuing and scheduling
-Elasticsearch
-Error handling
-Config management
-Logging, monitoring and observability
-Graceful shutdown
-Security
-Scaling and performance
-Concurrency and parallelism
-Object storage and large files
-Real-time backend systems
-Testing and code quality
-12 factor app
-OpenAPI standards
-Webhooks
-DevOps for backend engineers
+- A high-level understanding
+- HTTP protocol
+- Routing
+- Serialisation and deserialisation
+- Authentication and authorisation
+- Validation and transformation
+- Middlewares
+- Request context
+- Handlers, controllers and services
+- CRUD deepdive
+- RESTful architecture and best practices
+- Databases
+- Business logic layer (BLL)
+- Caching
+- Transactional emails
+- Task queuing and scheduling
+- Elasticsearch
+- Error handling
+- Config management
+- Logging, monitoring and observability
+- Graceful shutdown
+- Security
+- Scaling and performance
+- Concurrency and parallelism
+- Object storage and large files
+- Real-time backend systems
+- Testing and code quality
+- 12 factor app
+- OpenAPI standards
+- Webhooks
+- DevOps for backend engineers
