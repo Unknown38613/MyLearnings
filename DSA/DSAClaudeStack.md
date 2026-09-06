@@ -2,6 +2,26 @@
 
 - [Valid Parentheses — LC 20](https://leetcode.com/problems/valid-parentheses/)
 ```
+class Solution {
+    public boolean isValid(String s) {
+        if(s.length() % 2 != 0) return false;
+        Deque<Character> stack = new ArrayDeque<>();
+        for(char c : s.toCharArray()){
+            if(c == '(' || c == '[' || c == '{'){
+                stack.push(c);
+            }
+            else{
+                if(stack.isEmpty()) return false;
+                //⚠️ pop it
+                char top = stack.pop();
+                if((c == ')' && top != '(')
+                || (c == ']' && top != '[')
+                || (c == '}' && top != '{')) return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+}
 ```
 - [Min Stack — LC 155](https://leetcode.com/problems/min-stack/)
 ```
