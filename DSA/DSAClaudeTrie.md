@@ -431,6 +431,61 @@ class Solution {
 * [Concatenated Words — LC 472](https://leetcode.com/problems/concatenated-words/)
 
 ```java
+class Solution {
+    static class TrieNode{
+        TrieNode[] children = new TrieNode[26];
+        boolean isWord = false;
+    }
+
+    TrieNode root = new TrieNode();
+
+    public List<String> findAllConcatenatedWordsInADict(String[] words) {
+        
+        buildTrie(words);   
+        List<String> ansList = new ArrayList<>();
+        for(String word : words){
+            //⚠️ Repeated State, Memoization answer accepted
+            //1D memo because count changes constantly each time it is going to 
+            //have same result
+            Boolean[] memo = new Boolean[word.length() + 1];
+            if(isConcat(word, 0, 0, memo)) ansList.add(word);
+        }
+        return ansList;
+    }
+
+    private void buildTrie(String[] words){
+        for(String word : words){
+            TrieNode curr = root;
+            for(char c : word.toCharArray()){
+                int i = c - 'a';
+                if(curr.children[i] == null){
+                    curr.children[i] = new TrieNode();
+                }
+                curr = curr.children[i];
+            }
+            curr.isWord = true;
+        }
+    }
+
+    private boolean isConcat(String word, int start, int count, Boolean[] memo){
+        //⚠️ Only return after processing whole word
+        if(start >= word.length()) return count >= 2;
+
+        if(memo[start] != null) return memo[start];
+        
+        TrieNode curr = root;
+        
+        for(int i = start ; i < word.length() ; i++){
+            int idx = word.charAt(i) - 'a';
+            if(curr.children[idx] == null) return memo[start] = false;
+            curr = curr.children[idx];
+            if(curr.isWord){
+                if(isConcat(word, i + 1, count + 1, memo)) return memo[start] = true;
+            }
+        }
+        return memo[start] = false;
+    }   
+}
 ```
 
 * [Stream of Characters — LC 1032](https://leetcode.com/problems/stream-of-characters/)
