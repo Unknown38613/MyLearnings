@@ -21,3 +21,9 @@
 - [Basic Calculator II — LC 227](https://leetcode.com/problems/basic-calculator-ii/)
 ```
 ```
+- [Implement Queue using Stacks — LC 232](https://leetcode.com/problems/implement-queue-using-stacks/)
+```
+```
+- [Decode String — LC 394](https://leetcode.com/problems/decode-string/)
+```
+```
