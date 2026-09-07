@@ -25,6 +25,36 @@ class Solution {
 ```
 - [Min Stack — LC 155](https://leetcode.com/problems/min-stack/)
 ```
+class MinStack {
+
+    Deque<Integer> stack;
+    Deque<Integer> minStack;
+
+    public MinStack() {
+        stack = new ArrayDeque<>();
+        minStack = new ArrayDeque<>();
+    }
+    
+    public void push(int value) {
+        stack.push(value);
+        if(minStack.isEmpty()) minStack.push(value);
+        //⚠️ just maintain the minimum of all values we have seen
+        else minStack.push(Math.min(minStack.peek(), value));
+    }
+    
+    public void pop() {
+        stack.pop();
+        minStack.pop();
+    }
+    
+    public int top() {
+        return stack.peek();
+    }
+    
+    public int getMin() {
+        return minStack.peek();
+    }
+}
 ```
 - [Daily Temperatures — LC 739](https://leetcode.com/problems/daily-temperatures/)
 ```
