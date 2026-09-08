@@ -82,6 +82,26 @@ class Solution {
 ```
 - [Next Greater Element I — LC 496](https://leetcode.com/problems/next-greater-element-i/)
 ```
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
+        for(int n : nums2){
+            //if current is greater than peek, found nge
+            while(!stack.isEmpty() && stack.peek() < n){
+                map.put(stack.pop(), n);
+            }
+            stack.push(n);
+        }
+        while(!stack.isEmpty()) map.put(stack.pop(), -1);
+        int[] ans = new int[nums1.length];
+        int k = 0;
+        for(int n : nums1){
+            ans[k++] = map.get(n);
+        }
+        return ans;
+    }
+}
 ```
 - [Largest Rectangle in Histogram — LC 84](https://leetcode.com/problems/largest-rectangle-in-histogram/)
 ```
