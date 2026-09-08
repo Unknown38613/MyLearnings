@@ -58,6 +58,27 @@ class MinStack {
 ```
 - [Daily Temperatures — LC 739](https://leetcode.com/problems/daily-temperatures/)
 ```
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        int n = temperatures.length;
+        int[] ans = new int[n];
+        Deque<Integer> stack = new ArrayDeque<>();
+        stack.push(n - 1);
+        //NGE
+        for(int i = n - 2 ; i >= 0 ; i--){
+            //Not Strict, if current temp is greater than equal to peek then
+            //we found greatest one, so pop all below
+            while(!stack.isEmpty() && temperatures[stack.peek()] <= temperatures[i]){
+                stack.pop();
+            }
+            if(!stack.isEmpty()){
+                ans[i] = stack.peek() - i;
+            }
+            stack.push(i);
+        }
+        return ans;
+    }
+}
 ```
 - [Next Greater Element I — LC 496](https://leetcode.com/problems/next-greater-element-i/)
 ```
