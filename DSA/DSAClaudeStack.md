@@ -1,7 +1,7 @@
 ## Stack — Non-negotiable
 
 - [Valid Parentheses — LC 20](https://leetcode.com/problems/valid-parentheses/)
-```
+```java
 class Solution {
     public boolean isValid(String s) {
         if(s.length() % 2 != 0) return false;
@@ -24,7 +24,7 @@ class Solution {
 }
 ```
 - [Min Stack — LC 155](https://leetcode.com/problems/min-stack/)
-```
+```java
 class MinStack {
 
     Deque<Integer> stack;
@@ -57,7 +57,7 @@ class MinStack {
 }
 ```
 - [Daily Temperatures — LC 739](https://leetcode.com/problems/daily-temperatures/)
-```
+```java
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
         int n = temperatures.length;
@@ -81,7 +81,7 @@ class Solution {
 }
 ```
 - [Next Greater Element I — LC 496](https://leetcode.com/problems/next-greater-element-i/)
-```
+```java
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -104,7 +104,7 @@ class Solution {
 }
 ```
 - [Largest Rectangle in Histogram — LC 84](https://leetcode.com/problems/largest-rectangle-in-histogram/)
-```
+```java
 //NSE & PSE
 class Solution {
     public int largestRectangleArea(int[] heights) {
@@ -140,7 +140,7 @@ class Solution {
 }
 ```
 - [Trapping Rain Water — LC 42](https://leetcode.com/problems/trapping-rain-water/description/)
-```
+```java
 //NGE & PGE
 class Solution {
     public int trap(int[] height) {
@@ -180,14 +180,14 @@ class Solution {
 }
 ```
 - [Evaluate Reverse Polish Notation — LC 150](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
-```
+```java
 ```
 - [Basic Calculator II — LC 227](https://leetcode.com/problems/basic-calculator-ii/)
-```
+```java
 ```
 - [Implement Queue using Stacks — LC 232](https://leetcode.com/problems/implement-queue-using-stacks/)
-```
+```java
 ```
 - [Decode String — LC 394](https://leetcode.com/problems/decode-string/)
-```
+```java
 ```
