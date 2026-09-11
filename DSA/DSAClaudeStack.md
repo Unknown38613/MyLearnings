@@ -105,6 +105,79 @@ class Solution {
 ```
 - [Largest Rectangle in Histogram — LC 84](https://leetcode.com/problems/largest-rectangle-in-histogram/)
 ```
+//NSE & PSE
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        int n = heights.length;
+        int maxArea = 0;
+
+        for (int i = 0; i <= n; i++) {
+            //⚠️ in last keep 0 to pop all out of stack
+            // else if heights are in increasing order area will never be calculated
+            int currHeight = (i == n ? 0 : heights[i]);
+
+            while (!stack.isEmpty() && currHeight < heights[stack.peek()]) {
+
+                int top = stack.pop();
+                int height = heights[top];
+
+                int right = i;
+                //⚠️ handle when left/PSE doesn't exist
+                int left = stack.isEmpty() ? -1 : stack.peek();
+                //both inclusive : r - l + 1
+                //one inclusive, one exclusive : r - l
+                //both exclusive : r - l - 1
+                int width = right - left - 1;
+                maxArea = Math.max(maxArea, height * width);
+            }
+
+            stack.push(i);
+        }
+
+        return maxArea;
+    }
+}
+```
+- [Trapping Rain Water — LC 42](https://leetcode.com/problems/trapping-rain-water/description/)
+```
+//NGE & PGE
+class Solution {
+    public int trap(int[] height) {
+        int n = height.length;
+        Deque<Integer> stack = new ArrayDeque<>();
+        int water = 0;
+
+        for(int i = 0 ; i < n ; i++){
+            //⚠️ increasing/decreasing heights cannot trap water
+            // so no need to handle them
+            int currHeight = height[i];
+
+            while(!stack.isEmpty() && currHeight > height[stack.peek()]){
+                //floor on which water will stand
+                int floorHeight = stack.pop();
+                
+                //⚠️ if no left boundary/PGE present, water will leak
+                if(stack.isEmpty()) break;
+
+                //exclusive boundaries on both side
+                int right = i;
+                int left = stack.peek();
+
+                int width = right - left - 1;
+                
+                //bucket logic : min height of bucket - floor height gives water depth
+                int valleyHeight = Math.min(height[left], height[right]) - height[floorHeight];
+
+                water += valleyHeight * width;
+            }
+
+            stack.push(i);
+        }
+
+        return water;
+    }
+}
 ```
 - [Evaluate Reverse Polish Notation — LC 150](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
 ```
