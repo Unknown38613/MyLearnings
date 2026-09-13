@@ -181,6 +181,32 @@ class Solution {
 ```
 - [Evaluate Reverse Polish Notation — LC 150](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
 ```java
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        for(String s : tokens){
+            //⚠️ for string it equals too only
+            if(s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/")){
+                int b = stack.pop();
+                int a = stack.pop();
+                //⚠️ Order matters for - and /
+                int ans = switch(s) {
+                   case "+" -> a + b;
+                   case "-" -> a - b;
+                   case "*" -> a * b;
+                   case "/" -> a / b;
+                   //⚠️ default is required for switch
+                   default -> 0;
+                };
+                stack.push(ans);
+            }
+            else{
+                stack.push(Integer.parseInt(s));
+            }
+        }
+        return stack.pop();
+    }
+}
 ```
 - [Basic Calculator II — LC 227](https://leetcode.com/problems/basic-calculator-ii/)
 ```java
