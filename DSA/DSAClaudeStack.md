@@ -210,6 +210,48 @@ class Solution {
 ```
 - [Basic Calculator II — LC 227](https://leetcode.com/problems/basic-calculator-ii/)
 ```java
+class Solution {
+    public int calculate(String s) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        int currNum = 0;
+        char lastOp = '+';
+        int n = s.length();
+
+        for(int i = 0 ; i < n ; i++){
+            char c = s.charAt(i);
+            //⚠️ handle multiple digits
+            if(Character.isDigit(c)){
+                currNum = currNum * 10 + (c - '0');
+            }
+
+            if((!Character.isDigit(c) && c != ' ') || i == n - 1){
+                if(lastOp == '+'){
+                    stack.push(currNum);
+                }
+                else if(lastOp == '-'){
+                    stack.push(-currNum);
+                }
+                //perform operation for * and / (BODMAS)
+                else if(lastOp == '*'){
+                    stack.push(stack.pop() * currNum);
+                }
+                else if(lastOp == '/'){
+                    stack.push(stack.pop() / currNum);
+                }
+                //form new number
+                currNum = 0;
+                lastOp = c;
+            }
+        }
+
+        int res = 0;
+        while(!stack.isEmpty()){
+            res += stack.pop();
+        }
+
+        return res;
+    }
+}
 ```
 - [Implement Queue using Stacks — LC 232](https://leetcode.com/problems/implement-queue-using-stacks/)
 ```java
