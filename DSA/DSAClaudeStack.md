@@ -255,6 +255,42 @@ class Solution {
 ```
 - [Implement Queue using Stacks — LC 232](https://leetcode.com/problems/implement-queue-using-stacks/)
 ```java
+class MyQueue {
+
+    Deque<Integer> stack1;
+    Deque<Integer> stack2;
+
+    public MyQueue() {
+        stack1 = new ArrayDeque<>();
+        stack2 = new ArrayDeque<>();
+    }
+    
+    public void push(int x) {
+        stack1.push(x);
+    }
+    
+    public int pop() {
+        //amortized operation, do expensive operation once for O(N)
+        //rest all operations O(1)
+        moveWhenEmpty();
+        return stack2.pop();
+    }
+    
+    public int peek() {
+        moveWhenEmpty();
+        return stack2.peek();
+    }
+    
+    public boolean empty() {
+        return stack1.isEmpty() && stack2.isEmpty();
+    }
+
+    private void moveWhenEmpty(){
+        if(stack2.isEmpty()){
+            while(!stack1.isEmpty()) stack2.push(stack1.pop());
+        }
+    }
+}
 ```
 - [Decode String — LC 394](https://leetcode.com/problems/decode-string/)
 ```java
