@@ -294,4 +294,43 @@ class MyQueue {
 ```
 - [Decode String — LC 394](https://leetcode.com/problems/decode-string/)
 ```java
+class Solution {
+    public String decodeString(String s) {
+        Deque<Integer> kstack = new ArrayDeque<>();
+        Deque<StringBuilder> sstack = new ArrayDeque<>();
+        int currNum = 0;
+        StringBuilder currString = new StringBuilder();
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            
+            if (Character.isDigit(c)) {
+                currNum = currNum * 10 + (c - '0');
+            } 
+            else if (c == '[') {
+                kstack.push(currNum);
+                sstack.push(currString);
+                currNum = 0;
+                currString = new StringBuilder();
+            } 
+            else if (c == ']') {
+                int count = kstack.pop();
+                StringBuilder prevStr = sstack.pop();
+                
+                // Append currString 'count' times to prevStr
+                for (int j = 0; j < count; j++) {
+                    prevStr.append(currString);
+                }
+                
+                // Update currString to hold the combined string
+                currString = prevStr;
+            } 
+            else {
+                currString.append(c);
+            }
+        }
+
+        return currString.toString();
+    }
+}
 ```
