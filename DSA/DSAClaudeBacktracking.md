@@ -2,7 +2,7 @@
 
 **1. Subsets / Combinations (include-exclude choice)**
 - [Subsets (LC 78)](https://leetcode.com/problems/subsets/)
-```
+```java
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
@@ -22,7 +22,7 @@ class Solution {
 }
 ```
 - [Subsets II (LC 90)](https://leetcode.com/problems/subsets-ii/)
-```
+```java
 class Solution {
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         Arrays.sort(nums);
@@ -44,7 +44,7 @@ class Solution {
 }
 ```
 - [Combinations (LC 77)](https://leetcode.com/problems/combinations/)
-```
+```java
 class Solution {
     public List<List<Integer>> combine(int n, int k) {
         int[] nums = new int[n];
@@ -71,7 +71,7 @@ class Solution {
 
 **2. Permutations (order matters, swap/visited-based)**
 - [Permutations (LC 46)](https://leetcode.com/problems/permutations/)
-```
+```java
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
         int n = nums.length;
@@ -98,7 +98,7 @@ class Solution {
 }
 ```
 - [Permutations II (LC 47)](https://leetcode.com/problems/permutations-ii/)
-```
+```java
 class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
         Arrays.sort(nums);
@@ -128,7 +128,7 @@ class Solution {
 
 **3. Target sum / combination search (choose repeatedly until target)**
 - [Combination Sum (LC 39)](https://leetcode.com/problems/combination-sum/)
-```
+```java
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
@@ -150,7 +150,7 @@ class Solution {
 }
 ```
 - [Combination Sum II (LC 40)](https://leetcode.com/problems/combination-sum-ii/)
-```
+```java
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         Arrays.sort(candidates);
@@ -177,7 +177,7 @@ class Solution {
 }
 ```
 - [Combination Sum III (LC 216)](https://leetcode.com/problems/combination-sum-iii/)
-```
+```java
 class Solution {
     public List<List<Integer>> combinationSum3(int k, int n) {
         List<List<Integer>> res = new ArrayList<>();
@@ -202,7 +202,7 @@ class Solution {
 
 **4. Partitioning (split input into valid pieces)**
 - [Palindrome Partitioning (LC 131)](https://leetcode.com/problems/palindrome-partitioning/)
-```
+```java
 class Solution {
     public List<List<String>> partition(String s) {
         List<List<String>> res = new ArrayList<>();
@@ -230,7 +230,7 @@ class Solution {
 }
 ```
 - [Restore IP Addresses (LC 93)](https://leetcode.com/problems/restore-ip-addresses/)
-```
+```java
 class Solution {
     public List<String> restoreIpAddresses(String s) {
         List<String> res = new ArrayList<>();
@@ -278,7 +278,7 @@ class Solution {
 
 **5. Constraint satisfaction on a grid/board (place, check, undo)**
 - [N-Queens (LC 51)](https://leetcode.com/problems/n-queens/)
-```
+```java
 class Solution {
     private List<List<String>> games;
     private int n;
@@ -329,7 +329,7 @@ class Solution {
 }
 ```
 - [Sudoku Solver (LC 37)](https://leetcode.com/problems/sudoku-solver/)
-```
+```java
 class Solution {
     private boolean[][] visitedrow;
     private boolean[][] visitedcol;
@@ -397,7 +397,7 @@ class Solution {
 
 **6. Word search on grid (DFS + backtrack with visited marking)**
 - [Word Search (LC 79)](https://leetcode.com/problems/word-search/)
-```
+```java
 class Solution {
     public boolean exist(char[][] board, String word) {
         int rows = board.length;
@@ -440,7 +440,7 @@ class Solution {
 }
 ```
 - [Word Search II (LC 212)](https://leetcode.com/problems/word-search-ii/)
-```
+```java
 class Solution {
     public static class TrieNode{
         TrieNode[] children = new TrieNode[26];
@@ -508,7 +508,7 @@ class Solution {
 
 **7. String construction / matching with backtracking**
 - [Letter Combinations of a Phone Number (LC 17)](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
-```
+```java
 class Solution {
     public List<String> letterCombinations(String digits) {
         List<String> list = new ArrayList<>();
@@ -544,7 +544,7 @@ class Solution {
 }
 ```
 - [Generate Parentheses (LC 22)](https://leetcode.com/problems/generate-parentheses/)
-```
+```java
 class Solution {
     public List<String> generateParenthesis(int n) {
         List<String> list = new ArrayList<>();
@@ -569,95 +569,3 @@ class Solution {
     }
 }
 ```
-
-
-## Tree / BST — Non-negotiable
-
-| Problem | Why it's unavoidable |
-|---|---|
-| Maximum Depth of Binary Tree — LC 104 | Warm-up, but also the base recursion template for everything else |
-| Diameter of Binary Tree — LC 543 | Classic "return two things from recursion" pattern, asked everywhere |
-| Balanced Binary Tree — LC 110 | Tests bottom-up recursion discipline |
-| Binary Tree Level Order Traversal — LC 102 | BFS-on-tree template, extremely common |
-| Validate BST — LC 98 | Tests bounds-passing recursion, classic "gotcha" question |
-| Lowest Common Ancestor of a Binary Tree — LC 236 | Asked at almost every company, very high recurrence |
-| LCA of a BST — LC 235 | Simpler variant, but interviewers expect you to know the BST-specific optimization |
-| Binary Tree Right Side View — LC 199 | Common level-order variant, tests view-based thinking |
-| Serialize and Deserialize Binary Tree — LC 297 | Google/Amazon favorite, tests full traversal + reconstruction mastery |
-| Kth Smallest Element in a BST — LC 230 | Tests inorder-traversal-as-sorted-sequence insight |
-| Construct Binary Tree from Preorder and Inorder — LC 105 | Very common, tests deep traversal-index reasoning |
-| Path Sum II / Binary Tree Maximum Path Sum — LC 113, 124 | 124 especially — Amazon/Google favorite, tests global-max-during-recursion pattern |
-
-## LinkedList — Non-negotiable
-
-| Problem | Why it's unavoidable |
-|---|---|
-| Reverse Linked List — LC 206 | THE base template, must be instant/reflexive |
-| Merge Two Sorted Lists — LC 21 | Extremely common, also a building block for merge sort on lists |
-| Linked List Cycle (I & II) — LC 141, 142 | Floyd's cycle detection, asked constantly, high "gotcha" value |
-| Remove Nth Node From End — LC 19 | Classic two-pointer-on-list, common at Amazon/Microsoft |
-| Reorder List — LC 143 | Tests combining reverse + merge + find-middle in one problem |
-| Add Two Numbers — LC 2 | Very common, tests carry/edge-case handling |
-| Copy List with Random Pointer — LC 138 | Frequently asked, tests hashmap-based cloning |
-| Merge k Sorted Lists — LC 23 | Heap + linked list combo, common at senior-leaning SDE-1 rounds |
-| LRU Cache — LC 146 | Technically a design question but built on doubly linked list + hashmap — asked relentlessly at product companies |
-
-## Heap / Priority Queue — Non-negotiable
-
-| Problem | Why it's unavoidable |
-|---|---|
-| Kth Largest Element in an Array — LC 215 | The canonical heap-selection problem |
-| Top K Frequent Elements — LC 347 | Extremely common, hashmap + heap combo |
-| Merge k Sorted Lists — LC 23 | Also belongs here — heap-of-pointers pattern |
-| Find Median from Data Stream — LC 295 | Two-heap pattern, very frequently asked at Google/Amazon |
-| K Closest Points to Origin — LC 973 | Common, tests custom comparator usage |
-| Task Scheduler — LC 621 | Greedy + heap combo, asked at Amazon/Flipkart |
-
-## Intervals — Non-negotiable
-
-| Problem | Why it's unavoidable |
-|---|---|
-| Merge Intervals — LC 56 | Already flagged, but truly foundational to this category |
-| Insert Interval — LC 57 | Common follow-up variant to Merge Intervals |
-| Non-overlapping Intervals — LC 435 | Greedy-on-intervals template |
-| Meeting Rooms II — LC 253 (premium; practice via Insert Interval + heap logic) | Asked constantly at Amazon/Microsoft in disguised forms (meeting room, resource allocation) |
-
-## Stack — Non-negotiable
-
-| Problem | Why it's unavoidable |
-|---|---|
-| Valid Parentheses — LC 20 | Absolute baseline, must be reflexive |
-| Min Stack — LC 155 | Very common design-with-stack question |
-| Daily Temperatures — LC 739 | Monotonic stack template |
-| Next Greater Element I — LC 496 | Same pattern, simpler entry point |
-| Largest Rectangle in Histogram — LC 84 | Hard but genuinely asked at Google/Amazon, strong signal question |
-| Evaluate Reverse Polish Notation — LC 150 | Common, tests stack-based expression evaluation |
-| Basic Calculator II — LC 227 | Frequently asked at Amazon/Microsoft, tests operator precedence handling |
-
-## Trie — Non-negotiable
-
-| Problem | Why it's unavoidable |
-|---|---|
-| Implement Trie (Prefix Tree) — LC 208 | You must be able to build this from scratch without hesitation |
-| Word Search II — LC 212 | Trie + backtracking combo, very common at product companies |
-| Design Add and Search Words Data Structure — LC 211 | Tests trie with wildcard search, frequently asked |
-
-## Greedy — Non-negotiable
-
-| Problem | Why it's unavoidable |
-|---|---|
-| Jump Game — LC 55 | Base greedy-reachability template |
-| Gas Station — LC 134 | Classic greedy proof-based question, asked often |
-| Non-overlapping Intervals — LC 435 | Also core here — greedy-by-sorting template |
-| Candy — LC 135 | Common two-pass greedy, tests handling conflicting constraints |
-| Partition Labels — LC 763 | Frequent, simple but tests greedy-interval insight |
-
-## Bit Manipulation — Non-negotiable
-
-| Problem | Why it's unavoidable |
-|---|---|
-| Single Number — LC 136 | XOR trick, extremely common warm-up/filler question |
-| Number of 1 Bits — LC 191 | Basic but frequently tested for fundamentals check |
-| Counting Bits — LC 338 | DP + bit manipulation combo, common at Amazon |
-| Sum of Two Integers (without + or -) — LC 371 | Tests real bitwise arithmetic understanding, asked at Google/Microsoft |
-| Missing Number — LC 268 | XOR/math trick, very common |
