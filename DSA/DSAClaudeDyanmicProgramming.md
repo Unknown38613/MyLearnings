@@ -2,7 +2,7 @@
 
 **1. 1D DP — linear sequence decisions**
 - [Climbing Stairs — LC 70](https://leetcode.com/problems/climbing-stairs/)
-```
+```java
 class Solution {
     private int[] memo;
     public int climbStairs(int n) {
@@ -18,7 +18,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     public int climbStairs(int n) {
         int[] dp = new int[n + 1];
@@ -33,7 +33,7 @@ class Solution {
 }
 ```
 - [House Robber — LC 198](https://leetcode.com/problems/house-robber/)
-```
+```java
 class Solution {
     private int[] memo;
     private int robber(int i, int[] nums){
@@ -50,7 +50,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     public int rob(int[] nums) {
         int n = nums.length;
@@ -67,7 +67,7 @@ class Solution {
 }
 ```
 - [House Robber II (circular) — LC 213](https://leetcode.com/problems/house-robber-ii/)
-```
+```java
 class Solution {
     private int[] memo;
     private int robber(int i, int j, int[] nums, int offset){
@@ -90,7 +90,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     public int rob(int[] nums) {
         int n = nums.length;
@@ -124,10 +124,16 @@ class Solution {
     }
 }
 ```
+- [Decode Ways — LC 91](https://leetcode.com/problems/decode-ways/)
+```java
+```
+- [Word Break — LC 139](https://leetcode.com/problems/word-break/)
+```java
+```
 
 **2. Kadane's / subarray DP**
 - [Maximum Subarray — LC 53](https://leetcode.com/problems/maximum-subarray/)
-```
+```java
 class Solution {
     //⚠️ Negative number so Integer
     private Integer[] memo;
@@ -151,7 +157,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     public int maxSubArray(int[] nums) {
         int n = nums.length;
@@ -166,8 +172,7 @@ class Solution {
 }
 ```
 - [Maximum Product Subarray — LC 152](https://leetcode.com/problems/maximum-product-subarray/)
-
-```
+```java
 class Solution {
     public int maxProduct(int[] nums) {
         int n = nums.length;
@@ -199,7 +204,7 @@ class Solution {
 
 **3. 0/1 Knapsack pattern**
 - [Partition Equal Subset Sum — LC 416](https://leetcode.com/problems/partition-equal-subset-sum/)
-```
+```java
 class Solution {
     //⚠️ avoid confusion between computed false and pre-filled false
     private Boolean[][] memo;
@@ -225,7 +230,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     
     public boolean canPartition(int[] nums) {
@@ -260,7 +265,7 @@ class Solution {
 }
 ```
 - [Target Sum — LC 494](https://leetcode.com/problems/target-sum/)
-```
+```java
 class Solution {
     private Integer[][] memo;
     public int findTargetSumWays(int[] nums, int target) {
@@ -283,7 +288,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     public int findTargetSumWays(int[] nums, int target) {
         int n = nums.length;
@@ -317,7 +322,7 @@ class Solution {
 }
 ```
 - [Coin Change (min coins, unbounded knapsack variant) — LC 322](https://leetcode.com/problems/coin-change/)
-```
+```java
 class Solution {
     private static final int INF = (int) 1e9;
     private Integer[][] memo;
@@ -341,7 +346,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     private static final int INF = (int) 1e9;
     public int coinChange(int[] coins, int amount) {
@@ -373,7 +378,7 @@ class Solution {
 }
 ```
 - [Coin Change II (count ways, unbounded) — LC 518](https://leetcode.com/problems/coin-change-ii/)
-```
+```java
 class Solution {
     private Integer[][] memo;
     public int change(int amount, int[] coins) {
@@ -393,7 +398,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     public int change(int amount, int[] coins) {
         int n = coins.length;
@@ -417,10 +422,13 @@ class Solution {
     }
 }
 ```
+- [Combination Sum IV — LC 377](https://leetcode.com/problems/combination-sum-iv/)
+```java
+```
 
 **4. Longest Common Subsequence family (2D grid DP over two strings)**
 - [Longest Common Subsequence — LC 1143](https://leetcode.com/problems/longest-common-subsequence/)
-```
+```java
 class Solution {
     private Integer[][] memo;
     public int longestCommonSubsequence(String text1, String text2) {
@@ -451,7 +459,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
         int m = text1.length();
@@ -475,7 +483,7 @@ class Solution {
 }
 ```
 - [Edit Distance — LC 72](https://leetcode.com/problems/edit-distance/)
-```
+```java
 class Solution {
     private Integer[][] memo;
     public int minDistance(String word1, String word2) {
@@ -510,7 +518,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     
     public int minDistance(String word1, String word2) {
@@ -548,7 +556,7 @@ class Solution {
 }
 ```
 - [Distinct Subsequences — LC 115](https://leetcode.com/problems/distinct-subsequences/)
-```
+```java
 class Solution {
     private Integer[][] memo;
     public int numDistinct(String s, String t) {
@@ -583,7 +591,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     public int numDistinct(String s, String t) {
         int n = s.length();
@@ -612,7 +620,7 @@ class Solution {
 
 **5. Longest Increasing Subsequence pattern**
 - [Longest Increasing Subsequence (O(n log n) variant important) — LC 300](https://leetcode.com/problems/longest-increasing-subsequence/)
-```
+```java
 class Solution {
     private Integer[][] memo;
     public int lengthOfLIS(int[] nums) {
@@ -639,7 +647,7 @@ class Solution {
     }
 }
 ```
-```
+```java
 class Solution {
     public int lengthOfLIS(int[] nums) {
         int n = nums.length;
@@ -661,68 +669,38 @@ class Solution {
     }
 }
 ```
-- [Russian Doll Envelopes (LIS in 2D) — LC 354](https://leetcode.com/problems/russian-doll-envelopes/)
-```
-```
 
 **6. Palindromic DP**
 - [Longest Palindromic Substring — LC 5](https://leetcode.com/problems/longest-palindromic-substring/)
-```
+```java
 ```
 - [Longest Palindromic Subsequence — LC 516](https://leetcode.com/problems/longest-palindromic-subsequence/)
-```
-```
-- [Palindrome Partitioning II (min cuts) — LC 132](https://leetcode.com/problems/palindrome-partitioning-ii/)
-```
+```java
 ```
 
 **7. Grid/path DP**
 - [Unique Paths — LC 62](https://leetcode.com/problems/unique-paths/)
-```
+```java
 ```
 - [Minimum Path Sum — LC 64](https://leetcode.com/problems/minimum-path-sum/)
+```java
 ```
-```
-- [Dungeon Game (reverse DP) — LC 174](https://leetcode.com/problems/dungeon-game/)
-```
-```
-
-**8. Interval DP (decisions over subranges, merge point)**
-- [Burst Balloons — LC 312](https://leetcode.com/problems/burst-balloons/)
-```
-```
-- [Matrix Chain Multiplication style — Minimum Cost to Merge Stones — LC 1000](https://leetcode.com/problems/minimum-cost-to-merge-stones/)
-```
+- [Unique Paths II — LC 63](https://leetcode.com/problems/unique-paths-ii/)
+```java
 ```
 
 **9. DP on stocks (state machine DP)**
-- [Best Time to Buy and Sell Stock II — LC 122](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
+- [Best Time to Buy and Sell Stock — LC 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+```java
 ```
+- [Best Time to Buy and Sell Stock II — LC 122](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
+```java
 ```
 - [Best Time to Buy and Sell Stock with Cooldown — LC 309](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
-```
-```
-- [Best Time to Buy and Sell Stock III (k=2 transactions) — LC 123](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)
-```
+```java
 ```
 
-**10. Bitmask DP**
-- [Partition to K Equal Sum Subsets — LC 698](https://leetcode.com/problems/partition-to-k-equal-sum-subsets/)
-```
-```
-- [Shortest Path Visiting All Nodes — LC 847](https://leetcode.com/problems/shortest-path-visiting-all-nodes/)
-```
-```
-
-**11. DP on trees**
-- [House Robber III — LC 337](https://leetcode.com/problems/house-robber-iii/)
-```
-```
-- [Binary Tree Maximum Path Sum (DP-flavored, not classic but good practice) — LC 124](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
-```
-```
-
-**12. Digit DP / counting DP (less common in Indian product interviews but shows up occasionally)**
+**10. Digit DP / counting DP (less common in Indian product interviews but shows up occasionally)**
 - [Count Numbers with Unique Digits — LC 357](https://leetcode.com/problems/count-numbers-with-unique-digits/)
-```
+```java
 ```
