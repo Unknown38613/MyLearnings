@@ -36,3 +36,6 @@
 - [Intersection of Two Linked Lists — LC 160](https://leetcode.com/problems/intersection-of-two-linked-lists/)
 ```java
 ```
+- [Partition List — LC 86](https://leetcode.com/problems/partition-list/)
+```java
+```
