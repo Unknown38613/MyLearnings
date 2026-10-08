@@ -10,6 +10,12 @@
 - [Max Area of Island — LC 695](https://leetcode.com/problems/max-area-of-island/)
 ```
 ```
+- [Clone Graph — LC 133](https://leetcode.com/problems/clone-graph/)
+```
+```
+- [Pacific Atlantic Water Flow — LC 417](https://leetcode.com/problems/pacific-atlantic-water-flow/)
+```
+```
 
 **2. Connected Components / Union-Find**
 - [Number of Provinces — LC 547](https://leetcode.com/problems/number-of-provinces/)
@@ -19,6 +25,9 @@
 ```
 ```
 - [Accounts Merge — LC 721](https://leetcode.com/problems/accounts-merge/)
+```
+```
+- [Redundant Connection — LC 684](https://leetcode.com/problems/redundant-connection/)
 ```
 ```
 
@@ -41,6 +50,9 @@
 ```
 ```
 - [Word Ladder — LC 127](https://leetcode.com/problems/word-ladder/)
+```
+```
+- [Shortest Path in Binary Matrix — LC 1091](https://leetcode.com/problems/shortest-path-in-binary-matrix/)
 ```
 ```
 
@@ -92,11 +104,8 @@
 ```
 ```
 
-**11. Union-Find advanced (used a lot at Flipkart/Amazon LLD-adjacent rounds)**
-- [Number of Islands II — LC 305 (Premium)](https://leetcode.com/problems/number-of-islands-ii/)
-```
-```
-- [Satisfiability of Equality Equations — LC 990](https://leetcode.com/problems/satisfiability-of-equality-equations/)
+**11. Graph + Weighted DFS**
+- [Evaluate Division — LC 399](https://leetcode.com/problems/evaluate-division/)
 ```
 ```
 
