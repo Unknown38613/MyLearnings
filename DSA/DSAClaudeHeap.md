@@ -18,3 +18,6 @@
 - [Task Scheduler — LC 621](https://leetcode.com/problems/task-scheduler/)
 ```
 ```
+- [Find K Pairs with Smallest Sums — LC 373](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
+```
+```
