@@ -693,14 +693,36 @@ class Solution {
 - [Best Time to Buy and Sell Stock — LC 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 ```java
 ```
-- [Best Time to Buy and Sell Stock II — LC 122](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
-```java
-```
 - [Best Time to Buy and Sell Stock with Cooldown — LC 309](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
 ```java
 ```
 
 **10. Digit DP / counting DP (less common in Indian product interviews but shows up occasionally)**
 - [Count Numbers with Unique Digits — LC 357](https://leetcode.com/problems/count-numbers-with-unique-digits/)
+```java
+```
+
+**10. Non-negotiables**
+- [Perfect Squares — LC 279](https://leetcode.com/problems/perfect-squares/)
+```java
+```
+
+- [Maximal Square — LC 221](https://leetcode.com/problems/maximal-square/)
+```java
+```
+
+- [Best Time to Buy and Sell Stock IV — LC 188](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)
+```java
+```
+
+- [Wildcard Matching — LC 44](https://leetcode.com/problems/wildcard-matching/)
+```java
+```
+
+- [Longest Increasing Path in a Matrix — LC 329](https://leetcode.com/problems/longest-increasing-path-in-a-matrix/)
+```java
+```
+
+- [Minimum Cost For Tickets — LC 983](https://leetcode.com/problems/minimum-cost-for-tickets/)
 ```java
 ```
