@@ -27,9 +27,49 @@ class Solution {
 ```
 - [Best Time to Buy and Sell Stock — LC 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/) ⭐
 ```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        int profit = 0;
+        int buy = prices[0];
+        int n = prices.length;
+
+        for(int i = 1 ; i < n ; i++){
+            int sellprice = prices[i];
+            if(sellprice < buy) buy = sellprice;
+            else profit = Math.max(profit, sellprice - buy);
+        }
+
+        return profit;
+    }
+}
 ```
 - [Longest Consecutive Sequence — LC 128](https://leetcode.com/problems/longest-consecutive-sequence/description/) ⭐
 ```java
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        int n = nums.length;
+        Set<Integer> set = new HashSet<>();
+        int maxlength = 0;
+        for(int i = 0 ; i < n ; i++){
+            set.add(nums[i]);
+        }
+
+        for (int current : set) {
+            if (!set.contains(current - 1)) {
+                int currlength = 1;
+
+                while (set.contains(current + 1)) {
+                    current++;
+                    currlength++;
+                }
+
+                maxlength = Math.max(maxlength, currlength);
+            }
+        }
+
+        return maxlength;
+    }
+}
 ```
 - [Majority Element — LC 169](https://leetcode.com/problems/majority-element/description/)
 ```java
