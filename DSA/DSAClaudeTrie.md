@@ -1,6 +1,6 @@
 ## Trie — Non-negotiable
 
-* [Implement Trie (Prefix Tree) — LC 208](https://leetcode.com/problems/implement-trie-prefix-tree/)
+* [Implement Trie (Prefix Tree) — LC 208](https://leetcode.com/problems/implement-trie-prefix-tree/) ⭐
 
 ```java
 class Trie {
@@ -54,7 +54,7 @@ class Trie {
  */
 ```
 
-* [Design Add and Search Words Data Structure — LC 211](https://leetcode.com/problems/design-add-and-search-words-data-structure/)
+* [Design Add and Search Words Data Structure — LC 211](https://leetcode.com/problems/design-add-and-search-words-data-structure/) ⭐
 
 ```java
 class WordDictionary {
@@ -117,7 +117,7 @@ class WordDictionary {
  */
 ```
 
-* [Word Search II — LC 212](https://leetcode.com/problems/word-search-ii/)
+* [Word Search II — LC 212](https://leetcode.com/problems/word-search-ii/) ⭐⭐
 
 ```java
 class Solution {
@@ -187,7 +187,7 @@ class Solution {
 }
 ```
 
-* [Replace Words — LC 648](https://leetcode.com/problems/replace-words/)
+* [Replace Words — LC 648](https://leetcode.com/problems/replace-words/) ⭐
 
 ```java
 class Solution {
@@ -302,7 +302,7 @@ class MapSum {
 
 ```
 
-* [Maximum XOR of Two Numbers in an Array — LC 421](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/)
+* [Maximum XOR of Two Numbers in an Array — LC 421](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/) ⭐
 
 ```java
 //Greedy HSB Pick algorithm
@@ -359,7 +359,7 @@ class Solution {
 }
 ```
 
-* [Search Suggestions System — LC 1268](https://leetcode.com/problems/search-suggestions-system/)
+* [Search Suggestions System — LC 1268](https://leetcode.com/problems/search-suggestions-system/) ⭐
 
 ```java
 class Solution {
