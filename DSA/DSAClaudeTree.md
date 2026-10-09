@@ -897,3 +897,44 @@ class Solution {
     }
 }
 ```
+
+## Non-negotiable
+- [Binary Tree Inorder Traversal — LC 94](https://leetcode.com/problems/binary-tree-inorder-traversal/)
+```java
+```
+
+- [Binary Tree Preorder Traversal — LC 144](https://leetcode.com/problems/binary-tree-preorder-traversal/)
+```java
+```
+
+- [Binary Tree Postorder Traversal — LC 145](https://leetcode.com/problems/binary-tree-postorder-traversal/)
+```java
+```
+
+- [Binary Search Tree Iterator — LC 173](https://leetcode.com/problems/binary-search-tree-iterator/)
+```java
+```
+
+- [Vertical Order Traversal of a Binary Tree — LC 987](https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/)
+```java
+```
+
+- [Path Sum III — LC 437](https://leetcode.com/problems/path-sum-iii/)
+```java
+```
+
+- [Flatten Binary Tree to Linked List — LC 114](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/)
+```java
+```
+
+- [Maximum Width of Binary Tree — LC 662](https://leetcode.com/problems/maximum-width-of-binary-tree/)
+```java
+```
+
+- [House Robber III — LC 337](https://leetcode.com/problems/house-robber-iii/)
+```java
+```
+
+- [Recover Binary Search Tree — LC 99](https://leetcode.com/problems/recover-binary-search-tree/)
+```java
+```
