@@ -1,35 +1,35 @@
 ## Arrays
 **0. Hashing / Array Fundamentals**
-- [Two Sum — LC 1](https://leetcode.com/problems/two-sum/description/)
+- [Two Sum — LC 1](https://leetcode.com/problems/two-sum/description/) ⭐
 ```java
 ```
 - [Contains Duplicate — LC 217](https://leetcode.com/problems/contains-duplicate/description/)
 ```java
 ```
-- [Best Time to Buy and Sell Stock — LC 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
+- [Best Time to Buy and Sell Stock — LC 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/) ⭐
 ```java
 ```
-- [Longest Consecutive Sequence — LC 128](https://leetcode.com/problems/longest-consecutive-sequence/description/)
+- [Longest Consecutive Sequence — LC 128](https://leetcode.com/problems/longest-consecutive-sequence/description/) ⭐
 ```java
 ```
 - [Majority Element — LC 169](https://leetcode.com/problems/majority-element/description/)
 ```java
 ```
-- [Group Anagrams — LC 49](https://leetcode.com/problems/group-anagrams/description/)
+- [Group Anagrams — LC 49](https://leetcode.com/problems/group-anagrams/description/) ⭐
 ```java
 ```
 
 **1. Two Pointers (opposite ends)**
-- [Two Sum II (sorted) — LC 167](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
+- [Two Sum II (sorted) — LC 167](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) ⭐
 ```java
 ```
-- [Container With Most Water — LC 11](https://leetcode.com/problems/container-with-most-water/)
+- [Container With Most Water — LC 11](https://leetcode.com/problems/container-with-most-water/) ⭐
 ```java
 ```
-- [Trapping Rain Water — LC 42](https://leetcode.com/problems/trapping-rain-water/)
+- [Trapping Rain Water — LC 42](https://leetcode.com/problems/trapping-rain-water/) ⭐
 ```java
 ```
-- [3Sum — LC 15](https://leetcode.com/problems/3sum/description/)
+- [3Sum — LC 15](https://leetcode.com/problems/3sum/description/) ⭐
 ```java
 ```
 - [Valid Palindrome — LC 125](https://leetcode.com/problems/valid-palindrome/description/)
@@ -50,36 +50,36 @@
 ```
 
 **4. Sliding Window (variable size)**
-- [Longest Substring Without Repeating Characters — LC 3](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+- [Longest Substring Without Repeating Characters — LC 3](https://leetcode.com/problems/longest-substring-without-repeating-characters/) ⭐
 ```java
 ```
-- [Minimum Size Subarray Sum — LC 209](https://leetcode.com/problems/minimum-size-subarray-sum/)
+- [Minimum Size Subarray Sum — LC 209](https://leetcode.com/problems/minimum-size-subarray-sum/) ⭐
 ```java
 ```
 - [Longest Substring with At Most K Distinct Characters — LC 340 (Premium)](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
 ```java
 ```
-- [Longest Repeating Character Replacement — LC 424](https://leetcode.com/problems/longest-repeating-character-replacement/)
+- [Longest Repeating Character Replacement — LC 424](https://leetcode.com/problems/longest-repeating-character-replacement/) ⭐
 ```java
 ```
-- [Permutation in String — LC 567](https://leetcode.com/problems/permutation-in-string/)
+- [Permutation in String — LC 567](https://leetcode.com/problems/permutation-in-string/) ⭐
 ```java
 ```
-- [Minimum Window Substring — LC 76](https://leetcode.com/problems/minimum-window-substring/)
+- [Minimum Window Substring — LC 76](https://leetcode.com/problems/minimum-window-substring/) ⭐
 ```java
 ```
 - [Max Consecutive Ones III — LC 1004](https://leetcode.com/problems/max-consecutive-ones-iii/)
 ```java
 ```
-- [Sliding Window Maximum — LC 239](https://leetcode.com/problems/sliding-window-maximum/)
+- [Sliding Window Maximum — LC 239](https://leetcode.com/problems/sliding-window-maximum/) ⭐
 ```java
 ```
 
 **5. Prefix Sum**
-- [Subarray Sum Equals K — LC 560](https://leetcode.com/problems/subarray-sum-equals-k/)
+- [Subarray Sum Equals K — LC 560](https://leetcode.com/problems/subarray-sum-equals-k/) ⭐
 ```java
 ```
-- [Product of Array Except Self — LC 238](https://leetcode.com/problems/product-of-array-except-self/)
+- [Product of Array Except Self — LC 238](https://leetcode.com/problems/product-of-array-except-self/) ⭐
 ```java
 ```
 - [Range Sum Query - Immutable — LC 303](https://leetcode.com/problems/range-sum-query-immutable/)
@@ -93,21 +93,21 @@
 ```
 
 **6. Kadane's Algorithm (subarray optimization)**
-- [Maximum Subarray — LC 53](https://leetcode.com/problems/maximum-subarray/)
+- [Maximum Subarray — LC 53](https://leetcode.com/problems/maximum-subarray/) ⭐
 ```java
 ```
 - [Maximum Circular Subarray Sum — LC 918](https://leetcode.com/problems/maximum-sum-circular-subarray/)
 ```java
 ```
-- [Maximum Product Subarray — LC 152](https://leetcode.com/problems/maximum-product-subarray/)
+- [Maximum Product Subarray — LC 152](https://leetcode.com/problems/maximum-product-subarray/) ⭐
 ```java
 ```
 
 **8. Binary Search on Answer**
-- [Koko Eating Bananas — LC 875](https://leetcode.com/problems/koko-eating-bananas/)
+- [Koko Eating Bananas — LC 875](https://leetcode.com/problems/koko-eating-bananas/) ⭐
 ```java
 ```
-- [Capacity to Ship Packages Within D Days — LC 1011](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/)
+- [Capacity to Ship Packages Within D Days — LC 1011](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/) ⭐
 ```java
 ```
 - [Split Array Largest Sum — LC 410](https://leetcode.com/problems/split-array-largest-sum/)
@@ -115,10 +115,10 @@
 ```
 
 **9. Binary Search on Rotated/Modified Arrays**
-- [Search in Rotated Sorted Array — LC 33](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+- [Search in Rotated Sorted Array — LC 33](https://leetcode.com/problems/search-in-rotated-sorted-array/) ⭐
 ```java
 ```
-- [Find Minimum in Rotated Sorted Array — LC 153](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+- [Find Minimum in Rotated Sorted Array — LC 153](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) ⭐
 ```java
 ```
 - [Median of Two Sorted Arrays — LC 4](https://leetcode.com/problems/median-of-two-sorted-arrays/)
@@ -127,10 +127,10 @@
 
 
 **10. Cyclic Sort (missing/duplicate number patterns)**
-- [Find the Duplicate Number — LC 287](https://leetcode.com/problems/find-the-duplicate-number/)
+- [Find the Duplicate Number — LC 287](https://leetcode.com/problems/find-the-duplicate-number/) ⭐
 ```java
 ```
-- [First Missing Positive — LC 41](https://leetcode.com/problems/first-missing-positive/)
+- [First Missing Positive — LC 41](https://leetcode.com/problems/first-missing-positive/) ⭐
 ```java
 ```
 - [Missing Number — LC 268](https://leetcode.com/problems/missing-number/)
@@ -144,35 +144,35 @@
 ```
 
 **11. In-place array manipulation**
-- [Rotate Array — LC 189](https://leetcode.com/problems/rotate-array/)
+- [Rotate Array — LC 189](https://leetcode.com/problems/rotate-array/) ⭐
 ```java
 ```
-- [Next Permutation — LC 31](https://leetcode.com/problems/next-permutation/)
+- [Next Permutation — LC 31](https://leetcode.com/problems/next-permutation/) ⭐
 ```java
 ```
-- [Sort Colors — LC 75](https://leetcode.com/problems/sort-colors/)
+- [Sort Colors — LC 75](https://leetcode.com/problems/sort-colors/) ⭐
 ```java
 ```
 
 **12. Matrix as array (common warm-up round question)**
-- [Rotate Image — LC 48](https://leetcode.com/problems/rotate-image/)
+- [Rotate Image — LC 48](https://leetcode.com/problems/rotate-image/) ⭐
 ```java
 ```
-- [Spiral Matrix — LC 54](https://leetcode.com/problems/spiral-matrix/)
+- [Spiral Matrix — LC 54](https://leetcode.com/problems/spiral-matrix/) ⭐
 ```java
 ```
-- [Set Matrix Zeroes — LC 73](https://leetcode.com/problems/set-matrix-zeroes/)
+- [Set Matrix Zeroes — LC 73](https://leetcode.com/problems/set-matrix-zeroes/) ⭐
 ```java
 ```
 - [Word Search — LC 79](https://leetcode.com/problems/word-search/)
 ```java
 ```
-- [Search a 2D Matrix — LC 74](https://leetcode.com/problems/search-a-2d-matrix/)
+- [Search a 2D Matrix — LC 74](https://leetcode.com/problems/search-a-2d-matrix/) ⭐
 ```java
 ```
 
 **13. Merge/Multi-array**
-- [Merge Sorted Array — LC 88](https://leetcode.com/problems/merge-sorted-array/)
+- [Merge Sorted Array — LC 88](https://leetcode.com/problems/merge-sorted-array/) ⭐
 ```java
 ```
 - [Merge k Sorted Lists — LC 23](https://leetcode.com/problems/merge-k-sorted-lists/)
@@ -180,12 +180,12 @@
 ```
 
 **15. Greedy on Arrays**
-- [Jump Game — LC 55](https://leetcode.com/problems/jump-game/)
+- [Jump Game — LC 55](https://leetcode.com/problems/jump-game/) ⭐
 ```java
 ```
-- [Jump Game II — LC 45](https://leetcode.com/problems/jump-game-ii/)
+- [Jump Game II — LC 45](https://leetcode.com/problems/jump-game-ii/) ⭐
 ```java
 ```
-- [Gas Station — LC 134](https://leetcode.com/problems/gas-station/)
+- [Gas Station — LC 134](https://leetcode.com/problems/gas-station/) ⭐
 ```java
 ```
