@@ -130,9 +130,42 @@ class Solution {
 **1. Two Pointers (opposite ends)**
 - [Two Sum II (sorted) — LC 167](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) ⭐
 ```java
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int n = numbers.length;
+        int left = 0;
+        int right = n - 1;
+        while(left < right){
+            int sum = numbers[left] + numbers[right];
+            if(sum > target) right -= 1;
+            else if(sum < target) left += 1;
+            else return new int[]{left + 1, right + 1};
+        }
+        return new int[]{};
+    }
+}
 ```
 - [Container With Most Water — LC 11](https://leetcode.com/problems/container-with-most-water/) ⭐
 ```java
+class Solution {
+    public int maxArea(int[] height) {
+        int n = height.length;
+        int left = 0;
+        int right = n - 1;
+        int maxArea = 0;
+
+        while(left < right){
+            int minLen = 0;
+            int width = right - left;
+            if(height[left] <= height[right]) minLen = height[left++];
+            else minLen = height[right--];
+            int currArea = minLen * width;
+            maxArea = Math.max(maxArea, currArea);
+        }
+
+        return maxArea;
+    }
+}
 ```
 - [Trapping Rain Water — LC 42](https://leetcode.com/problems/trapping-rain-water/) ⭐
 ```java
