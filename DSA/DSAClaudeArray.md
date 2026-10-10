@@ -24,6 +24,16 @@ class Solution {
 ```
 - [Contains Duplicate — LC 217](https://leetcode.com/problems/contains-duplicate/description/)
 ```java
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for(int n : nums){
+            if(set.contains(n)) return true;
+            set.add(n);
+        }
+        return false;
+    }
+}
 ```
 - [Best Time to Buy and Sell Stock — LC 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/) ⭐
 ```java
@@ -73,9 +83,48 @@ class Solution {
 ```
 - [Majority Element — LC 169](https://leetcode.com/problems/majority-element/description/)
 ```java
+class Solution {
+    public int majorityElement(int[] nums) {
+        int n = nums.length;
+        int vote = 1;
+        int candidate = nums[0];
+        
+        //Boyer-Moore Majority Vote 
+        for(int i = 1 ; i < n ; i++){
+            int next = nums[i];
+            if(next == candidate) vote += 1;
+            else vote -= 1;
+
+            if(vote == 0){
+                candidate = next;
+                vote = 1;
+            }
+        }
+
+        return candidate;
+    }
+}
 ```
 - [Group Anagrams — LC 49](https://leetcode.com/problems/group-anagrams/description/) ⭐
 ```java
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> ansList = new ArrayList<>();
+        Map<String, List<String>> map = new HashMap<>();
+        for(String s : strs){
+            char[] sarr = s.toCharArray();
+            Arrays.sort(sarr);
+            String sorted = new String(sarr);
+            map.computeIfAbsent(sorted, k -> new ArrayList<>()).add(s);
+        }
+
+        for(List<String> value : map.values()){
+            ansList.add(value);
+        }
+
+        return ansList;
+    }
+}
 ```
 
 **1. Two Pointers (opposite ends)**
