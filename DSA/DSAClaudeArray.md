@@ -169,9 +169,78 @@ class Solution {
 ```
 - [Trapping Rain Water — LC 42](https://leetcode.com/problems/trapping-rain-water/) ⭐
 ```java
+class Solution {
+    public int trap(int[] height) {
+        int n = height.length;
+        int left = 0;
+        int right = n - 1;
+        int maxLeft = height[left++];
+        int maxRight = height[right--];
+        int water = 0;
+        
+        while(left <= right){
+            //water = min(max on left, max on right) - current bar
+            int currLeft = height[left];
+            int currRight = height[right];
+            if(maxLeft <= maxRight){
+                if(maxLeft > currLeft) water += maxLeft - currLeft;
+                else maxLeft = currLeft;
+                left++;
+            }
+            else{
+                if(maxRight > currRight) water += maxRight - currRight;
+                else maxRight = currRight;
+                right--;
+            }
+        }
+
+        return water;
+    }
+}
 ```
 - [3Sum — LC 15](https://leetcode.com/problems/3sum/description/) ⭐
 ```java
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        List<List<Integer>> ansList = new ArrayList<>();
+
+        for(int i = 0 ; i < n - 2 ; i++){
+            //elminate immediate duplicate combination
+            if(i != 0 && nums[i] == nums[i - 1]) continue;
+            //if current and last 2 largest nums gives < 0 then no point in continuing
+            if(nums[i] + nums[n - 1] + nums[n - 2] < 0) continue;
+
+            int left = i + 1;
+            int right = n - 1;
+            int first = nums[i];
+            //take advantage of sorted property
+            while(left < right){
+                int second = nums[left];
+                int third = nums[right];
+                int sum = first + second + third;
+
+                if(sum == 0){
+                    ansList.add(new ArrayList<>(Arrays.asList(first, second, third)));
+                    left++;
+                    right--;
+                    //skip duplicate triplet formation too
+                    while(left < right && nums[left] == second) left++;
+                    while(left < right && nums[right] == third) right--;
+                }
+                else if(sum > 0){
+                    right--;
+                }
+                else{
+                    left++;
+                }
+            }
+        }
+
+        return ansList;
+    }
+}
 ```
 - [Valid Palindrome — LC 125](https://leetcode.com/problems/valid-palindrome/description/)
 ```java
