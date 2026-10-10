@@ -53,7 +53,7 @@ class Solution {
         for(int i = 0 ; i < n ; i++){
             set.add(nums[i]);
         }
-
+        //⚠️ iterating over nums means duplicate items being considered again
         for (int current : set) {
             if (!set.contains(current - 1)) {
                 int currlength = 1;
