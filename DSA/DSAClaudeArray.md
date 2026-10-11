@@ -319,8 +319,39 @@ class Solution {
 - [Longest Substring with At Most K Distinct Characters — LC 340 (Premium)](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
 ```java
 ```
-- [Longest Repeating Character Replacement — LC 424](https://leetcode.com/problems/longest-repeating-character-replacement/) ⭐
+- [Longest Repeating Character Replacement — LC 424](https://leetcode.com/problems/longest-repeating-character-replacement/) ⭐⭐⭐
 ```java
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int n = s.length();
+        int len = 0;
+        int mostFreqCount = 0;
+        int left = 0;
+        int[] freq = new int[128];
+
+        for(int right = 0 ; right < n ; right++){
+            char c = s.charAt(right);
+            freq[c]++;
+            mostFreqCount = Math.max(mostFreqCount, freq[c]);
+            
+            //valid window = window length - max freq char <= k
+            //⚠️ we don't use while loop here, because valid window can never 
+            // get smaller than we already found here
+            if((right - left + 1) - mostFreqCount > k){
+                char remove = s.charAt(left);
+                freq[remove]--;
+                left++;
+                //⚠️ even though mostFreqCount can become stale
+                // it can never make max length found already to be incorrect
+                //if(remove == c) mostFreqCount -= 1;
+            }
+
+            len = Math.max(len, right - left + 1);
+        }
+
+        return len;
+    }
+}
 ```
 - [Permutation in String — LC 567](https://leetcode.com/problems/permutation-in-string/) ⭐
 ```java
