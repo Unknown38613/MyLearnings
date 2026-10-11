@@ -292,6 +292,29 @@ class Solution {
 ```
 - [Minimum Size Subarray Sum — LC 209](https://leetcode.com/problems/minimum-size-subarray-sum/) ⭐
 ```java
+class Solution {
+    private static final int INF = 1_000_000_000;
+    public int minSubArrayLen(int target, int[] nums) {
+        int n = nums.length;
+        int len = INF;
+        int sum = 0;
+        int left = 0;
+        
+        for(int right = 0 ; right < n ; right++){
+            int curr = nums[right];
+            sum += curr;
+
+            while(sum >= target){
+                len = Math.min(len, right - left + 1);
+                int remove = nums[left];
+                sum -= remove;
+                left++;
+            }
+        }
+
+        return len == INF ? 0 : len;
+    }
+}
 ```
 - [Longest Substring with At Most K Distinct Characters — LC 340 (Premium)](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
 ```java
