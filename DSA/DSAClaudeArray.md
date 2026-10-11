@@ -355,6 +355,37 @@ class Solution {
 ```
 - [Permutation in String — LC 567](https://leetcode.com/problems/permutation-in-string/) ⭐
 ```java
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int n1 = s1.length();
+        int n2 = s2.length();
+        if(n1 > n2) return false;
+
+        int[] freq = new int[128];
+        for(int i = 0 ; i < n1 ; i++) freq[s1.charAt(i)]++;
+        int left = 0;
+        int need = n1;
+
+        for(int right = 0 ; right < n2 ; right++){
+            char c = s2.charAt(right);
+            // ⚠️ we found, decrease need, then consume char
+            if(freq[c] > 0) need -= 1;
+            freq[c]--;
+            
+            if((right - left + 1) > n1){
+                char remove = s2.charAt(left);
+                freq[remove]++;
+                left++;
+                //⚠️ re-introduce char, produce char, increase need
+                if(freq[remove] > 0) need += 1;
+            }
+
+            if(need == 0) return true;
+        }
+
+        return false;
+    }
+}
 ```
 - [Minimum Window Substring — LC 76](https://leetcode.com/problems/minimum-window-substring/) ⭐
 ```java
