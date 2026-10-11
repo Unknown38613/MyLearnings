@@ -262,6 +262,33 @@ class Solution {
 **4. Sliding Window (variable size)**
 - [Longest Substring Without Repeating Characters — LC 3](https://leetcode.com/problems/longest-substring-without-repeating-characters/) ⭐
 ```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        if(n == 0) return 0;
+        int maxlen = 0;
+        int left = 0;
+        //⚠️ whole window cannot contain duplicate not just pointers
+        int[] freq = new int[256];
+        int occurence = 0;
+        
+        for(int right = 0 ; right < n ; right++){
+            char c = s.charAt(right);
+            freq[c]++;
+            occurence = Math.max(occurence, freq[c]);
+
+            while(occurence >= 2){
+                char remove = s.charAt(left);
+                freq[remove]--;
+                left++;
+                if(remove == c) occurence -= 1;
+            }
+
+            maxlen = Math.max(maxlen, right - left + 1);
+        }
+        return maxlen;
+    }
+}
 ```
 - [Minimum Size Subarray Sum — LC 209](https://leetcode.com/problems/minimum-size-subarray-sum/) ⭐
 ```java
