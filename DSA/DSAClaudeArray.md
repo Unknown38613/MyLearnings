@@ -389,6 +389,41 @@ class Solution {
 ```
 - [Minimum Window Substring — LC 76](https://leetcode.com/problems/minimum-window-substring/) ⭐
 ```java
+class Solution {
+    private static final int INF = 1_000_000_000;
+    public String minWindow(String s, String t) {
+        int n1 = s.length();
+        int n2 = t.length();
+        if(n2 > n1) return "";
+        int[] freq = new int[128];
+        for(int i = 0 ; i < n2 ; i++) freq[t.charAt(i)]++;
+        int need = n2;
+        int minlen = INF;
+        int left = 0;
+        int start = 0;
+
+        for(int right = 0 ; right < n1 ; right++){
+            char c = s.charAt(right);
+            if(freq[c] > 0) need -= 1;
+            freq[c] -= 1;
+
+            while(need == 0){
+                //⚠️ minlen = Math.min(minlen, right - left + 1); doesn't maintain left
+                //standard substring return strategy, update start with valid condition
+                if((right - left + 1) < minlen){
+                    minlen = right - left + 1;
+                    start = left;
+                }
+                char remove = s.charAt(left);
+                freq[remove]++;
+                left++;
+                if(freq[remove] > 0) need += 1;
+            }
+        }
+
+        return minlen == INF ? "" : s.substring(start, start + minlen);
+    }
+}
 ```
 - [Max Consecutive Ones III — LC 1004](https://leetcode.com/problems/max-consecutive-ones-iii/)
 ```java
