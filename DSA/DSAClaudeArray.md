@@ -430,6 +430,43 @@ class Solution {
 ```
 - [Sliding Window Maximum — LC 239](https://leetcode.com/problems/sliding-window-maximum/) ⭐
 ```java
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        int[] ans = new int[n - k + 1];
+        Deque<Integer> deque = new ArrayDeque<>();
+        int idx = 0;
+        int left = 0;
+        //First -- Last (Deque)
+        //put new element in last
+        //before that remove all less than from deque from last
+        //since adding from last first one will contain old out-of-window element
+        //remove them first even if they are max
+        //first will give max element at that time
+
+        for(int right = 0 ; right < n ; right++){
+            //1. Valid window condition based on indices
+            while(!deque.isEmpty() && deque.peekFirst() < (right - k + 1)){
+                deque.pollFirst();
+            }
+
+            //2. Maintain max 
+            while(!deque.isEmpty() && nums[deque.peekLast()] < nums[right]){
+                deque.pollLast();
+            }
+
+            //3. Enter from last
+            deque.offerLast(right);
+
+            //4. After k size is acheived then each time add max in ans
+            if(right >= k - 1){
+                ans[idx++] = nums[deque.peekFirst()];
+            }
+        }
+
+        return ans;
+    }
+}
 ```
 
 **5. Prefix Sum**
