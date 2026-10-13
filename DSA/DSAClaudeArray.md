@@ -472,6 +472,29 @@ class Solution {
 **5. Prefix Sum**
 - [Subarray Sum Equals K — LC 560](https://leetcode.com/problems/subarray-sum-equals-k/) ⭐
 ```java
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        int n = nums.length;
+        //sum, frequency
+        Map<Integer, Integer> prefixMap = new HashMap<>();
+        //⚠️ important
+        prefixMap.put(0, 1);
+        int currSum = 0;
+        int ans = 0;
+
+        for(int i = 0 ; i < n ; i++){
+            currSum += nums[i];
+            //currsum - prevsum = k
+            if(prefixMap.containsKey(currSum - k)){
+                ans += prefixMap.get(currSum - k);
+            }
+
+            prefixMap.put(currSum, prefixMap.getOrDefault(currSum, 0) + 1);
+        }
+
+        return ans;
+    }
+}
 ```
 - [Product of Array Except Self — LC 238](https://leetcode.com/problems/product-of-array-except-self/) ⭐
 ```java
