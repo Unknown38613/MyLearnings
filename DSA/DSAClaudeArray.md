@@ -498,6 +498,26 @@ class Solution {
 ```
 - [Product of Array Except Self — LC 238](https://leetcode.com/problems/product-of-array-except-self/) ⭐
 ```java
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] leftProduct = new int[n];
+        //except self so first will be 1, then second will be 1 * first...
+        leftProduct[0] = 1;
+        for(int i = 1 ; i < n ; i++) leftProduct[i] = leftProduct[i - 1] * nums[i - 1];
+
+        //leftProduct l -- i -- rightProduct r
+        //so iproduct = r * l
+        //then r = r * nums[i]
+        int rightProduct = 1;
+        for(int i = n - 1 ; i >= 0 ; i--){
+            int currProduct = rightProduct * leftProduct[i];
+            leftProduct[i] = currProduct;
+            rightProduct *= nums[i];
+        }
+        return leftProduct;
+    }
+}
 ```
 - [Range Sum Query - Immutable — LC 303](https://leetcode.com/problems/range-sum-query-immutable/)
 ```java
