@@ -532,12 +532,55 @@ class Solution {
 **6. Kadane's Algorithm (subarray optimization)**
 - [Maximum Subarray — LC 53](https://leetcode.com/problems/maximum-subarray/) ⭐
 ```java
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int n = nums.length;
+        int maxSum = nums[0];
+        int currSum = nums[0];
+
+        for(int i = 1 ; i < n ; i++){
+            //add to current or start new, whichever greater
+            currSum = Math.max(currSum + nums[i], nums[i]);
+            maxSum = Math.max(maxSum, currSum);
+        }
+
+        return maxSum;
+    }
+}
 ```
 - [Maximum Circular Subarray Sum — LC 918](https://leetcode.com/problems/maximum-sum-circular-subarray/)
 ```java
 ```
 - [Maximum Product Subarray — LC 152](https://leetcode.com/problems/maximum-product-subarray/) ⭐
 ```java
+class Solution {
+    public int maxProduct(int[] nums) {
+        int n = nums.length;
+        int maxProd = nums[0];
+        int minProd = nums[0];
+        int ans = nums[0];
+        for(int i = 1 ; i < n ; i++){
+            int curr = nums[i];
+            
+            //2 negative numbers form big positive number
+            //so swap max and min as candidates for new max and new min
+            if(curr < 0){
+                int temp = maxProd;
+                maxProd = minProd;
+                minProd = temp;
+            }
+            
+            //note we are finding max and min at current index, for all we are 
+            //storing it in ans already
+            maxProd = Math.max(maxProd * curr, curr);
+            minProd = Math.min(minProd * curr, curr);
+
+            ans = Math.max(ans, maxProd);
+        }
+
+        return ans;
+    }
+}
 ```
 
 **8. Binary Search on Answer**
