@@ -586,6 +586,41 @@ class Solution {
 **8. Binary Search on Answer**
 - [Koko Eating Bananas — LC 875](https://leetcode.com/problems/koko-eating-bananas/) ⭐
 ```java
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int n = piles.length;
+        int minSpeed = 1;
+        int maxSpeed = 0;
+
+        //Speed range : 1 to maxBanana (0 means no eating, maxBanana means can eat 
+        //any pile in hour, greater than maxBanana no use because k should be minimum possible speed)
+        for(int i = 0 ; i < n ; i++) if(maxSpeed < piles[i]) maxSpeed = piles[i];
+        
+        //try every speed within range
+        while(minSpeed <= maxSpeed){
+            int mid = minSpeed + (maxSpeed - minSpeed) / 2;
+            if(canEat(piles, mid, h, n)){
+                maxSpeed = mid - 1;
+            }
+            else{
+                minSpeed = mid + 1;
+            }
+        }
+
+        return minSpeed;
+    }
+
+    //calculate total hours taken by doing bananas / speed (ceil division)
+    //for each pile, if it's under h then we can consider that speed and try to minimize it
+    private boolean canEat(int[] piles, int speed, int hrs, int n){
+        long totalhours = 0;
+        for(int i = 0 ; i < n ; i++){
+            totalhours += (piles[i] + (long) speed - 1) / speed;
+        }
+
+        return totalhours <= hrs;
+    }
+}
 ```
 - [Capacity to Ship Packages Within D Days — LC 1011](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/) ⭐
 ```java
