@@ -624,6 +624,52 @@ class Solution {
 ```
 - [Capacity to Ship Packages Within D Days — LC 1011](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/) ⭐
 ```java
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int n = weights.length;
+        int maxCapacity = 0;
+        int minCapacity = 0;
+
+        //minCapacity = max weight, if we kept it lower then ship will not able to 
+        //carry the other weight heavier than it (packages cannot be divied)
+        //maxCapacity = summation of all weight packages
+        for(int i = 0 ; i < n ; i++){
+            int curr = weights[i];
+            if(curr > minCapacity) minCapacity = curr;
+            maxCapacity += curr;
+        }
+        
+        //try for each capacity
+        while(minCapacity <= maxCapacity){
+            int mid = minCapacity + (maxCapacity - minCapacity) / 2;
+            if(canFinish(weights, mid, days, n)){
+                maxCapacity = mid - 1;
+            }
+            else{
+                minCapacity = mid + 1;
+            }
+        }
+
+        return minCapacity;
+    }
+
+    //calculate how many days required under current capacity and if it is lesser 
+    // than given days
+    private boolean canFinish(int[] weights, int currCapacity, int days, int n){
+        //⚠️ start from day 1
+        int totalDays = 1;
+        int totalweight = 0;
+        for(int i = 0 ; i < n ; i++){
+            //after capacity exceed, start with new day and weight
+            if(totalweight + weights[i] > currCapacity){
+                totalDays += 1;
+                totalweight = 0;
+            }
+            totalweight += weights[i];
+        }
+        return totalDays <= days;
+    }
+}
 ```
 - [Split Array Largest Sum — LC 410](https://leetcode.com/problems/split-array-largest-sum/)
 ```java
