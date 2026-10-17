@@ -678,9 +678,57 @@ class Solution {
 **9. Binary Search on Rotated/Modified Arrays**
 - [Search in Rotated Sorted Array — LC 33](https://leetcode.com/problems/search-in-rotated-sorted-array/) ⭐
 ```java
+class Solution {
+    public int search(int[] nums, int target) {
+        int n = nums.length;
+        int left = 0;
+        int right = n - 1;
+        //Rotated means one part is sorted
+        //Discard the mid after checking
+        while(left <= right){
+            int mid = left + (right - left) / 2;
+
+            if(nums[mid] == target) return mid;
+            
+            //left is sorted part
+            if(nums[left] <= nums[mid]){
+                if(target >= nums[left] && target < nums[mid]){
+                    right = mid - 1;
+                }
+                else left = mid + 1; //safe to eliminate from sorted part
+            } //right is sorted part
+            else{
+                if(target > nums[mid] && target <= nums[right]){
+                    left = mid + 1;
+                }
+                else right = mid - 1; //safe to eliminate from sorted part
+            }
+        }
+
+        return -1;
+    }
+}
 ```
 - [Find Minimum in Rotated Sorted Array — LC 153](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) ⭐
 ```java
+class Solution {
+    public int findMin(int[] nums) {
+        int n = nums.length;
+        int left = 0;
+        int right = n - 1;
+        //mid can be the answer
+        while(left < right){
+            int mid = left + (right - left) / 2;
+            //normal: l < m < r
+            //rotated: l < m > r
+            //discard mid because it can't be minimum
+            if(nums[mid] > nums[right]) left = mid + 1;
+            //check mid because it can be minimum
+            else right = mid;
+        }
+        return nums[left];
+    }
+}
 ```
 - [Median of Two Sorted Arrays — LC 4](https://leetcode.com/problems/median-of-two-sorted-arrays/)
 ```java
