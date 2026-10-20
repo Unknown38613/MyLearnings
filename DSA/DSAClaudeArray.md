@@ -738,6 +738,46 @@ class Solution {
 **10. Cyclic Sort (missing/duplicate number patterns)**
 - [Find the Duplicate Number — LC 287](https://leetcode.com/problems/find-the-duplicate-number/) ⭐
 ```java
+class Solution {
+    /*F = dist from start to cycle start
+      a = dist from cycle start to meeting point
+      b = rest dist from meeting point to cycle start
+      k = laps/cycle completed by fast
+      slow = fast meet point
+      2(F + a) = F + a + k(a + b) //loop length
+      F + a = k(a + b) 
+      F = ka + kb - a
+      F = a(k - 1) + kb
+      F = a(k - 1) + kb - b + b
+      F = a(k - 1) + b(k - 1) + b
+      F = (k - 1)(a + b) + b
+      F - b = (k - 1)(a + b)
+      F - b / (a + b) = k - 1
+      therfore, F ≡ b (mod a + b) // F and b leaves same remainder when divided
+      by cycle length
+      so, cycle enterance is our duplicate
+    */
+    public int findDuplicate(int[] nums) {
+        int slow = nums[0];
+        int fast = nums[0];
+        //find meeting point
+        do{
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+        while(slow != fast);
+        
+        //crash at cycle enterance
+        slow = nums[0];
+
+        while(slow != fast){
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+
+        return slow;
+    }
+}
 ```
 - [First Missing Positive — LC 41](https://leetcode.com/problems/first-missing-positive/) ⭐
 ```java
