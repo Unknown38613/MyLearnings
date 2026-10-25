@@ -781,9 +781,6 @@ class Solution {
 ```
 - [First Missing Positive — LC 41](https://leetcode.com/problems/first-missing-positive/) ⭐
 ```java
-```
-- [Missing Number — LC 268](https://leetcode.com/problems/missing-number/)
-```java
 class Solution {
     //⚠️ 0 is not integer
     //trick: place each number in correct place 1->nums[0], 2-> nums[1]
@@ -806,6 +803,9 @@ class Solution {
         return n + 1;
     }
 }
+```
+- [Missing Number — LC 268](https://leetcode.com/problems/missing-number/)
+```java
 ```
 - [Find All Numbers Disappeared in an Array — LC 448](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)
 ```java
