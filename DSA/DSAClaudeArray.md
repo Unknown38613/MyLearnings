@@ -817,10 +817,15 @@ class Solution {
 **11. In-place array manipulation**
 - [Rotate Array — LC 189](https://leetcode.com/problems/rotate-array/) ⭐
 ```java
+//[1,2,3,4,5] k = 2
+//[5,4,3,2,1]
+//[4,5]
+//[1,2,3]
+//[4,5,1,2,3]
 class Solution {
     public void rotate(int[] nums, int k) {
         int n = nums.length;
-        k %= n; //handle if k > n
+        k %= n; //⚠️handle if k > n
         rotateArr(nums, 0, n - 1);
         rotateArr(nums, 0, k - 1);
         rotateArr(nums, k, n - 1);
@@ -840,6 +845,29 @@ class Solution {
 ```
 - [Sort Colors — LC 75](https://leetcode.com/problems/sort-colors/) ⭐
 ```java
+class Solution {
+    public void sortColors(int[] nums) {
+        //low 0, high 2 boundaries
+        int low = 0, mid = 0, high = nums.length - 1;
+        //mid is scanner
+        while(mid <= high){
+            if(nums[mid] == 0){
+                int temp = nums[mid];
+                nums[mid] = nums[low];
+                nums[low] = temp;
+                mid++;  //⚠️for sure know mid is processed
+                low++;
+            }
+            else if(nums[mid] == 1) mid++;
+            else{
+                int temp = nums[mid];
+                nums[mid] = nums[high];
+                nums[high] = temp;
+                high--;
+            }
+        }
+    }
+}
 ```
 
 **12. Matrix as array (common warm-up round question)**
