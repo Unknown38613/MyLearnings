@@ -817,6 +817,23 @@ class Solution {
 **11. In-place array manipulation**
 - [Rotate Array — LC 189](https://leetcode.com/problems/rotate-array/) ⭐
 ```java
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k %= n; //handle if k > n
+        rotateArr(nums, 0, n - 1);
+        rotateArr(nums, 0, k - 1);
+        rotateArr(nums, k, n - 1);
+    }
+
+    private void rotateArr(int[] nums, int l, int r){
+        while(l < r){
+            int temp = nums[l];
+            nums[l++] = nums[r];
+            nums[r--] = temp;
+        }
+    }
+}
 ```
 - [Next Permutation — LC 31](https://leetcode.com/problems/next-permutation/) ⭐
 ```java
