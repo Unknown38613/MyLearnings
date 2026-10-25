@@ -784,6 +784,28 @@ class Solution {
 ```
 - [Missing Number — LC 268](https://leetcode.com/problems/missing-number/)
 ```java
+class Solution {
+    //⚠️ 0 is not integer
+    //trick: place each number in correct place 1->nums[0], 2-> nums[1]
+    public int firstMissingPositive(int[] nums) {
+        int n = nums.length;
+        for(int i = 0 ; i < n ; i++){
+            //1...n range, if already placed in pos then stop
+            while(nums[i] <= n && nums[i] > 0 && nums[i] != nums[nums[i] - 1]){
+                int pos = nums[i] - 1;
+                int temp = nums[i];
+                nums[i] = nums[pos];
+                nums[pos] = temp;
+            }
+        }
+        //1...n
+        for(int i = 0 ; i < n ; i++){
+            if(nums[i] != i + 1) return i + 1;
+        }
+        //n+1
+        return n + 1;
+    }
+}
 ```
 - [Find All Numbers Disappeared in an Array — LC 448](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)
 ```java
