@@ -873,6 +873,31 @@ class Solution {
 **12. Matrix as array (common warm-up round question)**
 - [Rotate Image — LC 48](https://leetcode.com/problems/rotate-image/) ⭐
 ```java
+class Solution {
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        //transpose of square matrix 
+        // i,j -> j,i 
+        //for square, skip i == j
+        for(int i = 0 ; i < n ; i++){
+            for(int j = i + 1 ; j < n ; j++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        //reverse each row
+        for(int i = 0 ; i < n ; i++){
+            int left = 0;
+            int right = n - 1;
+            while(left < right){
+                int temp = matrix[i][left];
+                matrix[i][left++] = matrix[i][right];
+                matrix[i][right--] = temp;
+            }
+        }
+    }
+}
 ```
 - [Spiral Matrix — LC 54](https://leetcode.com/problems/spiral-matrix/) ⭐
 ```java
