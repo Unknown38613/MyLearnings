@@ -2,6 +2,17 @@
 
 redis is a in-memory datastore, which is blazing fast because it operates on RAM, and RAM is optimized to perform any read-write operation in nanoseconds which allows redis to scale upto 1 million QPS, also it runs on single CPU thread so it doesn't have bottlenecks like context switching, deadlocks, concurrency issues, etc also it uses I/O multiplexing, means instead of assigning new thread to each request, it relies on event loop by OS kernel like epoll for monitoring every socket connection established by clients on redis server, then if data packet arrives it immediately performs operations and frees up the socket
 
+## Main Components of Redis:
+
+- Redis Server: Core process that handles client requests and manages data in memory.
+- Redis Client: Application or library that connects to Redis and sends commands.
+- Redis Data Structures: Built-in data types like Strings, Lists, Sets, Hashes, and Sorted Sets used to store data.
+- Redis Event Loop: Handles multiple client connections efficiently using I/O multiplexing.
+- Redis Persistence: Stores in-memory data on disk using RDB snapshots and AOF logs.
+- Redis Replication: Maintains copies of data across master and replica nodes for high availability.
+- Redis Sentinel: Monitors Redis instances and handles automatic failover.
+- Redis Cluster: Distributes data across multiple nodes using 16,384 hash slots for horizontal scalability.
+  
 ## How does redis achieves it?
 
 - It uses its own redis object which prevents heavy objects overhead,
