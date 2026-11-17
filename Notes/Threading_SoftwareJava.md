@@ -42,6 +42,18 @@ Your Answer:
 
 ## 4. start() vs run(), join(), sleep()
 
+- "**`start()` vs `run()`:** `start()` asks the JVM to spin up a **new OS thread** and run the task asynchronously. Calling `run()` directly just executes it like a regular method on the **current thread** with no concurrency.
+- **`join()`:** Used for thread coordination. When Thread A calls `threadB.join()`, **Thread A pauses** and waits until Thread B completely finishes its execution.
+- **`sleep()` vs `wait()`:** Both pause the current thread, but with a critical difference in locking:
+- * **`Thread.sleep()`** pauses for a fixed time and **keeps all locks** it holds.
+- * **`Object.wait()`** pauses until another thread calls `notify()`, and it **releases the lock** so other threads can access the shared resource."
+
+### Quick Cheat-Sheet for Rapid-Fire Follow-Ups
+
+* **Can you call `start()` twice on the same thread?** No, it throws `IllegalThreadStateException`.
+* **Which thread pauses on `t.join()`?** The *calling* thread pauses, not `t`.
+* **Why is `wait()` in `Object` instead of `Thread`?** Because in Java, every object has an intrinsic lock (monitor), and `wait()` releases that specific object's lock.
+
 ## 5. Thread Lifecycle
 
 ## 6. ExecutorService and Thread Pools
