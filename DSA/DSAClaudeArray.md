@@ -901,9 +901,93 @@ class Solution {
 ```
 - [Spiral Matrix — LC 54](https://leetcode.com/problems/spiral-matrix/) ⭐
 ```java
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> ansList = new ArrayList<>();
+        int top = 0;
+        int down = matrix.length - 1;
+        int left = 0;
+        int right = matrix[0].length - 1;
+
+        while(top <= down && left <= right){
+            for(int i = left ; i <= right ; i++){
+                ansList.add(matrix[top][i]);
+            }
+            top++;
+
+            for(int i = top ; i <= down ; i++){
+                ansList.add(matrix[i][right]);
+            }
+            right--;
+ 
+            //to avoid traversing same row again
+            if(top <= down){
+                for(int i = right ; i >= left ; i--){
+                    ansList.add(matrix[down][i]);
+                }
+                down--;
+            }
+
+            if(left <= right){
+                for(int i = down ; i >= top ; i--){
+                    ansList.add(matrix[i][left]);
+                }
+                left++;
+            }
+        }
+
+        return ansList;
+    }
+}
 ```
 - [Set Matrix Zeroes — LC 73](https://leetcode.com/problems/set-matrix-zeroes/) ⭐
 ```java
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int r = matrix.length;
+        int c = matrix[0].length;
+        
+        //to know if first row and col already contains 0
+        boolean firstRow = false;
+        boolean firstCol = false;
+
+        for(int i = 0 ; i < r ; i++){
+           if(matrix[i][0] == 0) firstCol = true;
+        }
+
+        for(int i = 0 ; i < c ; i++){
+           if(matrix[0][i] == 0) firstRow = true;
+        }
+
+        for(int i = 1 ; i < r ; i++){
+            for(int j = 1 ; j < c ; j++){
+                if(matrix[i][j] == 0){
+                    matrix[0][j] = 0;
+                    matrix[i][0] = 0;
+                }
+            }
+        }
+
+        for(int i = 1 ; i < r ; i++){
+            for(int j = 1 ; j < c ; j++){
+                if(matrix[0][j] == 0 ||
+                   matrix[i][0] == 0) matrix[i][j] = 0;
+            }
+        }
+
+        if(firstRow){
+            for(int i = 0 ; i < c ; i++){
+                matrix[0][i] = 0;
+            }
+        }
+
+        if(firstCol){
+            for(int i = 0 ; i < r ; i++){
+                matrix[i][0] = 0;
+            }
+        }
+    }
+}
 ```
 - [Word Search — LC 79](https://leetcode.com/problems/word-search/)
 ```java
