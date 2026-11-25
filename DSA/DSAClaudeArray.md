@@ -1029,6 +1029,22 @@ class Solution {
 **13. Merge/Multi-array**
 - [Merge Sorted Array — LC 88](https://leetcode.com/problems/merge-sorted-array/) ⭐
 ```java
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+        
+        while (j >= 0) {
+            //keep running while i is exhausted, then append every j will append
+            if (i >= 0 && nums1[i] > nums2[j]) {
+                nums1[k--] = nums1[i--];
+            } else {
+                nums1[k--] = nums2[j--];
+            }
+        }
+    }
+}
 ```
 - [Merge k Sorted Lists — LC 23](https://leetcode.com/problems/merge-k-sorted-lists/)
 ```java
@@ -1037,6 +1053,17 @@ class Solution {
 **15. Greedy on Arrays**
 - [Jump Game — LC 55](https://leetcode.com/problems/jump-game/) ⭐
 ```java
+class Solution {
+    public boolean canJump(int[] nums) {
+        int n = nums.length;
+        int farthest = 0;
+        for(int i = 0 ; i < n ; i++){
+            if(i > farthest) return false;
+            farthest = Math.max(farthest, i + nums[i]);
+        }
+        return true;
+    }
+}
 ```
 - [Jump Game II — LC 45](https://leetcode.com/problems/jump-game-ii/) ⭐
 ```java
