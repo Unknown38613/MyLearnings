@@ -1,4 +1,20 @@
 ## LinkedList — Non-negotiable
+
+| Pattern | Problems covering it | Coverage |
+|---|---|---|
+| Fast & Slow Pointers | LC 876, 141, 142, 234 | Covered |
+| Reversal | LC 206, 92, 25 | Covered |
+| Dummy Node / Pointer Manipulation | LC 21, 19, 86, 82 | Covered |
+| Two Pointers | LC 19, 160 | Covered |
+| Merging Linked Lists | LC 21, 23 | Covered |
+| Merge Sort | LC 148 | Covered |
+| HashMap / Random Pointer | LC 138 | Covered |
+| Heap / Priority Queue | LC 23 | Covered |
+| LinkedList Design | LC 146 | Covered |
+| Splitting and Reconnecting | LC 143 | Covered |
+| Advanced Reversal | LC 92, 25 | Covered |
+| Intersection | LC 160 | Covered |
+
 Tier 1 — Must solve independently
 Non-negotiable
 These give you the foundational techniques and the highest-value interview patterns.
