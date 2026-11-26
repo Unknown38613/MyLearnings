@@ -1,4 +1,26 @@
 ## LinkedList — Non-negotiable
+Tier 1 — Must solve independently
+Non-negotiable
+These give you the foundational techniques and the highest-value interview patterns.
+1. LC 206 — Reverse Linked List
+2. LC 876 — Middle of the Linked List
+3. LC 21 — Merge Two Sorted Lists
+4. LC 141 — Linked List Cycle
+5. LC 142 — Linked List Cycle II
+6. LC 19 — Remove Nth Node From End
+7. LC 143 — Reorder List
+8. LC 160 — Intersection of Two Linked Lists
+9. LC 92 — Reverse Linked List II
+10. LC 138 — Copy List with Random Pointer
+11. LC 146 — LRU Cache
+Tier 2 — Important variations
+Solve after Tier 1
+12. LC 148 — Sort List
+13. LC 23 — Merge k Sorted Lists
+14. LC 25 — Reverse Nodes in k-Group
+15. LC 2 — Add Two Numbers
+16. LC 234 — Palindrome Linked List
+
 - [Middle of the Linked List — LC 876](https://leetcode.com/problems/middle-of-the-linked-list/) ⭐
 ```java
 ```
